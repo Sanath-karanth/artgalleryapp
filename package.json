@@ -12,6 +12,7 @@
     "bootstrap": "^4.6.0",
     "clsx": "^1.1.1",
     "font-awesome": "^4.7.0",
+    "material-auto-rotating-carousel": "^3.0.2",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -20,6 +21,7 @@
     "react-imageview": "^1.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+    "react-swipeable-views": "^0.13.9",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

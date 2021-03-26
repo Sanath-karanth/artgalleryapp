@@ -37,7 +37,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Tooltip from '@material-ui/core/Tooltip';
-import Slide from '@material-ui/core/Slide';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -48,6 +47,10 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import PhoneIcon from '@material-ui/icons/Phone';
+import Button from "@material-ui/core/Button";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { red, blue, green } from "@material-ui/core/colors";
+import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 
 const drawerWidth = 240;
 
@@ -177,6 +180,59 @@ const MainPage = (props) => {
     const handleDrawerClose = () => {
       setOpen(false);
     };
+
+    // slide function https://www.npmjs.com/package/material-auto-rotating-carousel
+
+    const [handleOpen, setHandleOpen] = useState({ open: false });
+    const handleslideclick = () => {
+      setHandleOpen({ open: true });
+    };
+    const matches = useMediaQuery("(max-width:600px)");
+
+    const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
+  return (
+    <div>
+      {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
+      <AutoRotatingCarousel
+        label="Get started"
+        open={handleOpen.open}
+        onClose={() => setHandleOpen({ open: false })}
+        onStart={() => setHandleOpen({ open: false })}
+        autoplay={true}
+        mobile={isMobile}
+        style={{ position: "absolute" }}
+      >
+        <Slide
+          media={
+            <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
+          }
+          mediaBackgroundStyle={{ backgroundColor: red[400] }}
+          style={{ backgroundColor: red[600] }}
+          title="This is a very cool feature"
+          subtitle="Just using this will blow your mind."
+        />
+        <Slide
+          media={
+            <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
+          }
+          mediaBackgroundStyle={{ backgroundColor: blue[400] }}
+          style={{ backgroundColor: blue[600] }}
+          title="Ever wanted to be popular?"
+          subtitle="Well just mix two colors and your are good to go!"
+        />
+        <Slide
+          media={
+            <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
+          }
+          mediaBackgroundStyle={{ backgroundColor: green[400] }}
+          style={{ backgroundColor: green[600] }}
+          title="May the force be with you"
+          subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
+        />
+      </AutoRotatingCarousel>
+    </div>
+  );
+};
 
     ////////////////   back to top function
 
@@ -353,30 +409,12 @@ const MainPage = (props) => {
             <main className={classes.content}>
               <Toolbar id="back-to-top-anchor" />
                 <Container>
-                <Typography paragraph>
-                          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                          hendrerit gravida  Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                          hendrerit gravida  Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                          hendrerit gravida  Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                          heorbi. Euismod lacinia at quis risus sed
-                          vulputate odio. Morbi tincidunt ocus sed viverra tellus. Purus sit amet volutpat
-                          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
+                {/* <Button onClick={handleslideclick}>Open carousel</Button>
+                <AutoRotatingCarouselModal
+                    // isMobile={matches}
+                    handleOpen={handleOpen}
+                    setHandleOpen={setHandleOpen}
+                /> */}
                          
                 </Container>
                 <div className={classes.footerroot}>
