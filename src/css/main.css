@@ -1,0 +1,25 @@
+body {
+    display: -ms-flexbox;
+    /* display: flex; */
+
+    background-color: #f7f7f7 !important;
+  }
+.title
+{
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: black;
+}
+.description
+{
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: black;
+}
+.myimg
+{
+    height: 300px;
+    width:300px;
+}
