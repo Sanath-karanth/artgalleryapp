@@ -415,7 +415,27 @@ const MainPage = (props) => {
                     handleOpen={handleOpen}
                     setHandleOpen={setHandleOpen}
                 /> */}
-                         
+                  <Typography variant="h1" component="h2" gutterBottom>
+                        Sample text
+                  </Typography>
+                  <Typography variant="h1" component="h2" gutterBottom>
+                        Sample text
+                  </Typography>
+                  <Typography variant="h1" component="h2" gutterBottom>
+                        Sample text
+                  </Typography>
+                  <Typography variant="h1" component="h2" gutterBottom>
+                        Sample text
+                  </Typography>
+                  <Typography variant="h1" component="h2" gutterBottom>
+                        Sample text
+                  </Typography>
+                  <Typography variant="h1" component="h2" gutterBottom>
+                        Sample text
+                  </Typography>
+                  <Typography variant="h1" component="h2" gutterBottom>
+                        Sample text
+                  </Typography>       
                 </Container>
                 <div className={classes.footerroot}>
                 <footer className={classes.headergradient}>
