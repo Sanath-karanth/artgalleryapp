@@ -442,12 +442,16 @@ const MainPage = (props) => {
                 <Divider />
                 <List>
                     <ListItem button>
-                      <Tooltip title="About">
-                        <ListItemIcon onClick={aboutlink}>
-                          <AccountCircleIcon onClick={aboutlink} />
-                        </ListItemIcon>
+                        <Tooltip title="About">
+                          <ListItemIcon>
+                            <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
+                              <AccountCircleIcon />
+                            </Link>
+                          </ListItemIcon>
                         </Tooltip>
-                        <ListItemText onClick={aboutlink} primary='About' />
+                          <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
+                          <ListItemText primary='About' />
+                          </Link>
                     </ListItem>
                 </List>
             </Drawer>
