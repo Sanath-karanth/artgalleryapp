@@ -163,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const MainPage = (props) => {
+const AboutPage = (props) => {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -190,46 +190,46 @@ const MainPage = (props) => {
     const matches = useMediaQuery("(max-width:600px)");
 
     const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
-        return (
-          <div>
-            {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
-            <AutoRotatingCarousel
-              label="Get started"
-              open={handleOpen.open}
-              onClose={() => setHandleOpen({ open: false })}
-              onStart={() => setHandleOpen({ open: false })}
-              autoplay={true}
-              mobile={isMobile}
-              style={{ position: "absolute" }}
-            >
-              <Slide
-                media={
-                  <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
-                }
-                mediaBackgroundStyle={{ backgroundColor: red[400] }}
-                style={{ backgroundColor: red[600] }}
-                title="This is a very cool feature"
-                subtitle="Just using this will blow your mind."
-              />
-              <Slide
-                media={
-                  <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
-                }
-                mediaBackgroundStyle={{ backgroundColor: blue[400] }}
-                style={{ backgroundColor: blue[600] }}
-                title="Ever wanted to be popular?"
-                subtitle="Well just mix two colors and your are good to go!"
-              />
-              <Slide
-                media={
-                  <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
-                }
-                mediaBackgroundStyle={{ backgroundColor: green[400] }}
-                style={{ backgroundColor: green[600] }}
-                title="May the force be with you"
-                subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
-              />
-            </AutoRotatingCarousel>
+  return (
+    <div>
+      {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
+      <AutoRotatingCarousel
+        label="Get started"
+        open={handleOpen.open}
+        onClose={() => setHandleOpen({ open: false })}
+        onStart={() => setHandleOpen({ open: false })}
+        autoplay={true}
+        mobile={isMobile}
+        style={{ position: "absolute" }}
+      >
+        <Slide
+          media={
+            <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
+          }
+          mediaBackgroundStyle={{ backgroundColor: red[400] }}
+          style={{ backgroundColor: red[600] }}
+          title="This is a very cool feature"
+          subtitle="Just using this will blow your mind."
+        />
+        <Slide
+          media={
+            <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
+          }
+          mediaBackgroundStyle={{ backgroundColor: blue[400] }}
+          style={{ backgroundColor: blue[600] }}
+          title="Ever wanted to be popular?"
+          subtitle="Well just mix two colors and your are good to go!"
+        />
+        <Slide
+          media={
+            <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
+          }
+          mediaBackgroundStyle={{ backgroundColor: green[400] }}
+          style={{ backgroundColor: green[600] }}
+          title="May the force be with you"
+          subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
+        />
+      </AutoRotatingCarousel>
     </div>
   );
 };
@@ -315,11 +315,6 @@ const MainPage = (props) => {
           </div>
           </Fragment>
         );
-      }
-
-
-      const aboutlink = () => {
-        <Link to="/about"></Link>
       }
     
     return (
@@ -443,65 +438,18 @@ const MainPage = (props) => {
                 <List>
                     <ListItem button>
                       <Tooltip title="About">
-                        <ListItemIcon onClick={aboutlink}>
-                          <AccountCircleIcon onClick={aboutlink} />
+                        <ListItemIcon onClick={handleDrawerClose}>
+                          <AccountCircleIcon />
                         </ListItemIcon>
                         </Tooltip>
-                        <ListItemText onClick={aboutlink} primary='About' />
+                        <ListItemText onClick={handleDrawerClose} primary='About' />
                     </ListItem>
                 </List>
             </Drawer>
             <main className={classes.content}>
               <Toolbar id="back-to-top-anchor" />
                 <Container>
-                {/* <Button onClick={handleslideclick}>Open carousel</Button>
-                <AutoRotatingCarouselModal
-                    // isMobile={matches}
-                    handleOpen={handleOpen}
-                    setHandleOpen={setHandleOpen}
-                /> */}
-                {/* -----------------------------------------------SlideShow part---------------------------------------- */}
-
-                  <div className="container-fluid">
-                  <div id="carouselExampleCaptions" class="carousel slide pt-2" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                  </ol>
-                  <div class="carousel-inner">
-                      <div class="carousel-item active">
-                      <img src="./images/banner/slide1.jpg" class="d-block  w-100" alt="slide 1"></img>
-                      <div class="carousel-caption d-none d-md-block">
-                          <h5 className="title text-dark">Modern Art Works</h5>
-                          {/* <p className="description">Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
-                      </div>
-                      </div>
-                      <div class="carousel-item">
-                      <img src="./images/banner/slide2.jpg" class="d-block  w-100" alt="slide 2"></img>
-                      <div class="carousel-caption d-none d-md-block">
-                          <h5 className="title">Digital Art Works</h5>
-                          {/* <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
-                      </div>
-                      </div>
-                      <div class="carousel-item">
-                      <img src="./images/banner/slide3.jpg" class="d-block  w-100" alt="slide "></img>
-                      <div class="carousel-caption d-none d-md-block">
-                          <h5 className="title">Modern Solutions for your Art</h5>
-                          {/* <p className="description">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> */}
-                      </div>
-                      </div>
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                  </a>
-                  </div>
-                  </div>
+               
         
                   <div className="container pt-3">
                   <div class="card" >
@@ -604,4 +552,4 @@ const MainPage = (props) => {
     )
 }
 
-export default MainPage;
+export default AboutPage;

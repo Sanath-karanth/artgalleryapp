@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import MainPage from './components/mainPage';
 // import SecondPage from './components/secondPage';
-// import About from './components/about';
+import About from './components/about';
 // import MarkerPage from './components/markerSketch';
 // import PortraitPage from './components/portraitSketch';
 // import PhotographyPage from './components/photography';
@@ -15,12 +15,13 @@ function App() {
      <Route exact path="/">
            <MainPage />
      </Route>
+     <Route path="/about">
+           <About />
+      </Route>
      {/* <Route path="/secondPage">
            <SecondPage />
       </Route>
-      <Route path="/about">
-           <About />
-      </Route>
+      
       <Route path="/markerSketch">
            <MarkerPage />
       </Route>
