@@ -51,8 +51,19 @@ import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { red, blue, green } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import '../css/custom.css'
 
-const drawerWidth = 240;
+const drawerWidth = 230;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -158,7 +169,32 @@ const useStyles = makeStyles((theme) => ({
         color: '#ffffff',
         fontFamily: 'Roboto Mono',
         fontSize:'20px'
-      }
+      },
+      aboutcardroot: {
+        maxWidth: "100%",
+      },
+      mediaimage: {
+        height: "auto",
+        width:"50%",
+        padding: '25%',
+        alignItems: 'center',
+        borderRadius:'80%',
+        justifyContent:'center',
+        marginLeft:'25%' 
+      },
+      expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+          duration: theme.transitions.duration.shortest,
+        }),
+      },
+      expandOpen: {
+        transform: 'rotate(180deg)',
+      },
+      avatar: {
+        backgroundColor: red[500],
+      },
   }));
 
 
@@ -190,46 +226,46 @@ const AboutPage = (props) => {
     const matches = useMediaQuery("(max-width:600px)");
 
     const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
-  return (
-    <div>
-      {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
-      <AutoRotatingCarousel
-        label="Get started"
-        open={handleOpen.open}
-        onClose={() => setHandleOpen({ open: false })}
-        onStart={() => setHandleOpen({ open: false })}
-        autoplay={true}
-        mobile={isMobile}
-        style={{ position: "absolute" }}
-      >
-        <Slide
-          media={
-            <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
-          }
-          mediaBackgroundStyle={{ backgroundColor: red[400] }}
-          style={{ backgroundColor: red[600] }}
-          title="This is a very cool feature"
-          subtitle="Just using this will blow your mind."
-        />
-        <Slide
-          media={
-            <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
-          }
-          mediaBackgroundStyle={{ backgroundColor: blue[400] }}
-          style={{ backgroundColor: blue[600] }}
-          title="Ever wanted to be popular?"
-          subtitle="Well just mix two colors and your are good to go!"
-        />
-        <Slide
-          media={
-            <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
-          }
-          mediaBackgroundStyle={{ backgroundColor: green[400] }}
-          style={{ backgroundColor: green[600] }}
-          title="May the force be with you"
-          subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
-        />
-      </AutoRotatingCarousel>
+        return (
+          <div>
+            {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
+            <AutoRotatingCarousel
+              label="Get started"
+              open={handleOpen.open}
+              onClose={() => setHandleOpen({ open: false })}
+              onStart={() => setHandleOpen({ open: false })}
+              autoplay={true}
+              mobile={isMobile}
+              style={{ position: "absolute" }}
+            >
+              <Slide
+                media={
+                  <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
+                }
+                mediaBackgroundStyle={{ backgroundColor: red[400] }}
+                style={{ backgroundColor: red[600] }}
+                title="This is a very cool feature"
+                subtitle="Just using this will blow your mind."
+              />
+              <Slide
+                media={
+                  <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
+                }
+                mediaBackgroundStyle={{ backgroundColor: blue[400] }}
+                style={{ backgroundColor: blue[600] }}
+                title="Ever wanted to be popular?"
+                subtitle="Well just mix two colors and your are good to go!"
+              />
+              <Slide
+                media={
+                  <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
+                }
+                mediaBackgroundStyle={{ backgroundColor: green[400] }}
+                style={{ backgroundColor: green[600] }}
+                title="May the force be with you"
+                subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
+              />
+            </AutoRotatingCarousel>
     </div>
   );
 };
@@ -316,6 +352,14 @@ const AboutPage = (props) => {
           </Fragment>
         );
       }
+
+// ///////////////////  expand card function
+
+const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
     
     return (
         <Fragment>
@@ -437,33 +481,103 @@ const AboutPage = (props) => {
                 <Divider />
                 <List>
                     <ListItem button>
-                      <Tooltip title="About">
-                        <ListItemIcon onClick={handleDrawerClose}>
-                          <AccountCircleIcon />
-                        </ListItemIcon>
+                        <Tooltip title="About">
+                          <ListItemIcon>
+                            <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
+                              <AccountCircleIcon />
+                            </Link>
+                          </ListItemIcon>
                         </Tooltip>
-                        <ListItemText onClick={handleDrawerClose} primary='About' />
+                          <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
+                          <ListItemText primary='About' />
+                          </Link>
                     </ListItem>
                 </List>
             </Drawer>
             <main className={classes.content}>
               <Toolbar id="back-to-top-anchor" />
-                <Container>
+                <Container className="pb-4" style={{backgroundColor:"#EEECEB"}}>
                
+     
+
+        {/* --------------------------------Heading part----------------------------- */}
         
-                  <div className="container pt-3">
-                  <div class="card" >
-                    {/* <img class="card-img-top" src="..." alt="Card image cap"></img> */}
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+                  <div className="container-fluid pt-4">
+                      <div className="card">
+                          <div className="shadow-lg p-3  bg-white rounded">
+                              <h3 className="text-left">My Profile</h3>
+                          </div>                
+                      </div>
                   </div>
-                  </div>
-                  <Typography variant="h1" component="h2" gutterBottom>
-                        Sample text
-                  </Typography>       
+
+        {/* ------------------------------------------------------------------------- */}
+            <div className="container-fluid pt-4">
+                <Card className={classes.aboutcardroot}>
+                    <CardHeader
+                      avatar={
+                        <Avatar aria-label="recipe" className={classes.avatar}>
+                          S
+                        </Avatar>
+                      }
+                      action={
+                        <IconButton aria-label="settings">
+                          <MoreVertIcon />
+                        </IconButton>
+                      }
+                      title="Sanath S Karanth"
+                      subheader="March 30, 2021"
+                    />
+                    <CardMedia
+                      className={classes.mediaimage}
+                      // className="rounded-circle myimg mt-3"
+                      image="./images/Sanath.jpg"
+                      title="Paella dish"
+                    />
+                    <CardContent>
+                    <p class="card-text paraquote">
+                        <i class="fas fa-quote-left p-2"></i> 
+                        To succeed in all your pursuits, remove doubts and develop your confidence.
+                        <i class="fas fa-quote-right p-2"></i>
+                    </p>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                      <IconButton aria-label="add to favorites">
+                        <FavoriteIcon />
+                      </IconButton>
+                      <IconButton aria-label="share">
+                        <ShareIcon />
+                      </IconButton>
+                      <IconButton
+                        className={clsx(classes.expand, {
+                          [classes.expandOpen]: expanded,
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                      >
+                        <ExpandMoreIcon />
+                      </IconButton>
+                    </CardActions>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                      <CardContent>
+                        <Typography paragraph>About Me</Typography>
+                        <Typography paragraph>
+                          Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
+                          minutes.
+                        </Typography>
+                        <Typography paragraph>
+                          Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
+                          heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
+                          browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
+                         
+                        </Typography>
+                        
+                      </CardContent>
+                    </Collapse>
+                  </Card>
+                </div>   
+
+      {/* ------------------------------------------------------------------------- */}
                 </Container>
                 <div className={classes.footerroot}>
                 <footer className={classes.headergradient}>

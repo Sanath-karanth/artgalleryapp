@@ -51,8 +51,9 @@ import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { red, blue, green } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
+import '../css/custom.css'
 
-const drawerWidth = 240;
+const drawerWidth = 230;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -457,69 +458,100 @@ const MainPage = (props) => {
             </Drawer>
             <main className={classes.content}>
               <Toolbar id="back-to-top-anchor" />
-                <Container>
+                <Container className="pb-4" style={{backgroundColor:"#EEECEB"}}>
                 {/* <Button onClick={handleslideclick}>Open carousel</Button>
                 <AutoRotatingCarouselModal
                     // isMobile={matches}
                     handleOpen={handleOpen}
                     setHandleOpen={setHandleOpen}
                 /> */}
-                {/* -----------------------------------------------SlideShow part---------------------------------------- */}
+      {/* -----------------------------------------------SlideShow part---------------------------------------- */}
 
                   <div className="container-fluid">
-                  <div id="carouselExampleCaptions" class="carousel slide pt-2" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                  </ol>
-                  <div class="carousel-inner">
-                      <div class="carousel-item active">
-                      <img src="./images/banner/slide1.jpg" class="d-block  w-100" alt="slide 1"></img>
-                      <div class="carousel-caption d-none d-md-block">
-                          <h5 className="title text-dark">Modern Art Works</h5>
-                          {/* <p className="description">Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+                      <div id="carouselExampleCaptions" className="carousel slide pt-2" data-ride="carousel">
+                      <ol className="carousel-indicators">
+                          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                      </ol>
+                      <div className="carousel-inner">
+                          <div className="carousel-item active">
+                          <img src="./images/banner/slider1.jpg" className="d-block  w-100" alt="slide 1"></img>
+                          <div className="carousel-caption d-none d-md-block">
+                              <h4 className="text-light">Portrait Sketching</h4>
+                              <p className="text-light paracarousel">Portrait painting is a genre in painting, where the intent is to represent a specific human subject.</p>
+                          </div>
+                          </div>
+                          <div className="carousel-item">
+                          <img src="./images/banner/slider2.jpg" className="d-block  w-100" alt="slide 2"></img>
+                          <div className="carousel-caption d-none d-md-block">
+                              <h4 className="text-light">Marker Sketching</h4>
+                              <p className="text-light paracarousel">Art markers are used by illustrators, designers and artists to achieve a different result in artwork than you would normally see from using colored pencils or paints.</p>
+                          </div>
+                          </div>
+                          <div className="carousel-item">
+                          <img src="./images/banner/slider3.jpg" className="d-block  w-100" alt="slide "></img>
+                          <div className="carousel-caption d-none d-md-block">
+                              <h4 className="text-light">Photography</h4>
+                              <p className="text-light paracarousel">Photography is the art, application, and practice of creating durable images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film.</p>
+                          </div>
+                          </div>
                       </div>
-                      </div>
-                      <div class="carousel-item">
-                      <img src="./images/banner/slide2.jpg" class="d-block  w-100" alt="slide 2"></img>
-                      <div class="carousel-caption d-none d-md-block">
-                          <h5 className="title">Digital Art Works</h5>
-                          {/* <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
-                      </div>
-                      </div>
-                      <div class="carousel-item">
-                      <img src="./images/banner/slide3.jpg" class="d-block  w-100" alt="slide "></img>
-                      <div class="carousel-caption d-none d-md-block">
-                          <h5 className="title">Modern Solutions for your Art</h5>
-                          {/* <p className="description">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> */}
-                      </div>
+                      <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span className="sr-only">Previous</span>
+                      </a>
+                      <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span className="sr-only">Next</span>
+                      </a>
                       </div>
                   </div>
-                  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                  </a>
-                  </div>
-                  </div>
+        {/* ------------------------------------------------------------------------- */}
+
+        {/* --------------------------------Heading part----------------------------- */}
         
-                  <div className="container pt-3">
-                  <div class="card" >
-                    {/* <img class="card-img-top" src="..." alt="Card image cap"></img> */}
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <div className="container-fluid">
+                      <div className="card mt-5">
+                          <div className="shadow-lg p-3  bg-white rounded">
+                              <h3 className="text-left">Portrait Arts and Sketchings</h3>
+                          </div>                
+                      </div>
+                  </div>
+
+        {/* ------------------------------------------------------------------------- */}
+
+        {/* --------------------------ingle Indian culture card---------------------- */}  
+
+              <div className="container-fluid pt-4">
+                  <div className="card mb-2">
+                    <div className="row no-gutters">
+                        <div className="col-md-5">
+                        <img  src="./images/art/indiamap.jpg" style={{width:"100%",height:'auto'}} className="card-img p-3" alt="image"></img>
+                        </div>
+                        <div className="col-md-7">
+                        <div className="card-body">
+                            <h4 style={{color:"#5D6D7E"}}>Indian Culture Map</h4>
+                            <p className="card-text paraquote">
+                                <i className="fas fa-quote-left p-2"></i> 
+                                India is the cradle of the human race, the birthplace of human speech, the mother of history, the grandmother of legend, and the great grand mother of tradition. Our most valuable and most artistic materials in the history of man are treasured up in India only!.
+                                <i className="fas fa-quote-right p-2"></i>
+                            </p>
+                            <p className="card-text paradesp text-dark">The Indian culture, often labeled as an amalgamation of several various cultures, spans across the Indian subcontinent and has been influenced and shaped by a history that is several thousand years old. India is the birthplace of Hinduism, Buddhism, Jainism, Sikhism, and other religions.</p>
+                            <p className="card-text paradate">Art Creation Date:<small className="text-primary"> 20-08-2018</small></p>
+                              <a href="https://en.wikipedia.org/wiki/India"  
+                                target="_blank" 
+                                className="btn btn-dark">
+                                  <p className="card-text paradesp">About India</p>
+                              </a>
+                        </div>
+                        </div>
                     </div>
                   </div>
-                  </div>
-                  <Typography variant="h1" component="h2" gutterBottom>
-                        Sample text
-                  </Typography>       
+                </div>
+
+        {/* ------------------------------------------------------------------------- */}        
+                        
                 </Container>
                 <div className={classes.footerroot}>
                 <footer className={classes.headergradient}>

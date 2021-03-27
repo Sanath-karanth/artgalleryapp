@@ -1,0 +1,165 @@
+/*
+Theme Name: Worthy - Free Powerful Theme by HtmlCoder
+Author:HtmlCoder
+Author URI:http://www.htmlcoder.me
+Version:1.0.0
+Created:November 2014
+License: Creative Commons Attribution 3.0 License (https://creativecommons.org/licenses/by/3.0/)
+File Description: Place here your custom CSS styles
+*/
+ol li.list-group-item { 
+    list-style: decimal inside;
+    display: list-item;
+}
+.subSectionTitleBlack{
+    	font-family: 'poppins',sans-serif;
+        font-size: 40px;
+    font-weight: bold;
+    height: 31px;
+    position: relative;
+    top: -25px;
+}
+.subSectionTitleWhite{
+    	font-family: 'poppins',sans-serif;
+        font-size: 30px;
+    font-weight: bold;
+    height: 31px;
+    color:#fff;
+    position: relative;
+    top: -25px;
+}
+.styleForDiv{
+    position: relative;
+    height:255px;
+    width:80%;
+    margin: auto;
+    background-color: rgba(255,255,255,1);
+    box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.35);
+    top: 39px !important;
+}
+.styleForDivDigital{
+    position: relative;
+    height:310px;
+    width:80%;
+    margin: auto;
+    background-color: rgba(255,255,255,1);
+    box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.35);
+}
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 45px;
+    width: 45px;
+    pointer-events: none;
+  }
+  .myimg
+{
+    height: 300px;
+    width:300px;
+    justify-content: center;
+    align-items: center;
+}
+  
+  /* @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  } */
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  body {
+    background-color: #e0e0e0;
+  }
+
+  h4 
+  {
+    font-family: 'Century Gothic';
+    font-weight: bold;
+  }
+  h3 
+  {
+    font-family: 'Century Gothic';
+    font-weight: lighter;
+  }
+  .headerfont
+  {
+    font-family: 'Century Gothic';
+  }
+  .paracarousel
+  {
+    font-family: 'Century Gothic';
+  }
+  .paraquote
+  {
+    font-family: 'Century Gothic';
+    color: rgb(0, 0, 0);
+  }
+  .paradesp
+  {
+    font-family: "Century Gothic";
+  }
+  .paradate
+  {
+    font-family: 'Century Gothic';
+  }
+  .sanathfont
+  {
+    font-family: 'Century Gothic';
+  }
+  .rolefont
+  {
+    font-family: 'Century Gothic';
+  }
+  .mailidfont
+  {
+    font-family: 'Century Gothic';
+  }
+  .phonefont
+  {
+    font-family: 'Century Gothic';
+  }
+  .websitelink
+  {
+    font-family: 'Century Gothic';
+  }
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+/*@media only screen and (max-width: 992px) {
+   .downButton {
+           margin-top: 17%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+   .downButton {
+           margin-top: 22%;
+    }
+}
+@media only screen and (max-width: 320px) {
+   .downButton {
+           margin-top: 100%;
+       background-color: chartreuse;
+    }
+}*/
