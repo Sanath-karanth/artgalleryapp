@@ -1,4 +1,4 @@
-import React, { Fragment,useState } from 'react';
+import React, { Fragment,useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import '../css/main.css'
 import PropTypes from 'prop-types';
@@ -51,6 +51,8 @@ import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { red, blue, green } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
+import anime from "animejs";
+import TextTransition, { presets } from "react-text-transition";
 import '../css/custom.css'
 
 const drawerWidth = 230;
@@ -318,11 +320,70 @@ const MainPage = (props) => {
         );
       }
 
-
-      const aboutlink = () => {
-        <Link to="/about"></Link>
+      /////////////////////  Heading Animation
+      
+      const paraanimation = () => {
+          var textWrapper = document.querySelector('.paradesp');
+          console.log("paraqute "+ textWrapper);
+          textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+          
+          anime.timeline({loop: true})
+          .add({
+            targets: '.paradesp .letter',
+            scale: [4,1],
+            opacity: [0,1],
+            translateZ: 0,
+            easing: "easeOutExpo",
+            duration: 950,
+            delay: (el, i) => 70*i
+          }).add({
+            targets: '.paradesp',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+          });
       }
+
+      const artgalleryanimation = () => {
+        
+        anime.timeline({loop: true})
+        .add({
+          targets: '.artanimation .word',
+          scale: [14,1],
+          opacity: [0,1],
+          easing: "easeOutCirc",
+          duration: 1500,
+          delay: (el, i) => 800 * i
+        }).add({
+          targets: '.artanimation',
+          opacity: 0,
+          duration: 1000,
+          easing: "easeOutExpo",
+          delay: 1000
+        });
+    }
+     
+
+        const TEXTS = [
+          "Portrait Arts and Sketchings",
+          "Building",
+          "Tree",
+          "Color"
+        ];
+
+    const [index, setIndex] = useState(0);
     
+    useEffect(() => {
+      paraanimation();
+      artgalleryanimation();
+        const intervalId = setInterval(() =>
+          setIndex(index => index + 1),
+          3000 // every 3 seconds
+        );
+        return () => clearTimeout(intervalId);
+      }, []);
+
     return (
         <Fragment>
           <div className={classes.root}>
@@ -347,8 +408,13 @@ const MainPage = (props) => {
                     <MenuIcon style={{fontSize:"30px"}}/>
                 </IconButton>
                 </Tooltip>
-                <Typography className={classes.titlestyle} variant="h5" noWrap>
-                    ART Gallery
+                <Typography className='artanimation'
+                style={{ fontFamily: 'Roboto Mono',
+                fontWeight:'bold',
+                flexGrow: 1}} 
+                variant="h5" noWrap>
+                  <span className='word'>ART</span> 
+                  <span className='word'>Gallery</span>
                 </Typography>
                 <Tooltip title="About">
                   <IconButton
@@ -467,7 +533,7 @@ const MainPage = (props) => {
                 /> */}
       {/* -----------------------------------------------SlideShow part---------------------------------------- */}
 
-                  <div className="container-fluid">
+                  <div className="container-fluid mt-2">
                       <div id="carouselExampleCaptions" className="carousel slide pt-2" data-ride="carousel">
                       <ol className="carousel-indicators">
                           <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -514,9 +580,29 @@ const MainPage = (props) => {
                   <div className="container-fluid">
                       <div className="card mt-5">
                           <div className="shadow-lg p-3  bg-white rounded">
-                              <h3 className="text-left">Portrait Arts and Sketchings</h3>
+                              <h3 className="headanimate text-left">Portrait Arts and Sketchings</h3>
+                              {/* <h1>
+                                <TextTransition
+                                  text={ TEXTS[index % TEXTS.length] }
+                                  springConfig={ presets.wobbly }
+                                />
+                              </h1> */}
                           </div>                
                       </div>
+                  </div>
+
+                  <div class="flip-card mb-4">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                      <h1>John Doe</h1> 
+                        <p>Architect & Engineer</p> 
+                        <p>We love that guy</p>
+                      
+                      </div>
+                      <div class="flip-card-back">
+                      <img  src="./images/art/indiamap.jpg" style={{width:"100%",height:'auto'}} className="card-img p-3 shadow-lg" alt="image"></img>
+                      </div>
+                    </div>
                   </div>
 
         {/* ------------------------------------------------------------------------- */}
@@ -524,11 +610,11 @@ const MainPage = (props) => {
         {/* --------------------------ingle Indian culture card---------------------- */}  
 
               <div className="container-fluid pt-4">
-                  <div className="card mb-2">
+                  <div className="card mb-2 shadow-lg">
                     <div className="row no-gutters">
                         <div className="col-md-5">
-                        <img  src="./images/art/indiamap.jpg" style={{width:"100%",height:'auto'}} className="card-img p-3" alt="image"></img>
-                        </div>
+                        <img  src="./images/art/indiamap.jpg" style={{width:"100%",height:'auto'}} className="card-img p-3 shadow-lg" alt="image"></img>
+                        </div>  
                         <div className="col-md-7">
                         <div className="card-body">
                             <h4 style={{color:"#5D6D7E"}}>Indian Culture Map</h4>
