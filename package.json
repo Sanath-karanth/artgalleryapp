@@ -1,5 +1,5 @@
 {
-  "name": "ArtGallery",
+  "name": "artgallery",
   "version": "0.1.0",
   "engines": {
     "node": "14.15.4",
