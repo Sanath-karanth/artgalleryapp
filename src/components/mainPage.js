@@ -591,7 +591,7 @@ const MainPage = (props) => {
                       </div>
                   </div>
 
-                  <div class="flip-card mb-4">
+                  {/* <div class="flip-card mb-4">
                     <div class="flip-card-inner">
                       <div class="flip-card-front">
                       <h1>John Doe</h1> 
@@ -603,7 +603,7 @@ const MainPage = (props) => {
                       <img  src="./images/art/indiamap.jpg" style={{width:"100%",height:'auto'}} className="card-img p-3 shadow-lg" alt="image"></img>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
         {/* ------------------------------------------------------------------------- */}
 
