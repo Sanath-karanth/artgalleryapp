@@ -7,7 +7,7 @@ import About from './components/about';
 // import MarkerPage from './components/markerSketch';
 // import PortraitPage from './components/portraitSketch';
 // import PhotographyPage from './components/photography';
-// import Demo from './components/demo';
+import Demo from './components/demo';
 
 function App() {
   return (
@@ -17,6 +17,9 @@ function App() {
      </Route>
      <Route path="/about">
            <About />
+      </Route>
+      <Route path="/demopage">
+           <Demo />
       </Route>
      {/* <Route path="/secondPage">
            <SecondPage />
@@ -31,9 +34,7 @@ function App() {
       <Route path="/photography">
            <PhotographyPage />
       </Route>
-      <Route path="/demopage">
-           <Demo />
-      </Route> */}
+       */}
           
       </Switch>
   );

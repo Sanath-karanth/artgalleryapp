@@ -53,152 +53,458 @@ import { red, blue, green } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import anime from "animejs";
 import TextTransition, { presets } from "react-text-transition";
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import '../css/custom.css'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
- 
-  menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
-  },
+const drawerWidth = 230;
 
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(0),
-  },
-  headergradient: {
-    background: "linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182));"
-    // background: "linear-gradient(to right,rgb(0, 0, 0), rgb(51, 8, 103));" 
-  },
-  titlestyle: {
-    fontFamily: 'Roboto Mono',
-    fontWeight:'bold',
-    flexGrow: 1,
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
+const useStyles = makeStyles((theme) => ({
+    root: {
       display: 'flex',
     },
-  },
-  backroot: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  footerroot: {
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    menuButton: {
+      marginRight: 36,
+    },
+    hide: {
+      display: 'none',
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
+    },
+    drawerOpen: {
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    drawerClose: {
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      width: theme.spacing(7) + 1,
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9) + 1,
+      },
+    },
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(0),
+    },
+    headergradient: {
+      background: "linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182));"
+      // background: "linear-gradient(to right,rgb(0, 0, 0), rgb(51, 8, 103));" 
+    },
+    titlestyle: {
+      fontFamily: 'Roboto Mono',
+      fontWeight:'bold',
       flexGrow: 1,
     },
-    copyrighttext: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: '#ffffff',
-      fontFamily: 'Roboto Mono',
-      background: "rgb(0, 0, 0)",
-      opacity: 0.3
+    nested: {
+      paddingLeft: theme.spacing(4),
     },
-    footertexts: {
-      textAlign: 'center',
-      color: '#ffffff',
-      fontFamily: 'Roboto Mono',
-      fontSize:'20px'
+    sectionDesktop: {
+      display: 'none',
+      [theme.breakpoints.up('md')]: {
+        display: 'flex',
+      },
     },
-    officialtext: {
-      color: '#ffffff',
-      fontFamily: 'Roboto Mono',
-      fontSize:'20px'
+    backroot: {
+      position: 'fixed',
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
     },
-  dralist: {
-    width: 250,
-  },
-  fulldraList: {
-    width: 'auto',
-  },
-}));
+    footerroot: {
+        flexGrow: 1,
+      },
+      copyrighttext: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: '#ffffff',
+        fontFamily: 'Roboto Mono',
+        background: "rgb(0, 0, 0)",
+        opacity: 0.3
+      },
+      footertexts: {
+        textAlign: 'center',
+        color: '#ffffff',
+        fontFamily: 'Roboto Mono',
+        fontSize:'20px'
+      },
+      officialtext: {
+        color: '#ffffff',
+        fontFamily: 'Roboto Mono',
+        fontSize:'20px'
+      }
+  }));
 
-const MainPage = (props) => {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
-  const [ancher, setAncher] = useState('left');
- 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+
+
+const DemoPage = (props) => {
+    const classes = useStyles();
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
+  
+    const handleDrawerOpen = () => {
+      setOpen(true);
+    };
+    const [subopen, setSubopen] = React.useState(false);
+
+  const handleClick = () => {
+    setSubopen(!subopen);
   };
+  
+    const handleDrawerClose = () => {
+      setOpen(false);
+    };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    // slide function https://www.npmjs.com/package/material-auto-rotating-carousel
 
-  const Drawerlist = (ancher) => (
-    <div
-      className={clsx(classes.dralist, {
-        [classes.fulldraList]: ancher === 'left',
-      })}
-      role="presentation"
-    >
-        <List>
-            <ListItem button>
-              <Tooltip title="Home">
-                  <ListItemIcon onClick={handleDrawerClose}>
-                      <HomeIcon />
-                  </ListItemIcon>
+    const [handleOpen, setHandleOpen] = useState({ open: false });
+    const handleslideclick = () => {
+      setHandleOpen({ open: true });
+    };
+    const matches = useMediaQuery("(max-width:600px)");
+
+    const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
+        return (
+          <div>
+            {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
+            <AutoRotatingCarousel
+              label="Get started"
+              open={handleOpen.open}
+              onClose={() => setHandleOpen({ open: false })}
+              onStart={() => setHandleOpen({ open: false })}
+              autoplay={true}
+              mobile={isMobile}
+              style={{ position: "absolute" }}
+            >
+              <Slide
+                media={
+                  <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
+                }
+                mediaBackgroundStyle={{ backgroundColor: red[400] }}
+                style={{ backgroundColor: red[600] }}
+                title="This is a very cool feature"
+                subtitle="Just using this will blow your mind."
+              />
+              <Slide
+                media={
+                  <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
+                }
+                mediaBackgroundStyle={{ backgroundColor: blue[400] }}
+                style={{ backgroundColor: blue[600] }}
+                title="Ever wanted to be popular?"
+                subtitle="Well just mix two colors and your are good to go!"
+              />
+              <Slide
+                media={
+                  <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
+                }
+                mediaBackgroundStyle={{ backgroundColor: green[400] }}
+                style={{ backgroundColor: green[600] }}
+                title="May the force be with you"
+                subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
+              />
+            </AutoRotatingCarousel>
+    </div>
+  );
+};
+
+    ////////////////   back to top function
+
+    function ScrollTop(props) {
+      const { children, window } = props;
+      const classes = useStyles();
+      // Note that you normally won't need to set the window ref as useScrollTrigger
+      // will default to window.
+      // This is only being set here because the demo is in an iframe.
+      const trigger = useScrollTrigger({
+        target: window ? window() : undefined,
+        disableHysteresis: true,
+        threshold: 100,
+      });
+    
+      const handleClick = (event) => {
+        const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
+    
+        if (anchor) {
+          anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      };
+    
+      return (
+        <Zoom in={trigger}>
+          <div onClick={handleClick} role="presentation" className={classes.backroot}>
+            {children}
+          </div>
+        </Zoom>
+      );
+    }
+    
+    ScrollTop.propTypes = {
+      children: PropTypes.element.isRequired,
+      /**
+       * Injected by the documentation to work in an iframe.
+       * You won't need it on your project.
+       */
+      window: PropTypes.func,
+    };
+
+    ScrollTop.propTypes = {
+      children: PropTypes.element.isRequired,
+      /**
+       * Injected by the documentation to work in an iframe.
+       * You won't need it on your project.
+       */
+      window: PropTypes.func,
+    };
+
+    // /////////////////////   about Modal function
+
+    const openmodelabout = () => {
+    return(<Fragment>
+      <button 
+            type="button" 
+            class="btn btn-primary" 
+            data-toggle="modal" 
+            data-target="#exampleModalLong">
+          </button>
+
+          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </Fragment>
+        );
+      }
+
+      /////////////////////  Heading Animation
+      
+      const paraanimation = () => {
+          var textWrapper = document.querySelector('.paradesp');
+          console.log("paraqute "+ textWrapper);
+          textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+          
+          anime.timeline({loop: true})
+          .add({
+            targets: '.paradesp .letter',
+            scale: [4,1],
+            opacity: [0,1],
+            translateZ: 0,
+            easing: "easeOutExpo",
+            duration: 950,
+            delay: (el, i) => 70*i
+          }).add({
+            targets: '.paradesp',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+          });
+      }
+
+      const artgalleryanimation = () => {
+        
+        anime.timeline({loop: true})
+        .add({
+          targets: '.artanimation .word',
+          scale: [14,1],
+          opacity: [0,1],
+          easing: "easeOutCirc",
+          duration: 1500,
+          delay: (el, i) => 800 * i
+        }).add({
+          targets: '.artanimation',
+          opacity: 0,
+          duration: 1000,
+          easing: "easeOutExpo",
+          delay: 1000
+        });
+    }
+     
+
+        const TEXTS = [
+          "Portrait Arts and Sketchings",
+          "Building",
+          "Tree",
+          "Color"
+        ];
+
+    const [index, setIndex] = useState(0);
+    
+    useEffect(() => {
+      paraanimation();
+      artgalleryanimation();
+        const intervalId = setInterval(() =>
+          setIndex(index => index + 1),
+          3000 // every 3 seconds
+        );
+        return () => clearTimeout(intervalId);
+      }, []);
+
+    return (
+        <Fragment>
+          <div className={classes.root}>
+            <CssBaseline />
+            <AppBar
+                position="fixed"
+                className={clsx(classes.appBar, {
+                [classes.appBarShift]: open,
+                })}
+            >
+                <Toolbar className={classes.headergradient}>
+                <Tooltip title="Menu">
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    className={clsx(classes.menuButton, {
+                    [classes.hide]: open,
+                    })}
+                  >
+                    <MenuIcon style={{fontSize:"30px"}}/>
+                </IconButton>
                 </Tooltip>
-              <ListItemText onClick={handleDrawerClose} primary='Home' />
-            </ListItem>
-
-            <ListItem button>
-                <Tooltip title="Arts works">
-                  <ListItemIcon>
-                      <ColorLensIcon />
-                  </ListItemIcon>
+                <Typography className='artanimation'
+                style={{ fontFamily: 'Roboto Mono',
+                fontWeight:'bold',
+                flexGrow: 1}} 
+                variant="h5" noWrap>
+                  <span className='word'>ART</span> 
+                  <span className='word'>Gallery</span>
+                </Typography>
+                <Tooltip title="About">
+                  <IconButton
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    edge="end"
+                    // onClick={handleMenu}
+                    color="inherit"
+                    >
+                    <AccountCircleIcon style={{fontSize:"35px"}} />
+                  </IconButton>
                   </Tooltip>
-                <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
-            </ListItem>
 
-            <ListItem button>
-                <Tooltip title="Photography">
-                      <ListItemIcon onClick={handleDrawerClose}>
-                  <CameraAltIcon />
-                  </ListItemIcon>
-                  </Tooltip>
-                <ListItemText onClick={handleDrawerClose} primary='Photography' />
-              </ListItem>
+                </Toolbar>
+            </AppBar>
+            <Drawer
+                variant="permanent"
+                className={clsx(classes.drawer, {
+                [classes.drawerOpen]: open,
+                [classes.drawerClose]: !open,
+                })}
+                classes={{
+                paper: clsx({
+                    [classes.drawerOpen]: open,
+                    [classes.drawerClose]: !open,
+                }),
+                }}
+            >
+                <div className={classes.toolbar}>
+                <IconButton onClick={handleDrawerClose}>
+                    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                </IconButton>
+                </div>
+                <Divider />
+                <List>
+                    <ListItem button>
+                        <Tooltip title="Home">
+                        <ListItemIcon onClick={handleDrawerClose}>
+                          <HomeIcon />
+                        </ListItemIcon>
+                        </Tooltip>
+                        <ListItemText onClick={handleDrawerClose} primary='Home' />
+                    </ListItem>
+
+                    <ListItem button>
+                      <Tooltip title="Arts works">
+                        <ListItemIcon>
+                          <ColorLensIcon />
+                        </ListItemIcon>
+                        </Tooltip>
+                        <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
+                    </ListItem>
+
+                    <ListItem button>
+                      <Tooltip title="Photography">
+                        <ListItemIcon onClick={handleDrawerClose}>
+                          <CameraAltIcon />
+                        </ListItemIcon>
+                        </Tooltip>
+                        <ListItemText onClick={handleDrawerClose} primary='Photography' />
+                    </ListItem>
+
+                    {/* <ListItem button>
+                      <ListItemIcon>
+                        <DashboardIcon />
+                      </ListItemIcon>
+                      <ListItemText onClick={handleClick} primary="Category" />
+                      {subopen ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+
+                    <ListItem>
+                    <Collapse in={subopen} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        <ListItem button className={classes.nested}>
+                          <ListItemIcon>
+                            <ColorLensIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Portrait Sketchings" />
+                        </ListItem>
+                        <ListItem button className={classes.nested}>
+                          <ListItemIcon>
+                            <CameraAltIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Photography" />
+                        </ListItem>
+                      </List>
+                    </Collapse>
+                    </ListItem> */}
+
                 </List>
                 <Divider />
                 <List>
@@ -215,178 +521,20 @@ const MainPage = (props) => {
                           </Link>
                     </ListItem>
                 </List>
-    </div>
-  );
-
-    ////////////////   back to top function
-
-    function ScrollTop(props) {
-      const { children, window } = props;
-      const classes = useStyles();
-      // Note that you normally won't need to set the window ref as useScrollTrigger
-      // will default to window.
-      // This is only being set here because the demo is in an iframe.
-      const trigger = useScrollTrigger({
-        target: window ? window() : undefined,
-        disableHysteresis: true,
-        threshold: 100,
-      });
-
-      const handleClick = (event) => {
-        const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
-
-        if (anchor) {
-          anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      };
-
-      return (
-        <Zoom in={trigger}>
-          <div onClick={handleClick} role="presentation" className={classes.backroot}>
-            {children}
-          </div>
-        </Zoom>
-      );
-    }
-
-    ScrollTop.propTypes = {
-      children: PropTypes.element.isRequired,
-      /**
-       * Injected by the documentation to work in an iframe.
-       * You won't need it on your project.
-       */
-      window: PropTypes.func,
-    };
-
-    ScrollTop.propTypes = {
-      children: PropTypes.element.isRequired,
-      /**
-       * Injected by the documentation to work in an iframe.
-       * You won't need it on your project.
-       */
-      window: PropTypes.func,
-    };
-
-          /////////////////////  Heading Animation
-      
-          const paraanimation = () => {
-            var textWrapper = document.querySelector('.paradesp');
-            console.log("paraqute "+ textWrapper);
-            textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-            
-            anime.timeline({loop: true})
-            .add({
-              targets: '.paradesp .letter',
-              scale: [4,1],
-              opacity: [0,1],
-              translateZ: 0,
-              easing: "easeOutExpo",
-              duration: 950,
-              delay: (el, i) => 70*i
-            }).add({
-              targets: '.paradesp',
-              opacity: 0,
-              duration: 1000,
-              easing: "easeOutExpo",
-              delay: 1000
-            });
-        }
-  
-        const artgalleryanimation = () => {
-          
-          anime.timeline({loop: true})
-          .add({
-            targets: '.artanimation .word',
-            scale: [14,1],
-            opacity: [0,1],
-            easing: "easeOutCirc",
-            duration: 1500,
-            delay: (el, i) => 800 * i
-          }).add({
-            targets: '.artanimation',
-            opacity: 0,
-            duration: 1000,
-            easing: "easeOutExpo",
-            delay: 1000
-          });
-      }
-
-      const [index, setIndex] = useState(0);
-    
-    useEffect(() => {
-      paraanimation();
-      artgalleryanimation();
-        const intervalId = setInterval(() =>
-          setIndex(index => index + 1),
-          3000 // every 3 seconds
-        );
-        return () => clearTimeout(intervalId);
-      }, []);
-
-  return (
-        <Fragment >
-          <div className={classes.root}>
-          <CssBaseline />
-            <AppBar
-                  position="fixed"
-                  className={clsx(classes.appBar, {
-                  [classes.appBarShift]: open,
-                  })}
-              >
-                  <Toolbar className={classes.headergradient}>
-                  <Tooltip title="Menu">
-                  <IconButton
-                      color="inherit"
-                      aria-label="open drawer"
-                      onClick={handleDrawerOpen}
-                      edge="start"
-                      className={clsx(classes.menuButton, {
-                      [classes.hide]: open,
-                      })}
-                    >
-                      <MenuIcon style={{fontSize:"30px"}}/>
-                        </IconButton>
-                        </Tooltip>
-                        <Typography className='artanimation'
-                        style={{ fontFamily: 'Roboto Mono',
-                        fontWeight:'bold',
-                        flexGrow: 1}} 
-                        variant="h5" noWrap>
-                          <span className='word'>ART</span> 
-                          <span className='word'>Gallery</span>
-                        </Typography>
-                        <Tooltip title="About">
-                    <IconButton
-                      aria-label="account of current user"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      edge="end"
-                      // onClick={handleMenu}
-                      color="inherit"
-                      >
-                      <AccountCircleIcon style={{fontSize:"35px"}} />
-                    </IconButton>
-                    </Tooltip>
-
-                  </Toolbar>
-              </AppBar>
-                <SwipeableDrawer
-                  anchor={ancher}
-                  open={open}
-                  onClose={() => setOpen(false)}
-                  onOpen={() => setOpen(true)}
-                >
-                <Drawerlist anchorvalue={ancher} />
-                </SwipeableDrawer>
-
-            <main >
+            </Drawer>
+            <main className={classes.content}>
               <Toolbar id="back-to-top-anchor" />
-                <div className="pb-4" style={{backgroundColor:"#EEECEB"}}>
-               
+                <Container className="pb-4" style={{backgroundColor:"#EEECEB"}}>
+                {/* <Button onClick={handleslideclick}>Open carousel</Button>
+                <AutoRotatingCarouselModal
+                    // isMobile={matches}
+                    handleOpen={handleOpen}
+                    setHandleOpen={setHandleOpen}
+                /> */}
       {/* -----------------------------------------------SlideShow part---------------------------------------- */}
 
-                 
-                <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
+                  <div className="container-fluid mt-2">
+                      <div id="carouselExampleCaptions" className="carousel slide pt-2" data-ride="carousel">
                       <ol className="carousel-indicators">
                           <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                           <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -423,8 +571,8 @@ const MainPage = (props) => {
                           <span className="carousel-control-next-icon" aria-hidden="true"></span>
                           <span className="sr-only">Next</span>
                       </a>
-                </div>
-                 
+                      </div>
+                  </div>
         {/* ------------------------------------------------------------------------- */}
 
         {/* --------------------------------Heading part----------------------------- */}
@@ -459,9 +607,9 @@ const MainPage = (props) => {
 
         {/* ------------------------------------------------------------------------- */}
 
-        {/* --------------------------single Indian culture card---------------------- */}  
+        {/* --------------------------ingle Indian culture card---------------------- */}  
 
-              <div className="container pt-4">
+              <div className="container-fluid pt-4">
                   <div className="card mb-2 shadow-lg">
                     <div className="row no-gutters">
                         <div className="col-md-5">
@@ -490,7 +638,7 @@ const MainPage = (props) => {
 
         {/* ------------------------------------------------------------------------- */}        
                         
-                </div>
+                </Container>
                 <div className={classes.footerroot}>
                 <footer className={classes.headergradient}>
                         
@@ -571,9 +719,11 @@ const MainPage = (props) => {
                 </ScrollTop>
                 
             </main>
-
             </div>
-          </Fragment>
-  );
+            
+          
+        </Fragment>
+    )
 }
-export default MainPage;
+
+export default DemoPage;
