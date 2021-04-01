@@ -54,7 +54,10 @@ import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import anime from "animejs";
 import TextTransition, { presets } from "react-text-transition";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Switch from '@material-ui/core/Switch';
+import ToggleButton from '../common/ToggleButton'
 import '../css/custom.css'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -156,6 +159,46 @@ const MainPage = (props) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
+
+  const [togglestatus, setTogglestatus] = useState(false);
+  const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
+  const [togglemaincolor, setTogglemaincolor] = useState('#EEECEB');
+  const [headertogglecolor, setHeadertogglecolor] = useState('bg-light');
+  const [headertextcolor, setHeadertextcolor] = useState('#000000');
+  const [allbuttoncolor, setAllbuttoncolor] = useState('btn-dark');
+  const [cardcolor, setCardcolor] = useState('bg-light');
+  const [cardshadowcolor, setCardshadowcolor] = useState('shadow-lg');
+  const [cardheadcolor, setCardheadcolor] = useState('#5D6D7E');
+  const [alltextcolor, setAlltextcolor] = useState('#000000');
+  const [allbuttontextcolor, setAllbuttontextcolor] = useState('#FFFFFF');
+
+  const togglechange = () => {
+    if(togglestatus == true) {
+      setTogglestatus(false);
+      setTogglemaincolor('#EEECEB');
+      setHeadertogglecolor('bg-light');
+      setHeadertextcolor('#000000');
+      setCardcolor('bg-light');
+      setCardshadowcolor('shadow-lg');
+      setAllbuttoncolor('btn-dark');
+      setAllbuttontextcolor('#FFFFFF');
+      setCardheadcolor('#5D6D7E');
+      setAlltextcolor('#000000');
+      }
+      else
+      {
+      setTogglestatus(true);
+      setTogglemaincolor('#000000');
+      setHeadertogglecolor('bg-dark');
+      setHeadertextcolor('#FFFFFF');
+      setCardcolor('bg-dark');
+      setCardshadowcolor('');
+      setAllbuttoncolor('btn-light');
+      setAllbuttontextcolor('#000000');
+      setCardheadcolor('#FFFFFF');
+      setAlltextcolor('#FFFFFF');
+      } 
+  }
  
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -271,7 +314,6 @@ const MainPage = (props) => {
       
           const paraanimation = () => {
             var textWrapper = document.querySelector('.paradesp');
-            console.log("paraqute "+ textWrapper);
             textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
             
             anime.timeline({loop: true})
@@ -311,7 +353,7 @@ const MainPage = (props) => {
           });
       }
 
-      const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(0);
     
     useEffect(() => {
       paraanimation();
@@ -364,6 +406,11 @@ const MainPage = (props) => {
                       // onClick={handleMenu}
                       color="inherit"
                       >
+                        <ToggleButton
+                            className="mr-4" 
+                            onChange={togglechange} 
+                            defaultChecked={togglestatus} />
+                     
                       <AccountCircleIcon style={{fontSize:"35px"}} />
                     </IconButton>
                     </Tooltip>
@@ -381,7 +428,7 @@ const MainPage = (props) => {
 
             <main >
               <Toolbar id="back-to-top-anchor" />
-                <div className="pb-4" style={{backgroundColor:"#EEECEB"}}>
+                <div className="pb-4" style={{backgroundColor:togglemaincolor}}>
                
       {/* -----------------------------------------------SlideShow part---------------------------------------- */}
 
@@ -429,58 +476,68 @@ const MainPage = (props) => {
 
         {/* --------------------------------Heading part----------------------------- */}
         
-                  <div className="container-fluid">
-                      <div className="card mt-5">
-                          <div className="shadow-lg p-3  bg-white rounded">
-                              <h3 className="headanimate text-left">Portrait Arts and Sketchings</h3>
-                              {/* <h1>
-                                <TextTransition
-                                  text={ TEXTS[index % TEXTS.length] }
-                                  springConfig={ presets.wobbly }
-                                />
-                              </h1> */}
+                  {/* <div className="container-fluid">
+                      <div className="card shadow-lg mt-5">
+                          <div className={`shadow-lg p-3 rounded ${headertogglecolor}`}>
+                              <h3 style={{ color: headertextcolor}} className="headanimate text-left">Portrait Arts and Sketchings</h3>
                           </div>                
                       </div>
-                  </div>
-
-                  {/* <div class="flip-card mb-4">
-                    <div class="flip-card-inner">
-                      <div class="flip-card-front">
-                      <h1>John Doe</h1> 
-                        <p>Architect & Engineer</p> 
-                        <p>We love that guy</p>
-                      
-                      </div>
-                      <div class="flip-card-back">
-                      <img  src="./images/art/indiamap.jpg" style={{width:"100%",height:'auto'}} className="card-img p-3 shadow-lg" alt="image"></img>
-                      </div>
-                    </div>
                   </div> */}
+
+                  <div className="container-fluid">
+                    <div className={`card  mt-5 shadow-lg ${headertogglecolor}`}>
+                      <div className="row no-gutters">
+                        <div className="card-body">
+                            <h3 style={{ color: headertextcolor}} 
+                                className="headanimate text-left">Portrait Arts and Sketchings
+                            </h3>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                  
 
         {/* ------------------------------------------------------------------------- */}
 
         {/* --------------------------single Indian culture card---------------------- */}  
 
               <div className="container pt-4">
-                  <div className="card mb-2 shadow-lg">
+                  <div className={`card mb-2 shadow-lg ${cardcolor}`}>
                     <div className="row no-gutters">
-                        <div className="col-md-5">
-                        <img  src="./images/art/indiamap.jpg" style={{width:"100%",height:'auto'}} className="card-img p-3 shadow-lg" alt="image"></img>
+                        <div className="col-md-5 flip-card">  
+                            <div className="flip-card-inner">
+                                <div className="flip-card-front">
+                                <h1 className="mt-4">Indian Culture Map</h1> 
+                                <p className="card-text paradate" 
+                                style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 20-08-2018</small></p>
+                                  <p>Touch or hover to see</p>
+                                </div>
+                                <div className="flip-card-back">
+                                <img  src="./images/art/indiamap.jpg" 
+                                        style={{width:460,height:500}} 
+                                        className={`card-img p-3 ${cardshadowcolor}`} 
+                                        alt="image"></img>
+                                </div>
+                            </div>
                         </div>  
                         <div className="col-md-7">
                         <div className="card-body">
-                            <h4 style={{color:"#5D6D7E"}}>Indian Culture Map</h4>
-                            <p className="card-text paraquote">
+                            <h4 style={{color:cardheadcolor}}>Indian Culture Map</h4>
+                            <p className="card-text paraquote" style={{color:alltextcolor}}>
                                 <i className="fas fa-quote-left p-2"></i> 
                                 India is the cradle of the human race, the birthplace of human speech, the mother of history, the grandmother of legend, and the great grand mother of tradition. Our most valuable and most artistic materials in the history of man are treasured up in India only!.
                                 <i className="fas fa-quote-right p-2"></i>
                             </p>
-                            <p className="card-text paradesp text-dark">The Indian culture, often labeled as an amalgamation of several various cultures, spans across the Indian subcontinent and has been influenced and shaped by a history that is several thousand years old. India is the birthplace of Hinduism, Buddhism, Jainism, Sikhism, and other religions.</p>
-                            <p className="card-text paradate">Art Creation Date:<small className="text-primary"> 20-08-2018</small></p>
+                            <p className="card-text paradesp" 
+                                style={{color:alltextcolor}}>The Indian culture, often labeled as an amalgamation of several various cultures, spans across the Indian subcontinent and has been influenced and shaped by a history that is several thousand years old. India is the birthplace of Hinduism, Buddhism, Jainism, Sikhism, and other religions.</p>
+                            <p className="card-text paradate" 
+                                style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 20-08-2018</small></p>
                               <a href="https://en.wikipedia.org/wiki/India"  
                                 target="_blank" 
-                                className="btn btn-dark">
-                                  <p className="card-text paradesp">About India</p>
+                                className={`btn ${allbuttoncolor}`}>
+                                  <p className="card-text aboutbuttontext" 
+                                      style={{color:allbuttontextcolor}}>About India</p>
                               </a>
                         </div>
                         </div>
