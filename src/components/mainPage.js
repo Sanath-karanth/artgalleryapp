@@ -515,7 +515,7 @@ const MainPage = (props) => {
                                 </div>
                                 <div className="flip-card-back">
                                 <img  src="./images/art/indiamap.jpg" 
-                                        style={{width:460,height:500}} 
+                                        style={{height:'500px'}} 
                                         className={`card-img p-3 ${cardshadowcolor}`} 
                                         alt="image"></img>
                                 </div>
