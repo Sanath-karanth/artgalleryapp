@@ -55,7 +55,8 @@ import anime from "animejs";
 import TextTransition, { presets } from "react-text-transition";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Switch from '@material-ui/core/Switch';
-import ToggleButton from '../common/ToggleButton'
+import ToggleButton from '../common/ToggleButton';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import '../css/custom.css'
 
 
@@ -125,7 +126,12 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(2),
   },
   footerroot: {
-      flexGrow: 1,
+      display: 'flex',
+      // flexGrow: 1,
+      position: 'static',
+      left: 0,
+      bottom: 0,
+      width:'100%'
     },
     copyrighttext: {
       padding: theme.spacing(2),
@@ -135,12 +141,7 @@ const useStyles = makeStyles((theme) => ({
       background: "rgb(0, 0, 0)",
       opacity: 0.3
     },
-    footertexts: {
-      textAlign: 'center',
-      color: '#ffffff',
-      fontFamily: 'Roboto Mono',
-      fontSize:'20px'
-    },
+   
     officialtext: {
       color: '#ffffff',
       fontFamily: 'Roboto Mono',
@@ -313,12 +314,12 @@ const MainPage = (props) => {
           /////////////////////  Heading Animation
       
           const paraanimation = () => {
-            var textWrapper = document.querySelector('.paradesp');
+            var textWrapper = document.querySelector('.paradescription');
             textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
             
             anime.timeline({loop: true})
             .add({
-              targets: '.paradesp .letter',
+              targets: '.paradescription .letter',
               scale: [4,1],
               opacity: [0,1],
               translateZ: 0,
@@ -326,7 +327,7 @@ const MainPage = (props) => {
               duration: 950,
               delay: (el, i) => 70*i
             }).add({
-              targets: '.paradesp',
+              targets: '.paradescription',
               opacity: 0,
               duration: 1000,
               easing: "easeOutExpo",
@@ -339,11 +340,11 @@ const MainPage = (props) => {
           anime.timeline({loop: true})
           .add({
             targets: '.artanimation .word',
-            scale: [14,1],
+            scale: [12,1],
             opacity: [0,1],
             easing: "easeOutCirc",
             duration: 1500,
-            delay: (el, i) => 800 * i
+            delay: (el, i) => 1000 * i
           }).add({
             targets: '.artanimation',
             opacity: 0,
@@ -353,21 +354,43 @@ const MainPage = (props) => {
           });
       }
 
-    const [index, setIndex] = useState(0);
+    const feedbackmodal = () => {
+
+      return(<Fragment>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+          Launch demo modal
+        </button>
+
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </Fragment>
+        )
+    }
     
     useEffect(() => {
       paraanimation();
       artgalleryanimation();
-        const intervalId = setInterval(() =>
-          setIndex(index => index + 1),
-          3000 // every 3 seconds
-        );
-        return () => clearTimeout(intervalId);
       }, []);
 
   return (
         <Fragment >
-          <div className={classes.root}>
           <CssBaseline />
             <AppBar
                   position="fixed"
@@ -389,30 +412,40 @@ const MainPage = (props) => {
                       <MenuIcon style={{fontSize:"30px"}}/>
                         </IconButton>
                         </Tooltip>
-                        <Typography className='artanimation'
-                        style={{ fontFamily: 'Roboto Mono',
-                        fontWeight:'bold',
-                        flexGrow: 1}} 
-                        variant="h5" noWrap>
+                        <Typography 
+                                className='artanimation'
+                                style={{ fontFamily: 'Roboto Mono',
+                                fontWeight:'bold',
+                                flexGrow: 1}} 
+                                variant="h5" noWrap>
                           <span className='word'>ART</span> 
                           <span className='word'>Gallery</span>
                         </Typography>
-                        <Tooltip title="About">
-                    <IconButton
-                      aria-label="account of current user"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      edge="end"
-                      // onClick={handleMenu}
-                      color="inherit"
-                      >
-                        <ToggleButton
-                            className="mr-4" 
-                            onChange={togglechange} 
-                            defaultChecked={togglestatus} />
-                     
-                      <AccountCircleIcon style={{fontSize:"35px"}} />
-                    </IconButton>
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            edge="end"
+                            color="inherit">
+                          <ToggleButton
+                                    className="mr-4" 
+                                    onChange={togglechange} 
+                                    defaultChecked={togglestatus}>
+                          </ToggleButton>
+                        </IconButton>
+                        <Tooltip title="Feedback">
+                          <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            edge="end"
+                            // onClick={feedbackmodal}
+                            color="inherit"
+                            >
+                            <Link to="/" style={{color:"#ffffff", textDecoration:"none"}}>
+                            <FeedbackIcon style={{fontSize:"30px"}}></FeedbackIcon>
+                            </Link>
+                          </IconButton>
                     </Tooltip>
 
                   </Toolbar>
@@ -426,65 +459,58 @@ const MainPage = (props) => {
                 <Drawerlist anchorvalue={ancher} />
                 </SwipeableDrawer>
 
-            <main >
+           
               <Toolbar id="back-to-top-anchor" />
-                <div className="pb-4" style={{backgroundColor:togglemaincolor}}>
-               
-      {/* -----------------------------------------------SlideShow part---------------------------------------- */}
 
-                 
-                <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
-                      <ol className="carousel-indicators">
-                          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                      </ol>
-                      <div className="carousel-inner">
-                          <div className="carousel-item active">
-                          <img src="./images/banner/slider1.jpg" className="d-block  w-100" alt="slide 1"></img>
-                          <div className="carousel-caption d-none d-md-block">
-                              <h4 className="text-light">Portrait Sketching</h4>
-                              <p className="text-light paracarousel">Portrait painting is a genre in painting, where the intent is to represent a specific human subject.</p>
-                          </div>
-                          </div>
-                          <div className="carousel-item">
-                          <img src="./images/banner/slider2.jpg" className="d-block  w-100" alt="slide 2"></img>
-                          <div className="carousel-caption d-none d-md-block">
-                              <h4 className="text-light">Marker Sketching</h4>
-                              <p className="text-light paracarousel">Art markers are used by illustrators, designers and artists to achieve a different result in artwork than you would normally see from using colored pencils or paints.</p>
-                          </div>
-                          </div>
-                          <div className="carousel-item">
-                          <img src="./images/banner/slider3.jpg" className="d-block  w-100" alt="slide "></img>
-                          <div className="carousel-caption d-none d-md-block">
-                              <h4 className="text-light">Photography</h4>
-                              <p className="text-light paracarousel">Photography is the art, application, and practice of creating durable images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film.</p>
-                          </div>
-                          </div>
-                      </div>
-                      <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span className="sr-only">Previous</span>
-                      </a>
-                      <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span className="sr-only">Next</span>
-                      </a>
+               {/* ----------------------------------------SlideShow part--------------------------------- */}
+
+                <div className={classes.root}>
+                  <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
+                        <ol className="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        </ol>
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                            <img src="./images/banner/slider1.jpg" className="d-block  w-100" alt="slide 1"></img>
+                            <div className="carousel-caption d-none d-md-block">
+                                <h4 className="text-light">Portrait Sketching</h4>
+                                <p className="text-light paracarousel">Portrait painting is a genre in painting, where the intent is to represent a specific human subject.</p>
+                            </div>
+                            </div>
+                            <div className="carousel-item">
+                            <img src="./images/banner/slider2.jpg" className="d-block  w-100" alt="slide 2"></img>
+                            <div className="carousel-caption d-none d-md-block">
+                                <h4 className="text-light">Marker Sketching</h4>
+                                <p className="text-light paracarousel">Art markers are used by illustrators, designers and artists to achieve a different result in artwork than you would normally see from using colored pencils or paints.</p>
+                            </div>
+                            </div>
+                            <div className="carousel-item">
+                            <img src="./images/banner/slider3.jpg" className="d-block  w-100" alt="slide "></img>
+                            <div className="carousel-caption d-none d-md-block">
+                                <h4 className="text-light">Photography</h4>
+                                <p className="text-light paracarousel">Photography is the art, application, and practice of creating durable images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film.</p>
+                            </div>
+                            </div>
+                        </div>
+                        <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="sr-only">Previous</span>
+                        </a>
+                        <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="sr-only">Next</span>
+                        </a>
+                  </div>
                 </div>
-                 
-        {/* ------------------------------------------------------------------------- */}
 
-        {/* --------------------------------Heading part----------------------------- */}
-        
-                  {/* <div className="container-fluid">
-                      <div className="card shadow-lg mt-5">
-                          <div className={`shadow-lg p-3 rounded ${headertogglecolor}`}>
-                              <h3 style={{ color: headertextcolor}} className="headanimate text-left">Portrait Arts and Sketchings</h3>
-                          </div>                
-                      </div>
-                  </div> */}
-
-                  <div className="container-fluid">
+                {/* ------------------------------------------------------------------------- */}
+                <div style={{backgroundColor:togglemaincolor}}>
+            {/* ----------------------------------------Heading part--------------------------------- */}
+            
+            <div className={classes.root}>
+            <div className="container-fluid">
                     <div className={`card  mt-5 shadow-lg ${headertogglecolor}`}>
                       <div className="row no-gutters">
                         <div className="card-body">
@@ -495,43 +521,37 @@ const MainPage = (props) => {
                     </div>
                   </div>
                 </div>
+                </div>
+                
+            {/* ------------------------------------------------------------------------- */}
 
-                  
+             {/* --------------------------single Indian culture card---------------------- */}  
 
-        {/* ------------------------------------------------------------------------- */}
 
-        {/* --------------------------single Indian culture card---------------------- */}  
-
-              <div className="container pt-4">
-                  <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-                    <div className="row no-gutters">
-                        <div className="col-md-5 flip-card">  
-                            <div className="flip-card-inner">
-                                <div className="flip-card-front">
-                                <h1 className="mt-4">Indian Culture Map</h1> 
-                                <p className="card-text paradate" 
-                                style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 20-08-2018</small></p>
-                                  <p>Touch or hover to see</p>
-                                </div>
-                                <div className="flip-card-back">
-                                <img  src="./images/art/indiamap.jpg" 
-                                        style={{height:'500px'}} 
-                                        className={`card-img p-3 ${cardshadowcolor}`} 
-                                        alt="image"></img>
-                                </div>
-                            </div>
-                        </div>  
-                        <div className="col-md-7">
-                        <div className="card-body">
-                            <h4 style={{color:cardheadcolor}}>Indian Culture Map</h4>
-                            <p className="card-text paraquote" style={{color:alltextcolor}}>
-                                <i className="fas fa-quote-left p-2"></i> 
-                                India is the cradle of the human race, the birthplace of human speech, the mother of history, the grandmother of legend, and the great grand mother of tradition. Our most valuable and most artistic materials in the history of man are treasured up in India only!.
-                                <i className="fas fa-quote-right p-2"></i>
-                            </p>
-                            <p className="card-text paradesp" 
-                                style={{color:alltextcolor}}>The Indian culture, often labeled as an amalgamation of several various cultures, spans across the Indian subcontinent and has been influenced and shaped by a history that is several thousand years old. India is the birthplace of Hinduism, Buddhism, Jainism, Sikhism, and other religions.</p>
-                            <p className="card-text paradate" 
+                <div className="container pt-5">
+                <div className={`card mb-2 shadow-lg ${cardcolor}`}>
+                  <div className="row no-gutters">
+                      <div className="col-md-4">
+                      <img src="./images/art/indiamap.jpg"
+                           style={{width:"100%",height:'auto'}} 
+                            className={`card-img p-3 ${cardshadowcolor}`} 
+                            alt="image">      
+                      </img>
+                      </div>
+                      <div className="col-md-8">
+                      <div className="card-body">
+                          <h4 style={{color:cardheadcolor}} 
+                              className="card-title">Indian Culture Map
+                          </h4>
+                          <p className="card-text paraquote"
+                             style={{color:alltextcolor}}>
+                              <i className="fas fa-quote-left p-2"></i> 
+                              India is the cradle of the human race, the birthplace of human speech, the mother of history, the grandmother of legend, and the great grand mother of tradition. Our most valuable and most artistic materials in the history of man are treasured up in India only!.
+                              <i className="fas fa-quote-right p-2"></i>
+                          </p>
+                          <p className="card-text paradescription" 
+                                style={{color:alltextcolor,fontFamily:'Century Gothic'}}>The Indian culture, often labeled as an amalgamation of several various cultures, spans across the Indian subcontinent and has been influenced and shaped by a history that is several thousand years old. India is the birthplace of Hinduism, Buddhism, Jainism, Sikhism, and other religions.</p>
+                          <p className="card-text paradate" 
                                 style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 20-08-2018</small></p>
                               <a href="https://en.wikipedia.org/wiki/India"  
                                 target="_blank" 
@@ -539,97 +559,136 @@ const MainPage = (props) => {
                                   <p className="card-text aboutbuttontext" 
                                       style={{color:allbuttontextcolor}}>About India</p>
                               </a>
-                        </div>
-                        </div>
-                    </div>
+                      </div>
+                      </div>
                   </div>
-                </div>
+                  </div>
+              </div>
+          {/* ------------------------------------------------------------------------- */}
 
-        {/* ------------------------------------------------------------------------- */}        
-                        
-                </div>
-                <div className={classes.footerroot}>
-                <footer className={classes.headergradient}>
-                        
-                <Grid container xs={12} spacing={0}>
-                            <Grid style={{marginTop: '2%'}} item xs={6}>
-                              <Grid>
-                              <Typography  className={classes.footertexts}  noWrap>
-                              Social Media Links
-                              </Typography>
-                              </Grid>
-                              <Grid container
-                                direction="row"
-                                justify="center"
-                                alignItems="center" 
-                                style={{marginTop: '4%'}} >
-                                <Grid style={{marginRight: '8%'}} >
-                                <a href="http://www.gmail.com" target="_blank" className="btn-floating btn-fb mx-1">
-                                <i  className="fab fa-google-plus-g" 
-                                    style={{color:'white',fontSize:"20px"}}></i>
-                                </a>
-                                </Grid>
-                                <Grid style={{marginRight: '8%'}} >
-                                <a href="http://www.facebook.com" target="_blank" className="btn-floating btn-gplus mx-1">
-                                <i className="fa fa-facebook" 
-                                    style={{color:'white',fontSize:"20px"}}></i>
-                                </a>
-                                </Grid>
-                                <Grid style={{marginRight: '8%'}} >
-                                <a href="http://www.linkedin.com" target="_blank" className="btn-floating btn-li mx-1">
-                                <i className="fa fa-linkedin-square" 
-                                    style={{color:'white',fontSize:"20px"}}></i>
-                                </a>
-                                </Grid>
-                            </Grid>
-                            </Grid>
-                            <Grid style={{marginTop: '2%'}} item xs={6}>
-                                <Grid>
-                                <Typography className={classes.officialtext}  noWrap>
-                                Official Details
-                                </Typography>
-                                </Grid>
-                                    <Grid container
-                                    direction="column"
-                                    // justify="center"
-                                    // alignItems="center" 
-                                    style={{marginTop: '2%'}} >
-                                    <Grid  style={{margin: '1%'}} >
-                                    <BusinessCenterIcon  style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
-                                    <span  
-                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Associate Software Engineer
-                                    </span>
-                                    </Grid>
-                                    <Grid style={{margin: '1%'}} >
-                                    <MailIcon  style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
-                                    <span  
-                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>sanathsk97@gmail.com
-                                    </span>
-                                    </Grid>
-                                    <Grid style={{margin: '1%'}} >
-                                    <PhoneIcon style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
-                                    <span  
-                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>+91 94496 85219
-                                    </span>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
+          {/* --------------------------Single Indian Army Soldier card ---------------------- */} 
 
-                        <Grid style={{marginTop: '2%'}} className={classes.copyrighttext}>© 2021 Copyright:
-                        <a href="https://mdbootstrap.com/"> Karanthartgallery.com</a>
-                        </Grid>
-                    </footer>
+              <div class="container pt-4">
+              <div className={`card mb-2 shadow-lg ${cardcolor}`}>
+                  <div class="row no-gutters">
+                      <div class="col-md-8">
+                      <div class="card-body">
+                      <h4 style={{color:cardheadcolor}} 
+                              className="card-title">Indian Army Soldier
+                          </h4>
+                          <p className="card-text paraquote"
+                             style={{color:alltextcolor}}>
+                              <i class="fas fa-quote-left p-2"></i> 
+                              To other countries, I may go as a tourist, but to India, I come as an Indian Solider. — Indian Army.
+                              <i class="fas fa-quote-right p-2"></i>
+                          </p>
+                          <p className="card-text paradesp" 
+                                style={{color:alltextcolor}}>The Indian Army is the land-based branch and the largest component of the Indian Armed Forces. The President of India is the Supreme Commander of the Indian Army, and its professional head is the Chief of Army Staff, who is a four-star general.
+                          </p>
+                          <p className="card-text paradate" 
+                                style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 30-08-2018</small></p>
+                              <a href="https://en.wikipedia.org/wiki/Indian_Army"  
+                                target="_blank" 
+                                className={`btn ${allbuttoncolor}`}>
+                                  <p className="card-text aboutbuttontext" 
+                                      style={{color:allbuttontextcolor}}>About Indian Army</p>
+                              </a>
+                      </div>
+                      </div>
+                      <div class="col-md-4">
+                      <img src="./images/art/armyman.jpg" 
+                           style={{width:"100%",height:'auto'}} 
+                           class={`card-img p-3 ${cardshadowcolor}`}  
+                           alt="image"></img>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+              <div class="pb-4">
+
+              </div>
+        {/* ------------------------------------------------------------------------- */}
+
+      {/* --------------------------       footer part    ------------------------------- */} 
+      
+                <div className={clsx(classes.footerroot),(classes.headergradient)}>
+                <div className="footer-dark">
+                            <footer>
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-sm-6 col-md-2 item">
+                                            {/* <h3>Services</h3>
+                                            <ul>
+                                                <li><a href="#">Web design</a></li>
+                                                <li><a href="#">Development</a></li>
+                                                <li><a href="#">Hosting</a></li>
+                                            </ul> */}
+                                        </div>
+                                        <div className="col-sm-6 col-md-4 item">
+                                            <h3>About</h3>
+                                            <ul>
+                                                <li>
+                                                 <h4 style={{fontFamily:"Roboto Mono"}}>Sanath S Karanth</h4>
+                                                </li>
+                                                <li className='mt-3'>
+                                                  <a>
+                                                    <BusinessCenterIcon style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
+                                                    <span  
+                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Associate Software Engineer
+                                                    </span>
+                                                    </a>
+                                                </li>
+                                                <li className='mt-2'>
+                                                  <a href="#">
+                                                  <MailIcon  style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
+                                                    <span  
+                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>sanathsk97@gmail.com
+                                                    </span>
+                                                  </a>
+                                                </li>
+                                                <li className='mt-2'>
+                                                  <a>
+                                                  <PhoneIcon style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
+                                                    <span  
+                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>+91 94496 85219
+                                                    </span>
+                                                  </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div className="col-md-6 item text">
+                                            <h3>Art Gallery</h3>
+                                            <p className="footerdesp">Art is a creative activity that expresses imaginative or technical skill. 
+                                              It produces a product, an object. 
+                                              Art is a diverse range of human activities in creating visual,
+                                               performing artifacts, and expressing the author's imaginative mind. 
+                                               The product of art is called a work of art, for others to experience.</p>
+                                        </div>
+                                        <div className="col item social">
+                                          <a href="http://www.gmail.com" target="_blank">
+                                            <i  className="fab fa-google-plus-g" style={{color:'white',fontSize:"20px"}}></i>
+                                          </a>
+                                          <a href="http://www.facebook.com" target="_blank">
+                                            <i  className="fa fa-facebook" style={{color:'white',fontSize:"20px"}}></i>
+                                          </a>
+                                          <a href="http://www.linkedin.com" target="_blank">
+                                            <i  className="fa fa-linkedin-square" style={{color:'white',fontSize:"20px"}}></i>
+                                          </a>
+                                          </div>
+                                    </div>
+                                    <p className="copyright">© 2021 Copyright karanthartgallery.com</p>
+                                </div>
+                            </footer>
+                        </div>
                 </div>
+        {/* ------------------------------------------------------------------------- */} 
+  
+        </div>  
                 <ScrollTop {...props}>
                   <Fab color="secondary" size="small" aria-label="scroll back to top">
                     <KeyboardArrowUpIcon />
                   </Fab>
                 </ScrollTop>
-                
-            </main>
-
-            </div>
           </Fragment>
   );
 }

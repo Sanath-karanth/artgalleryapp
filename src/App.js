@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import MainPage from './components/mainPage';
-// import SecondPage from './components/secondPage';
+import FeedbackPage from './components/feedback';
 import About from './components/about';
 // import MarkerPage from './components/markerSketch';
 // import PortraitPage from './components/portraitSketch';
@@ -20,6 +20,9 @@ function App() {
       </Route>
       <Route path="/demopage">
            <Demo />
+      </Route>
+      <Route path="/feedback">
+           <FeedbackPage />
       </Route>
      {/* <Route path="/secondPage">
            <SecondPage />

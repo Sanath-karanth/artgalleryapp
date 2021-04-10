@@ -207,7 +207,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AboutPage = (props) => {
+const FeedbackPage = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -472,21 +472,21 @@ const AboutPage = (props) => {
                           <span className='word'>Gallery</span>
                         </Typography>
                         <Tooltip title="About">
-                          <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            edge="end"
-                            // onClick={handleMenu}
-                            color="inherit"
-                            >
-                              <ToggleButton
-                                  className="mr-4" 
-                                  onChange={togglechange} 
-                                  defaultChecked={togglestatus} />
-                          
-                            <AccountCircleIcon style={{fontSize:"35px"}} />
-                          </IconButton>
+                    <IconButton
+                      aria-label="account of current user"
+                      aria-controls="menu-appbar"
+                      aria-haspopup="true"
+                      edge="end"
+                      // onClick={handleMenu}
+                      color="inherit"
+                      >
+                        <ToggleButton
+                            className="mr-4" 
+                            onChange={togglechange} 
+                            defaultChecked={togglestatus} />
+                     
+                      <AccountCircleIcon style={{fontSize:"35px"}} />
+                    </IconButton>
                     </Tooltip>
 
                   </Toolbar>
@@ -508,12 +508,12 @@ const AboutPage = (props) => {
             {/* ----------------------------------------Heading part--------------------------------- */}
             
             <div className={classes.root}>
-            <div className="container-fluid">
+            <div className="container-fluid pb-4">
                     <div className={`card  mt-5 shadow-lg ${headertogglecolor}`}>
                       <div className="row no-gutters">
                         <div className="card-body">
                             <h3 style={{ color: headertextcolor}} 
-                                className="headanimate text-left">About Me
+                                className="headanimate text-left">Feedback Form
                             </h3>
                         </div>
                     </div>
@@ -522,96 +522,39 @@ const AboutPage = (props) => {
                 </div>
                 
             {/* ------------------------------------------------------------------------- */}
-            
-          {/* ------------------------------------------------------------------------- */}
-          <div className="container pt-4">
-                <Card className={classes.aboutcardroot}>
-                    <CardHeader
-                      avatar={
-                        <a href="http://www.gmail.com" style={{textDecoration:'none'}} target="_blank">
-                          <Avatar aria-label="recipe" className={classes.avatar}>
-                          S
-                        </Avatar></a>
-                      }
-                      action={
-                        <IconButton aria-label="settings">
-                          <MoreVertIcon />
-                        </IconButton>
-                      }
-                      title="Sanath S Karanth"
-                      subheader="March 30, 2021"
-                    />
-                    <div>
-                      { imgshow ? 
-                    <CardMedia
-                          className={clsx(classes.mediaimage, {
-                            [classes.mediaimageOpen]: imgexpand,
-                          })}
-                          onClick={handleimageclick}
-                          onMouseOver={handleimageclick}
-                          aria-expanded={imgexpand}
-                          aria-label="show more"
-                          image="./images/Sanath2.jpg"
-                          title="Paella dish" />
-                          :
-                          <CardMedia
-                          className={clsx(classes.mediaimage, {
-                            [classes.mediaimageOpen]: imgexpand,
-                          })}
-                          onClick={handleimageclick}
-                          onMouseOver={handleimageclick}
-                          aria-expanded={imgexpand}
-                          aria-label="show more"
-                          image="./images/Sanath.jpg"
-                          title="Paella dish" />
-                        }
+            <div className="container">
+            <div class="card p-2">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Phone Number:</label>
+                            <input type="text" 
+                                   class="form-control"
+                                   maxLength={12}
+                                   placeholder="Plese enter your 10 digit phone number">    
+                            </input>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Overall Rating:</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            </select>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Valuable feedback:</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">SUBMIT</button>
+                    </form>
                     </div>
-                    <CardContent>
-                    <p class="card-text paraquote">
-                        <i class="fas fa-quote-left p-2"></i> 
-                        To succeed in all your pursuits, remove doubts and develop your confidence.
-                        <i class="fas fa-quote-right p-2"></i>
-                    </p>
-                    </CardContent>
-                    <CardActions disableSpacing>
-                      <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                      </IconButton>
-                      <IconButton aria-label="share">
-                        <ShareIcon />
-                      </IconButton>
-                      <IconButton
-                        className={clsx(classes.expand, {
-                          [classes.expandOpen]: expanded,
-                        })}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                      >
-                        <ExpandMoreIcon />
-                      </IconButton>
-                    </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                      <CardContent>
-                        <h5 paragraph>Sanath S Karanth</h5>
-                        <p className='paradesp mt-2'>
-                        Associate Software Engineer
-                        <p className='paradesp mt-2'>
-                          Contact - +919449685219
-                          <p className='paradesp mt-2'>
-                          Shimoga - 577205
-                        </p>
-                        </p>
-                        </p>
-                       
-                       
-                      </CardContent>
-                    </Collapse>
-                  </Card>
-                </div>   
-
-      {/* ------------------------------------------------------------------------- */}
-        
+                </div>
+            
+            </div>
           </div>  
 
                 <div className={clsx(classes.footerroot),(classes.headergradient)}>
@@ -692,4 +635,4 @@ const AboutPage = (props) => {
           </Fragment>
   );
 }
-export default AboutPage;
+export default FeedbackPage;
