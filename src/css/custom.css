@@ -121,10 +121,7 @@ ol li.list-group-item {
   {
     font-family: 'Century Gothic';
   }
-  .paradesp .letter {
-    display: inline-block;
-    line-height: 1em;
-  }
+  
   .paradesp
   {
     font-family: "Century Gothic";
@@ -437,3 +434,31 @@ ol li.list-group-item {
 }
 
 /* -------------------------------   All paragraph descriptions style   --------------------- */
+
+.indiamaptext
+  {
+    font-family: "Century Gothic";
+  }
+  .indiamaptext .letter {
+    display: inline-block;
+    line-height: 1em;
+  }
+
+  .armymantext {
+    position: relative;
+    font-family: "Century Gothic";
+  }
+  
+  .armymantext .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.2em;
+    padding-right: 0.05em;
+    padding-bottom: 0.1em;
+    overflow: hidden;
+  }
+  
+  .armymantext .letter {
+    display: inline-block;
+    line-height: 1em;
+  }

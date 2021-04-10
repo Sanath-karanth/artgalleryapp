@@ -55,8 +55,16 @@ import anime from "animejs";
 import TextTransition, { presets } from "react-text-transition";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Switch from '@material-ui/core/Switch';
-import ToggleButton from '../common/ToggleButton';
 import FeedbackIcon from '@material-ui/icons/Feedback';
+import InvertColorsIcon from '@material-ui/icons/InvertColors';
+import BrushIcon from '@material-ui/icons/Brush';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import ToggleButton from '../common/ToggleButton';
+import TeaxtAnimation from '../common/textanimation';
 import '../css/custom.css'
 
 
@@ -102,9 +110,17 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(0),
   },
-  headergradient: {
+  headergradientD: {
     background: "linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182));"
-    // background: "linear-gradient(to right,rgb(0, 0, 0), rgb(51, 8, 103));" 
+  },
+  headergradientR: {
+    background: "linear-gradient(to right,rgb(0, 0, 0), rgb(241, 40, 100));" 
+  },
+  headergradientG: {
+    background: "linear-gradient(to right,rgb(0, 0, 0), rgb(42, 230, 123));" 
+  },
+  headergradientB: {
+    background: "linear-gradient(to right,rgb(0, 0, 0), rgb(45, 32, 223));" 
   },
   titlestyle: {
     fontFamily: 'Roboto Mono',
@@ -153,11 +169,15 @@ const useStyles = makeStyles((theme) => ({
   fulldraList: {
     width: 'auto',
   },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
 }));
 
 const MainPage = (props) => {
   const classes = useStyles();
   const theme = useTheme();
+  
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
 
@@ -172,6 +192,8 @@ const MainPage = (props) => {
   const [cardheadcolor, setCardheadcolor] = useState('#5D6D7E');
   const [alltextcolor, setAlltextcolor] = useState('#000000');
   const [allbuttontextcolor, setAllbuttontextcolor] = useState('#FFFFFF');
+
+  const [gradient1, setGradient1] = useState(classes.headergradientD);
 
   const togglechange = () => {
     if(togglestatus == true) {
@@ -209,6 +231,34 @@ const MainPage = (props) => {
     setOpen(false);
   };
 
+  const [opengradient, setOpengradient] = useState(false);
+
+  const handleClickgradient = () => {
+    setOpengradient(!opengradient);
+  };
+
+  const [radiovalue, setRadiovalue] = useState('Gradient 1');
+  const gradientselect = (event) => {
+    console.log(event.target.value);
+    setRadiovalue(event.target.value);
+    if(event.target.value === 'GradientD')
+    {
+      setGradient1(classes.headergradientD);
+    }
+    else if(event.target.value === 'GradientR')
+    {
+      setGradient1(classes.headergradientR);
+    }
+    else if(event.target.value === 'GradientG')
+    {
+      setGradient1(classes.headergradientG);
+    }
+    else if(event.target.value === 'GradientB')
+    {
+      setGradient1(classes.headergradientB);
+    }
+ }
+
   const Drawerlist = (ancher) => (
     <div
       className={clsx(classes.dralist, {
@@ -243,6 +293,34 @@ const MainPage = (props) => {
                   </Tooltip>
                 <ListItemText onClick={handleDrawerClose} primary='Photography' />
               </ListItem>
+                </List>
+                <Divider />
+                
+                <List>
+                    <ListItem button onClick={handleClickgradient}>
+                        <Tooltip title="Header Footer Theme">
+                          <ListItemIcon>
+                              <BrushIcon style={{color:"#000000"}} />
+                          </ListItemIcon>
+                        </Tooltip>
+                          <ListItemText primary='Gradient Theme' />
+                          {opengradient ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                      <Collapse in={opengradient} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <ListItem button className={classes.nested}>
+                                <RadioGroup aria-label="gradient" 
+                                            name="gradient 1"
+                                            value={radiovalue} 
+                                            onChange={value => gradientselect(value)}>
+                                  <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
+                                  <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
+                                  <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
+                                  <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
+                                </RadioGroup>
+                          </ListItem>
+                        </List>
+                      </Collapse>
                 </List>
                 <Divider />
                 <List>
@@ -312,28 +390,6 @@ const MainPage = (props) => {
     };
 
           /////////////////////  Heading Animation
-      
-          const paraanimation = () => {
-            var textWrapper = document.querySelector('.paradescription');
-            textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-            
-            anime.timeline({loop: true})
-            .add({
-              targets: '.paradescription .letter',
-              scale: [4,1],
-              opacity: [0,1],
-              translateZ: 0,
-              easing: "easeOutExpo",
-              duration: 950,
-              delay: (el, i) => 70*i
-            }).add({
-              targets: '.paradescription',
-              opacity: 0,
-              duration: 1000,
-              easing: "easeOutExpo",
-              delay: 1000
-            });
-        }
   
         const artgalleryanimation = () => {
           
@@ -384,13 +440,14 @@ const MainPage = (props) => {
         )
     }
     
+    
     useEffect(() => {
-      paraanimation();
       artgalleryanimation();
       }, []);
 
   return (
         <Fragment >
+          <TeaxtAnimation />
           <CssBaseline />
             <AppBar
                   position="fixed"
@@ -398,7 +455,7 @@ const MainPage = (props) => {
                   [classes.appBarShift]: open,
                   })}
               >
-                  <Toolbar className={classes.headergradient}>
+                  <Toolbar className={gradient1}>
                   <Tooltip title="Menu">
                   <IconButton
                       color="inherit"
@@ -442,7 +499,7 @@ const MainPage = (props) => {
                             // onClick={feedbackmodal}
                             color="inherit"
                             >
-                            <Link to="/" style={{color:"#ffffff", textDecoration:"none"}}>
+                            <Link to="/feedback" style={{color:"#ffffff", textDecoration:"none"}}>
                             <FeedbackIcon style={{fontSize:"30px"}}></FeedbackIcon>
                             </Link>
                           </IconButton>
@@ -527,31 +584,36 @@ const MainPage = (props) => {
 
              {/* --------------------------single Indian culture card---------------------- */}  
 
-
-                <div className="container pt-5">
-                <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-                  <div className="row no-gutters">
-                      <div className="col-md-4">
-                      <img src="./images/art/indiamap.jpg"
-                           style={{width:"100%",height:'auto'}} 
-                            className={`card-img p-3 ${cardshadowcolor}`} 
-                            alt="image">      
-                      </img>
-                      </div>
-                      <div className="col-md-8">
-                      <div className="card-body">
-                          <h4 style={{color:cardheadcolor}} 
-                              className="card-title">Indian Culture Map
-                          </h4>
-                          <p className="card-text paraquote"
-                             style={{color:alltextcolor}}>
-                              <i className="fas fa-quote-left p-2"></i> 
-                              India is the cradle of the human race, the birthplace of human speech, the mother of history, the grandmother of legend, and the great grand mother of tradition. Our most valuable and most artistic materials in the history of man are treasured up in India only!.
-                              <i className="fas fa-quote-right p-2"></i>
-                          </p>
-                          <p className="card-text paradescription" 
-                                style={{color:alltextcolor,fontFamily:'Century Gothic'}}>The Indian culture, often labeled as an amalgamation of several various cultures, spans across the Indian subcontinent and has been influenced and shaped by a history that is several thousand years old. India is the birthplace of Hinduism, Buddhism, Jainism, Sikhism, and other religions.</p>
-                          <p className="card-text paradate" 
+             <div className="container pt-4">
+                  <div className={`card mb-2 shadow-lg ${cardcolor}`}>
+                    <div className="row no-gutters">
+                        <div className="col-md-5 flip-card">  
+                            <div className="flip-card-inner">
+                                <div className="flip-card-front">
+                                <h1 className="mt-4">Indian Culture Map</h1> 
+                                <p className="card-text paradate" 
+                                style={{color:"#000000"}}>Art Creation Date:<small className="text-primary"> 20-08-2018</small></p>
+                                  <p>Touch or hover to see</p>
+                                </div>
+                                <div className="flip-card-back">
+                                <img  src="./images/art/indiamap.jpg" 
+                                        style={{height:'500px'}} 
+                                        className={`card-img p-3 ${cardshadowcolor}`} 
+                                        alt="image"></img>
+                                </div>
+                            </div>
+                        </div>  
+                        <div className="col-md-7">
+                        <div className="card-body">
+                            <h4 style={{color:cardheadcolor}}>Indian Culture Map</h4>
+                            <p className="card-text paraquote" style={{color:alltextcolor}}>
+                                <i className="fas fa-quote-left p-2"></i> 
+                                India is the cradle of the human race, the birthplace of human speech, the mother of history, the grandmother of legend, and the great grand mother of tradition. Our most valuable and most artistic materials in the history of man are treasured up in India only!.
+                                <i className="fas fa-quote-right p-2"></i>
+                            </p>
+                            <p className="card-text indiamaptext" 
+                                style={{color:alltextcolor}}>The Indian culture, often labeled as an amalgamation of several various cultures, spans across the Indian subcontinent and has been influenced and shaped by a history that is several thousand years old. India is the birthplace of Hinduism, Buddhism, Jainism, Sikhism, and other religions.</p>
+                            <p className="card-text paradate" 
                                 style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 20-08-2018</small></p>
                               <a href="https://en.wikipedia.org/wiki/India"  
                                 target="_blank" 
@@ -559,11 +621,11 @@ const MainPage = (props) => {
                                   <p className="card-text aboutbuttontext" 
                                       style={{color:allbuttontextcolor}}>About India</p>
                               </a>
-                      </div>
-                      </div>
+                        </div>
+                        </div>
+                    </div>
                   </div>
-                  </div>
-              </div>
+                </div>
           {/* ------------------------------------------------------------------------- */}
 
           {/* --------------------------Single Indian Army Soldier card ---------------------- */} 
@@ -571,7 +633,7 @@ const MainPage = (props) => {
               <div class="container pt-4">
               <div className={`card mb-2 shadow-lg ${cardcolor}`}>
                   <div class="row no-gutters">
-                      <div class="col-md-8">
+                      <div class="col-md-7">
                       <div class="card-body">
                       <h4 style={{color:cardheadcolor}} 
                               className="card-title">Indian Army Soldier
@@ -582,8 +644,12 @@ const MainPage = (props) => {
                               To other countries, I may go as a tourist, but to India, I come as an Indian Solider. — Indian Army.
                               <i class="fas fa-quote-right p-2"></i>
                           </p>
-                          <p className="card-text paradesp" 
-                                style={{color:alltextcolor}}>The Indian Army is the land-based branch and the largest component of the Indian Armed Forces. The President of India is the Supreme Commander of the Indian Army, and its professional head is the Chief of Army Staff, who is a four-star general.
+                          <p className="card-text armymantext" 
+                                style={{color:alltextcolor}}>
+                                  <span class="text-wrapper">
+                                    <span class="letters">The Indian Army is the land-based branch and the largest component of the Indian Armed Forces. The President of India is the Supreme Commander of the Indian Army, and its professional head is the Chief of Army Staff, who is a four-star general.</span>
+                                  </span>
+                                  
                           </p>
                           <p className="card-text paradate" 
                                 style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 30-08-2018</small></p>
@@ -595,12 +661,22 @@ const MainPage = (props) => {
                               </a>
                       </div>
                       </div>
-                      <div class="col-md-4">
-                      <img src="./images/art/armyman.jpg" 
-                           style={{width:"100%",height:'auto'}} 
-                           class={`card-img p-3 ${cardshadowcolor}`}  
-                           alt="image"></img>
-                      </div>
+                      <div className="col-md-5 flip-card">  
+                            <div className="flip-card-inner">
+                                <div className="flip-card-front">
+                                <h1 className="mt-4">Indian Army Soldier</h1> 
+                                <p className="card-text paradate" 
+                                style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 30-08-2018</small></p>
+                                  <p>Touch or hover to see</p>
+                                </div>
+                                <div className="flip-card-back">
+                                <img src="./images/art/armyman.jpg" 
+                                      style={{height:'500px'}} 
+                                      class={`card-img p-3 ${cardshadowcolor}`}  
+                                      alt="image"></img>
+                                </div>
+                            </div>
+                        </div> 
                   </div>
                   </div>
               </div>
@@ -609,9 +685,62 @@ const MainPage = (props) => {
               </div>
         {/* ------------------------------------------------------------------------- */}
 
+         {/* --------------------------Single Indian Army Soldier card ---------------------- */} 
+
+        <div class="container pt-4">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+              <div class={`card p-2 mb-4 shadow-lg ${cardcolor}`}>
+                <img src="./images/art/jokerpositive.jpg" 
+                     style={{width:"100%",height:'auto'}} 
+                     class="card-img-top" 
+                     alt="image"></img>
+                <div class="card-body">
+                  <h4 class="card-title" style={{color:cardheadcolor}}>Positive shade Sketch</h4>
+                  <p class="card-text paradesp"
+                     style={{color:alltextcolor}}>Positive space refers to the shape of an object. Look around your room. Every object that you are looking at is creating positive space. Don’t worry about the patterns or details of the item, just focus on the shape of the object.</p>
+                  
+                  <p className="card-text paradate" 
+                                style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 09-08-2020</small></p>
+                              <a href="https://www.artinstructionblog.com/an-introduction-to-negative-drawing-with-mike-sibley"  
+                                target="_blank" 
+                                className={`btn ${allbuttoncolor}`}>
+                                  <p className="card-text aboutbuttontext" 
+                                      style={{color:allbuttontextcolor}}>About this art</p>
+                              </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class={`card p-2 mb-4 shadow-lg ${cardcolor}`}>
+                <img src="./images/art/jokernegative.jpg" 
+                     style={{width:"100%",height:'auto'}} 
+                     class="card-img-top" 
+                     alt="image"></img>
+                <div class="card-body">
+                  <h4 class="card-title" style={{color:cardheadcolor}}>Negative shade Sketch</h4>
+                  <p class="card-text paradesp"
+                     style={{color:alltextcolor}}>Negative space refers to the shape around an object. It can be much harder to look at an object and see the space around it. Look around the room for an object up against a wall and try to focus on the shape created on the wall around the object.</p>
+                 
+                  <p className="card-text paradate" 
+                                style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 09-08-2020</small></p>
+                              <a href="https://www.artinstructionblog.com/an-introduction-to-negative-drawing-with-mike-sibley"  
+                                target="_blank" 
+                                className={`btn ${allbuttoncolor}`}>
+                                  <p className="card-text aboutbuttontext" 
+                                      style={{color:allbuttontextcolor}}>About this art</p>
+                              </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {/* ------------------------------------------------------------------------- */}
+
       {/* --------------------------       footer part    ------------------------------- */} 
       
-                <div className={clsx(classes.footerroot),(classes.headergradient)}>
+                <div className={clsx(classes.footerroot),(gradient1)}>
                 <div className="footer-dark">
                             <footer>
                                 <div className="container-fluid">

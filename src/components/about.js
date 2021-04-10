@@ -68,6 +68,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import BrushIcon from '@material-ui/icons/Brush';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 
 
@@ -113,9 +119,17 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(0),
   },
-  headergradient: {
+  headergradientD: {
     background: "linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182));"
-    // background: "linear-gradient(to right,rgb(0, 0, 0), rgb(51, 8, 103));" 
+  },
+  headergradientR: {
+    background: "linear-gradient(to right,rgb(0, 0, 0), rgb(241, 40, 100));" 
+  },
+  headergradientG: {
+    background: "linear-gradient(to right,rgb(0, 0, 0), rgb(42, 230, 123));" 
+  },
+  headergradientB: {
+    background: "linear-gradient(to right,rgb(0, 0, 0), rgb(45, 32, 223));" 
   },
   titlestyle: {
     fontFamily: 'Roboto Mono',
@@ -225,6 +239,8 @@ const AboutPage = (props) => {
   const [alltextcolor, setAlltextcolor] = useState('#000000');
   const [allbuttontextcolor, setAllbuttontextcolor] = useState('#FFFFFF');
 
+  const [gradient1, setGradient1] = useState(classes.headergradientD);
+
   const togglechange = () => {
     if(togglestatus == true) {
       setTogglestatus(false);
@@ -260,6 +276,34 @@ const AboutPage = (props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const [opengradient, setOpengradient] = useState(false);
+
+  const handleClickgradient = () => {
+    setOpengradient(!opengradient);
+  };
+
+  const [radiovalue, setRadiovalue] = useState('Gradient 1');
+  const gradientselect = (event) => {
+    console.log(event.target.value);
+    setRadiovalue(event.target.value);
+    if(event.target.value === 'GradientD')
+    {
+      setGradient1(classes.headergradientD);
+    }
+    else if(event.target.value === 'GradientR')
+    {
+      setGradient1(classes.headergradientR);
+    }
+    else if(event.target.value === 'GradientG')
+    {
+      setGradient1(classes.headergradientG);
+    }
+    else if(event.target.value === 'GradientB')
+    {
+      setGradient1(classes.headergradientB);
+    }
+ }
 
   const Drawerlist = (ancher) => (
     <div
@@ -299,6 +343,33 @@ const AboutPage = (props) => {
                   </Tooltip>
                 <ListItemText onClick={handleDrawerClose} primary='Photography' />
               </ListItem>
+                </List>
+                <Divider />
+                <List>
+                    <ListItem button onClick={handleClickgradient}>
+                        <Tooltip title="Header Footer Theme">
+                          <ListItemIcon>
+                              <BrushIcon style={{color:"#000000"}} />
+                          </ListItemIcon>
+                        </Tooltip>
+                          <ListItemText primary='Gradient Theme' />
+                          {opengradient ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                      <Collapse in={opengradient} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <ListItem button className={classes.nested}>
+                                <RadioGroup aria-label="gradient" 
+                                            name="gradient 1"
+                                            value={radiovalue} 
+                                            onChange={value => gradientselect(value)}>
+                                  <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
+                                  <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
+                                  <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
+                                  <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
+                                </RadioGroup>
+                          </ListItem>
+                        </List>
+                      </Collapse>
                 </List>
                 <Divider />
                 <List>
@@ -449,7 +520,7 @@ const AboutPage = (props) => {
                   [classes.appBarShift]: open,
                   })}
               >
-                  <Toolbar className={classes.headergradient}>
+                  <Toolbar className={gradient1}>
                   <Tooltip title="Menu">
                   <IconButton
                       color="inherit"
@@ -614,7 +685,7 @@ const AboutPage = (props) => {
         
           </div>  
 
-                <div className={clsx(classes.footerroot),(classes.headergradient)}>
+                <div className={clsx(classes.footerroot),(gradient1)}>
                 <div className="footer-dark">
                             <footer>
                                 <div className="container-fluid">
