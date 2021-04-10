@@ -428,7 +428,7 @@ const MainPage = (props) => {
                             edge="end"
                             color="inherit">
                           <ToggleButton
-                                    className="mr-4" 
+                                    className="mr-2" 
                                     onChange={togglechange} 
                                     defaultChecked={togglestatus}>
                           </ToggleButton>
