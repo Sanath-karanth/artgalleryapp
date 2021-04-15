@@ -4,7 +4,7 @@ import '../css/main.css'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+// import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -13,67 +13,68 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+// import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import NotesIcon from '@material-ui/icons/Notes';
-import ViewDayIcon from '@material-ui/icons/ViewDay';
-import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
+// import NotesIcon from '@material-ui/icons/Notes';
+// import ViewDayIcon from '@material-ui/icons/ViewDay';
+// import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import HomeIcon from '@material-ui/icons/Home';
 import Collapse from '@material-ui/core/Collapse';
-import StarBorder from '@material-ui/icons/StarBorder';
+// import StarBorder from '@material-ui/icons/StarBorder';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import BlurLinearIcon from '@material-ui/icons/BlurLinear';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+// import BlurLinearIcon from '@material-ui/icons/BlurLinear';
+// import DashboardIcon from '@material-ui/icons/Dashboard';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+// import MenuItem from '@material-ui/core/MenuItem';
+// import Menu from '@material-ui/core/Menu';
 import Tooltip from '@material-ui/core/Tooltip';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
+// import Box from '@material-ui/core/Box';
+// import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+// import Paper from '@material-ui/core/Paper';
+// import Grid from '@material-ui/core/Grid';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import PhoneIcon from '@material-ui/icons/Phone';
-import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+// import Button from "@material-ui/core/Button";
+// import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { red, blue, green } from "@material-ui/core/colors";
-import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
+// import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import anime from "animejs";
-import TextTransition, { presets } from "react-text-transition";
+// import TextTransition, { presets } from "react-text-transition";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Switch from '@material-ui/core/Switch';
-import ToggleButton from '../common/ToggleButton'
+// import Switch from '@material-ui/core/Switch';
+import ToggleButton from '../common/ToggleButton';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import '../css/aboutstyle.css'
 
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import Card from '@material-ui/core/Card';
+// import CardHeader from '@material-ui/core/CardHeader';
+// import CardMedia from '@material-ui/core/CardMedia';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardActions from '@material-ui/core/CardActions';
+// import Avatar from '@material-ui/core/Avatar';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+// import ShareIcon from '@material-ui/icons/Share';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import BrushIcon from '@material-ui/icons/Brush';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+// import FormControl from '@material-ui/core/FormControl';
+// import FormLabel from '@material-ui/core/FormLabel';
 
 
 
@@ -242,7 +243,7 @@ const Feedbackpage = (props) => {
   const [gradient1, setGradient1] = useState(classes.headergradientD);
 
   const togglechange = () => {
-    if(togglestatus == true) {
+    if(togglestatus === true) {
       setTogglestatus(false);
       setTogglemaincolor('#EEECEB');
       setHeadertogglecolor('bg-light');
@@ -305,14 +306,15 @@ const Feedbackpage = (props) => {
     }
  }
 
-  const Drawerlist = (ancher) => (
-    <div
-      className={clsx(classes.dralist, {
-        [classes.fulldraList]: ancher === 'left',
-      })}
-      role="presentation"
-    >
-        <List>
+ const Drawerlist = (ancher) => (
+  <div
+    className={clsx(classes.dralist, {
+      [classes.fulldraList]: ancher === 'left',
+    })}
+    role="presentation"
+  >
+      <List>
+      <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
             <ListItem button>
               <Tooltip title="Home">
               <ListItemIcon>
@@ -324,55 +326,58 @@ const Feedbackpage = (props) => {
                 <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
                           <ListItemText primary='Home' />
                 </Link>
-            </ListItem>
-
-            <ListItem button>
-                <Tooltip title="Arts works">
-                  <ListItemIcon>
-                      <ColorLensIcon />
-                  </ListItemIcon>
-                  </Tooltip>
-                <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
-            </ListItem>
-
-            <ListItem button>
-                <Tooltip title="Photography">
-                      <ListItemIcon onClick={handleDrawerClose}>
-                  <CameraAltIcon />
-                  </ListItemIcon>
-                  </Tooltip>
-                <ListItemText onClick={handleDrawerClose} primary='Photography' />
               </ListItem>
-                </List>
-                <Divider />
-                <List>
-                    <ListItem button onClick={handleClickgradient}>
-                        <Tooltip title="Header Footer Theme">
-                          <ListItemIcon>
-                              <BrushIcon style={{color:"#000000"}} />
-                          </ListItemIcon>
-                        </Tooltip>
-                          <ListItemText primary='Gradient Theme' />
-                          {opengradient ? <ExpandLess /> : <ExpandMore />}
-                    </ListItem>
-                      <Collapse in={opengradient} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <ListItem button className={classes.nested}>
-                                <RadioGroup aria-label="gradient" 
-                                            name="gradient 1"
-                                            value={radiovalue} 
-                                            onChange={value => gradientselect(value)}>
-                                  <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
-                                  <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
-                                  <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
-                                  <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
-                                </RadioGroup>
-                          </ListItem>
-                        </List>
-                      </Collapse>
-                </List>
-                <Divider />
-                <List>
+            </Link>
+
+          <ListItem button>
+              <Tooltip title="Arts works">
+                <ListItemIcon>
+                    <ColorLensIcon />
+                </ListItemIcon>
+                </Tooltip>
+              <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
+          </ListItem>
+
+          <ListItem button>
+              <Tooltip title="Photography">
+                    <ListItemIcon onClick={handleDrawerClose}>
+                <CameraAltIcon />
+                </ListItemIcon>
+                </Tooltip>
+              <ListItemText onClick={handleDrawerClose} primary='Photography' />
+            </ListItem>
+              </List>
+              <Divider />
+              
+              <List>
+                  <ListItem button onClick={handleClickgradient}>
+                      <Tooltip title="Header Footer Theme">
+                        <ListItemIcon>
+                            <BrushIcon style={{color:"#000000"}} />
+                        </ListItemIcon>
+                      </Tooltip>
+                        <ListItemText primary='Gradient Theme' />
+                        {opengradient ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                    <Collapse in={opengradient} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        <ListItem button className={classes.nested}>
+                              <RadioGroup aria-label="gradient" 
+                                          name="gradient 1"
+                                          value={radiovalue} 
+                                          onChange={value => gradientselect(value)}>
+                                <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
+                                <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
+                                <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
+                                <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
+                              </RadioGroup>
+                        </ListItem>
+                      </List>
+                    </Collapse>
+              </List>
+              <Divider />
+              <List>
+                <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
                     <ListItem button>
                         <Tooltip title="About">
                           <ListItemIcon>
@@ -385,9 +390,10 @@ const Feedbackpage = (props) => {
                           <ListItemText primary='About' />
                           </Link>
                     </ListItem>
-                </List>
-    </div>
-  );
+                </Link>
+              </List>
+  </div>
+);
 
     ////////////////   back to top function
 
@@ -495,7 +501,7 @@ const Feedbackpage = (props) => {
         const handleimageclick = () => {
           // setImgexpanded(!imgexpand);
           // setImgshow(true);
-          if(imgexpand == true) {
+          if(imgexpand === true) {
             setImgexpanded(false);
             setImgshow(false);
             }
@@ -542,24 +548,32 @@ const Feedbackpage = (props) => {
                           <span className='word'>ART</span> 
                           <span className='word'>Gallery</span>
                         </Typography>
-                        <Tooltip title="About">
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            edge="end"
+                            color="inherit">
+                          <ToggleButton
+                                    className="mr-2" 
+                                    onChange={togglechange} 
+                                    defaultChecked={togglestatus}>
+                          </ToggleButton>
+                        </IconButton>
+                        <Tooltip title="Feedback">
                           <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             edge="end"
-                            // onClick={handleMenu}
+                            // onClick={feedbackmodal}
                             color="inherit"
                             >
-                              <ToggleButton
-                                  className="mr-4" 
-                                  onChange={togglechange} 
-                                  defaultChecked={togglestatus} />
-                          
-                            <AccountCircleIcon style={{fontSize:"35px"}} />
+                            <Link to="/feedback" style={{color:"#ffffff", textDecoration:"none"}}>
+                            <FeedbackIcon style={{fontSize:"30px"}}></FeedbackIcon>
+                            </Link>
                           </IconButton>
                     </Tooltip>
-
                   </Toolbar>
               </AppBar>
                 <SwipeableDrawer
@@ -594,20 +608,20 @@ const Feedbackpage = (props) => {
                 
             {/* ------------------------------------------------------------------------- */}
             <div className="container">
-            <div class="card p-2">
-                <div class="card-body">
+            <div className="card p-2">
+                <div className="card-body">
                     <form>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label for="exampleFormControlInput1">Phone Number:</label>
                             <input type="text" 
-                                   class="form-control"
+                                   className="form-control"
                                    maxLength={12}
                                    placeholder="Plese enter your 10 digit phone number">    
                             </input>
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label for="exampleFormControlSelect1">Overall Rating:</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select className="form-control" id="exampleFormControlSelect1">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -616,11 +630,11 @@ const Feedbackpage = (props) => {
                             </select>
                         </div>
                     
-                        <div class="form-group">
+                        <div className="form-group">
                             <label for="exampleFormControlTextarea1">Valuable feedback:</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">SUBMIT</button>
+                        <button type="submit" className="btn btn-primary">SUBMIT</button>
                     </form>
                     </div>
                 </div>

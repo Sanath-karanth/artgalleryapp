@@ -4,7 +4,7 @@ import '../css/main.css'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+// import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -13,49 +13,50 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+// import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import NotesIcon from '@material-ui/icons/Notes';
-import ViewDayIcon from '@material-ui/icons/ViewDay';
-import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
+// import NotesIcon from '@material-ui/icons/Notes';
+// import ViewDayIcon from '@material-ui/icons/ViewDay';
+// import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import HomeIcon from '@material-ui/icons/Home';
 import Collapse from '@material-ui/core/Collapse';
-import StarBorder from '@material-ui/icons/StarBorder';
+// import StarBorder from '@material-ui/icons/StarBorder';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import BlurLinearIcon from '@material-ui/icons/BlurLinear';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+// import BlurLinearIcon from '@material-ui/icons/BlurLinear';
+// import DashboardIcon from '@material-ui/icons/Dashboard';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+// import MenuItem from '@material-ui/core/MenuItem';
+// import Menu from '@material-ui/core/Menu';
 import Tooltip from '@material-ui/core/Tooltip';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
+// import Box from '@material-ui/core/Box';
+// import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+// import Paper from '@material-ui/core/Paper';
+// import Grid from '@material-ui/core/Grid';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import PhoneIcon from '@material-ui/icons/Phone';
-import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { red, blue, green } from "@material-ui/core/colors";
-import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
+// import Button from "@material-ui/core/Button";
+// import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { red} from "@material-ui/core/colors";
+// import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import anime from "animejs";
-import TextTransition, { presets } from "react-text-transition";
+// import TextTransition, { presets } from "react-text-transition";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Switch from '@material-ui/core/Switch';
-import ToggleButton from '../common/ToggleButton'
+// import Switch from '@material-ui/core/Switch';
+import ToggleButton from '../common/ToggleButton';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import '../css/aboutstyle.css'
 
 import Card from '@material-ui/core/Card';
@@ -72,8 +73,8 @@ import BrushIcon from '@material-ui/icons/Brush';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+// import FormControl from '@material-ui/core/FormControl';
+// import FormLabel from '@material-ui/core/FormLabel';
 
 
 
@@ -223,7 +224,6 @@ const useStyles = makeStyles((theme) => ({
 
 const AboutPage = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
 
@@ -242,7 +242,7 @@ const AboutPage = (props) => {
   const [gradient1, setGradient1] = useState(classes.headergradientD);
 
   const togglechange = () => {
-    if(togglestatus == true) {
+    if(togglestatus === true) {
       setTogglestatus(false);
       setTogglemaincolor('#EEECEB');
       setHeadertogglecolor('bg-light');
@@ -313,6 +313,7 @@ const AboutPage = (props) => {
       role="presentation"
     >
         <List>
+        <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
             <ListItem button>
               <Tooltip title="Home">
               <ListItemIcon>
@@ -324,7 +325,8 @@ const AboutPage = (props) => {
                 <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
                           <ListItemText primary='Home' />
                 </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
 
             <ListItem button>
                 <Tooltip title="Arts works">
@@ -373,16 +375,16 @@ const AboutPage = (props) => {
                 </List>
                 <Divider />
                 <List>
-                    <ListItem button>
+                    <ListItem onClick={handleDrawerClose} button>
                         <Tooltip title="About">
                           <ListItemIcon>
                             <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                              <AccountCircleIcon />
+                              <AccountCircleIcon onClick={handleDrawerClose}/>
                             </Link>
                           </ListItemIcon>
                         </Tooltip>
                           <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                          <ListItemText primary='About' />
+                          <ListItemText primary='About' onClick={handleDrawerClose} />
                           </Link>
                     </ListItem>
                 </List>
@@ -495,7 +497,7 @@ const AboutPage = (props) => {
         const handleimageclick = () => {
           // setImgexpanded(!imgexpand);
           // setImgshow(true);
-          if(imgexpand == true) {
+          if(imgexpand === true) {
             setImgexpanded(false);
             setImgshow(false);
             }
@@ -542,21 +544,30 @@ const AboutPage = (props) => {
                           <span className='word'>ART</span> 
                           <span className='word'>Gallery</span>
                         </Typography>
-                        <Tooltip title="About">
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            edge="end"
+                            color="inherit">
+                          <ToggleButton
+                                    className="mr-2" 
+                                    onChange={togglechange} 
+                                    defaultChecked={togglestatus}>
+                          </ToggleButton>
+                        </IconButton>
+                        <Tooltip title="Feedback">
                           <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             edge="end"
-                            // onClick={handleMenu}
+                            // onClick={feedbackmodal}
                             color="inherit"
                             >
-                              <ToggleButton
-                                  className="mr-4" 
-                                  onChange={togglechange} 
-                                  defaultChecked={togglestatus} />
-                          
-                            <AccountCircleIcon style={{fontSize:"35px"}} />
+                            <Link to="/feedback" style={{color:"#ffffff", textDecoration:"none"}}>
+                            <FeedbackIcon style={{fontSize:"30px"}}></FeedbackIcon>
+                            </Link>
                           </IconButton>
                     </Tooltip>
 
@@ -638,10 +649,10 @@ const AboutPage = (props) => {
                         }
                     </div>
                     <CardContent>
-                    <p class="card-text paraquote">
-                        <i class="fas fa-quote-left p-2"></i> 
+                    <p className="card-text paraquote">
+                        <i className="fas fa-quote-left p-2"></i> 
                         To succeed in all your pursuits, remove doubts and develop your confidence.
-                        <i class="fas fa-quote-right p-2"></i>
+                        <i className="fas fa-quote-right p-2"></i>
                     </p>
                     </CardContent>
                     <CardActions disableSpacing>

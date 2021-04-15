@@ -10,11 +10,6 @@ const ToggleButton = ( props ) => {
     const [toggle, setToggle] = useState(false);
     const { defaultChecked, onChange, disabled, className } = props;
     
-    const {togglechange,togglestatus, setTogglestatus,togglemaincolor, setTogglemaincolor,
-           headertogglecolor, setHeadertogglecolor,headertextcolor, setHeadertextcolor,
-           allbuttoncolor, setAllbuttoncolor,cardcolor, setCardcolor,
-           cardshadowcolor, setCardshadowcolor,cardheadcolor, setCardheadcolor,
-           alltextcolor, setAlltextcolor,allbuttontextcolor, setAllbuttontextcolor} = props;
 
     useEffect(() => {
         if (defaultChecked) {
