@@ -67,12 +67,15 @@ import '../css/aboutstyle.css'
 // import Avatar from '@material-ui/core/Avatar';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // import ShareIcon from '@material-ui/icons/Share';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import BrushIcon from '@material-ui/icons/Brush';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 // import FormControl from '@material-ui/core/FormControl';
 // import FormLabel from '@material-ui/core/FormLabel';
 
@@ -227,6 +230,67 @@ const Feedbackpage = (props) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
+  const [emailid, setEmailid] = useState('');
+  const [username, setUsername] = useState('');
+  const [emailerr, setEmailerr] = useState(false);
+  const [emailnull, setEmailnull] = useState(false);
+  const [nameerr, setNameerr] = useState(false);
+  const [namenull, setNamenull] = useState(false);
+  const [submitdisable, setSubmitdisable] = useState(true);
+
+  const confirmEmailid = async(event) => {
+    setEmailid(event.target.value);
+    let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    // let regex = /^[0-9]{10}$/;
+    if(regex.test(event.target.value))
+    {
+      setSubmitdisable(false);
+      setEmailerr(false);
+      setEmailnull(false);
+      console.log('valid');
+    }
+    else
+    {
+      setSubmitdisable(true);
+      setEmailerr(true);
+      setEmailnull(false);
+      console.log('invalid');
+    } 
+  }
+
+  const confirmUsername = async(event) => {
+    setUsername(event.target.value);
+    let regex = /^[a-zA-Z ]+$/;
+    if(regex.test(event.target.value))
+    {
+      setSubmitdisable(false);
+      setNameerr(false);
+      setNamenull(false);
+      console.log('valid');
+    }
+    else
+    {
+      setSubmitdisable(true);
+      setNameerr(true);
+      setNamenull(false);
+      console.log('invalid');
+    } 
+  }
+
+  const feedbacksubmitvalidation = () => {
+    if(emailid == '' || emailid == null)
+    {
+      setEmailnull(true);
+    }
+    else if(username == '' || username == null)
+    {
+      setUsername(true);
+    }
+  }
+
+  const feedbacksubmit = () => {
+    console.log('pressed');
+  }
 
   const [togglestatus, setTogglestatus] = useState(false);
   const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
@@ -611,13 +675,46 @@ const Feedbackpage = (props) => {
             <div className="card p-2">
                 <div className="card-body">
                     <form>
-                        <div className="form-group">
-                            <label for="exampleFormControlInput1">Phone Number:</label>
+                    <div className="form-group">
+                            <label for="exampleFormControlTextarea1">Name:</label>
                             <input type="text" 
                                    className="form-control"
-                                   maxLength={12}
-                                   placeholder="Plese enter your 10 digit phone number">    
+                                   onChange={username => confirmUsername(username)}
+                                   placeholder="Plese enter your name">
                             </input>
+                        </div>
+                        { nameerr ? 
+                        <div>
+                           <p style={{color:'red',fontFamily:'Century Gothic'}}>Please Enter a Valid Email ID</p>
+                        </div>:null
+                        }
+                        { namenull ? 
+                        <div>
+                           <p style={{color:'red',fontFamily:'Century Gothic'}}>This field is required!!</p>
+                        </div>:null
+                        }
+                        <div className="form-group">
+                            <label for="exampleFormControlInput1">Email ID:</label>
+                            <input type="text" 
+                                   className="form-control"
+                                   onChange={emailid => confirmEmailid(emailid)}
+                                   placeholder="Plese enter your Email ID">    
+                            </input>
+                        </div>
+                        { emailerr ? 
+                        <div>
+                           <p style={{color:'red',fontFamily:'Century Gothic'}}>Please Enter a Valid Email ID</p>
+                        </div>:null
+                        }
+                        { emailnull ? 
+                        <div>
+                           <p style={{color:'red',fontFamily:'Century Gothic'}}>This field is required!!</p>
+                        </div>:null
+                        }
+
+                        <div className="form-group">
+                            <label for="exampleFormControlTextarea1">Your valuable feedback:</label>
+                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                         <div className="form-group">
                             <label for="exampleFormControlSelect1">Overall Rating:</label>
@@ -629,21 +726,38 @@ const Feedbackpage = (props) => {
                             <option>5</option>
                             </select>
                         </div>
-                    
-                        <div className="form-group">
-                            <label for="exampleFormControlTextarea1">Valuable feedback:</label>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <button type="submit" className="btn btn-primary">SUBMIT</button>
+                        <button type="button" 
+                                disabled={submitdisable}
+                                onClick={feedbacksubmitvalidation} 
+                                className="btn btn-primary">SUBMIT</button>
                     </form>
                     </div>
                 </div>
-            
             </div>
+
+            <div className="container mt-4 mb-2">
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography >View Feedback</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                    sit amet blandit leo lobortis eget.
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </div>
+
+            {/* ------------------------------------------------------------------------- */}
           </div>  
-      {/* ------------------------------------------------------------------------- */}
-        
-         
+            {/* ------------------------------------------------------------------------- */}
+
+            {/* --------------------------    footer part   --------------------------------- */}
 
                 <div className={clsx(classes.footerroot),(gradient1)}>
                 <div className="footer-dark">

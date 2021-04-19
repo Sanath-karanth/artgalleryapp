@@ -173,7 +173,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MainPage = (props) => {
+const PortraitSketch = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   
@@ -266,36 +266,36 @@ const MainPage = (props) => {
       role="presentation"
     >
         <List>
-            <ListItem onClick={handleDrawerClose} button>
-              <Tooltip title="Home">
-                  <ListItemIcon onClick={handleDrawerClose}>
-                      <HomeIcon />
-                  </ListItemIcon>
-                </Tooltip>
-              <ListItemText onClick={handleDrawerClose} primary='Home' />
-            </ListItem>
-
-            <Link to="/portrait" style={{color:"#000000", textDecoration:"none"}}>
-            <ListItem button>
-                <Tooltip title="Arts works">
-                  <ListItemIcon>
-                      <ColorLensIcon />
-                  </ListItemIcon>
-                  </Tooltip>
-                  <ListItemText primary="Portrait Sketchings" />
-            </ListItem>
+            <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
+                <ListItem button>
+                <Tooltip title="Home">
+                    <ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon>
+                    </Tooltip>
+                <ListItemText primary='Home' />
+                </ListItem>
             </Link>
 
-            <Link to="/photography" style={{color:"#000000", textDecoration:"none"}}>
-              <ListItem button>
-                  <Tooltip title="Photography">
+                <ListItem button onClick={handleDrawerClose}>
+                    <Tooltip title="Arts works">
+                    <ListItemIcon>
+                        <ColorLensIcon onClick={handleDrawerClose}/>
+                    </ListItemIcon>
+                    </Tooltip>
+                    <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
+                </ListItem>
+
+                <Link to="/photography" style={{color:"#000000", textDecoration:"none"}}>
+                <ListItem button>
+                    <Tooltip title="Photography">
                         <ListItemIcon>
                     <CameraAltIcon />
                     </ListItemIcon>
                     </Tooltip>
-                  <ListItemText primary='Photography' />
+                    <ListItemText primary='Photography' />
                 </ListItem>
-              </Link>
+                </Link>
                 </List>
                 <Divider />
                 
@@ -524,66 +524,24 @@ const MainPage = (props) => {
            
               <Toolbar id="back-to-top-anchor" />
 
-               {/* ----------------------------------------SlideShow part--------------------------------- */}
-
-                <div className={classes.root}>
-                  <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
-                        <ol className="carousel-indicators">
-                            <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>
-                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                        </ol>
-                        <div className="carousel-inner">
-                            <div className="carousel-item active">
-                            <img src="./images/banner/slider1.jpg" className="d-block  w-100" alt="slide 1"></img>
-                            <div className="carousel-caption d-none d-md-block">
-                                <h4 className="text-light">Portrait Sketching</h4>
-                                <p className="text-light paracarousel">Portrait painting is a genre in painting, where the intent is to represent a specific human subject.</p>
-                            </div>
-                            </div>
-                            <div className="carousel-item">
-                            <img src="./images/banner/slider2.jpg" className="d-block  w-100" alt="slide 2"></img>
-                            <div className="carousel-caption d-none d-md-block">
-                                <h4 className="text-light">Marker Sketching</h4>
-                                <p className="text-light paracarousel">Art markers are used by illustrators, designers and artists to achieve a different result in artwork than you would normally see from using colored pencils or paints.</p>
-                            </div>
-                            </div>
-                            <div className="carousel-item">
-                            <img src="./images/banner/slider3.jpg" className="d-block  w-100" alt="slide "></img>
-                            <div className="carousel-caption d-none d-md-block">
-                                <h4 className="text-light">Photography</h4>
-                                <p className="text-light paracarousel">Photography is the art, application, and practice of creating durable images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film.</p>
-                            </div>
-                            </div>
-                        </div>
-                        <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span className="sr-only">Previous</span>
-                        </a>
-                        <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span className="sr-only">Next</span>
-                        </a>
-                  </div>
-                </div>
-
-                {/* ------------------------------------------------------------------------- */}
+ 
                 <div style={{backgroundColor:togglemaincolor}}>
-            {/* ----------------------------------------Heading part--------------------------------- */}
-            
-            <div className={classes.root}>
-              <div className="container-fluid">
-                      <div className={`card  mt-5 shadow-lg ${headertogglecolor}`}>
-                        <div className="row no-gutters">
-                          <div className="card-body">
-                              <h3 style={{ color: headertextcolor}} 
-                                  className="headanimate text-left">Portrait Arts and Sketchings
-                              </h3>
-                      </div>
+
+                {/* ----------------------------------------Heading part--------------------------------- */}
+                
+                <div className={classes.root}>
+                <div className="container-fluid">
+                        <div className={`card mt-4 shadow-lg ${headertogglecolor}`}>
+                            <div className="row no-gutters">
+                            <div className="card-body">
+                                <h3 style={{ color: headertextcolor}} 
+                                    className="headanimate text-left">Portrait Sketchings
+                                </h3>
+                        </div>
+                        </div>
                     </div>
-                  </div>
+                    </div>
                 </div>
-              </div>
                 
             {/* ------------------------------------------------------------------------- */}
 
@@ -1292,7 +1250,7 @@ const MainPage = (props) => {
 
           {/* -----------------------Triple joker hrithik wolworine cards---------------*/}
 
-          <div className="container pt-4 pb-2">
+          <div className="container pt-4 pb-4">
             <div className="card-deck">
                 <div className={`card mt-2 shadow-lg ${cardcolor}`}>
                     <img src="./images/art/bottle.jpg" 
@@ -1353,354 +1311,6 @@ const MainPage = (props) => {
 
           {/* --------------------------------------------------------------------------*/}
 
-           {/* ----------------------------Photography heading--------------------------*/}
-
-          
-              <div className="container-fluid pt-4">
-                      <div className={`card shadow-lg ${headertogglecolor}`}>
-                        <div className="row no-gutters">
-                          <div className="card-body">
-                              <h3 style={{ color: headertextcolor}} 
-                                  className="headanimate text-left">Photography
-                              </h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-        {/* --------------------------------------------------------------------------*/}
-
-        {/* ---------------------------------Single Beach card --------------------------*/}
-
-        <div className="container pt-4">
-            <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-            <div className="row">
-                <div className="col-md-6">
-                  <img src="./images/photography/beach.jpg" 
-                        style={{width:"100%",height:'auto'}}
-                        className={`card-img p-2 ${cardshadowcolor}`} 
-                        alt="card 2">
-                    </img>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="card-body">
-                      <h4 className="card-title" style={{color:cardheadcolor}}>Beach</h4>
-                      <p className="card-text paraquote" style={{color:alltextcolor}}>
-                          <i className="fas fa-quote-left p-2"></i> 
-                          At the beach, life is different. Time doesn’t move hour to hour but mood to moment. We live by the currents, plan by the tides and follow the sun.
-                          <i className="fas fa-quote-right p-2"></i>
-                      </p>
-                      <p className="card-text paradesp"
-                        style={{color:alltextcolor}}>A beach is a landform alongside a body of water which consists of loose particles. The particles composing a beach are typically made from rock, such as sand, gravel, shingle, pebbles, etc, or biological sources, such as mollusc shells or coralline algae.
-                      </p>
-                      <p className="card-text paradate" 
-                      style={{color:alltextcolor}}>Art Creation Date:
-                      <small className="text-primary"> 08-08-2017</small>
-                      </p>
-                        <a href="https://en.wikipedia.org/wiki/Beach"  
-                          target="_blank" 
-                          className={`btn ${allbuttoncolor}`}>
-                          <p className="card-text aboutbuttontext" 
-                            style={{color:allbuttontextcolor}}>About Beach
-                          </p>
-                        </a>
-                    </div>
-                  </div>
-              </div>
-              </div>
-          </div>
-
-          {/* ------------------------------------------------------------------------- */}
-
-          {/* ---------------------------------Single Beach ride card ------------------*/}
-
-          <div className="container pt-4">
-            <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-            <div className="row">
-                  <div className="col-md-6">
-                    <div className="card-body">
-                      <h4 className="card-title" style={{color:cardheadcolor}}>Beach Adventure</h4>
-                      <p className="card-text paraquote" style={{color:alltextcolor}}>
-                          <i className="fas fa-quote-left p-2"></i> 
-                          To escape and sit quietly on the beach – that's my idea of paradise.
-                      </p>
-                      <p className="card-text paradesp"
-                        style={{color:alltextcolor}}>At the beach, life is different. Time doesn’t move hour to hour but mood to moment. We live by the currents, plan by the tides and follow the sun.
-                      </p>
-                      <p className="card-text paradate" 
-                      style={{color:alltextcolor}}>Art Creation Date:
-                      <small className="text-primary"> 08-08-2017</small>
-                      </p>
-                        <a href="http://beachadventures.in/"  
-                          target="_blank" 
-                          className={`btn ${allbuttoncolor}`}>
-                          <p className="card-text aboutbuttontext" 
-                            style={{color:allbuttontextcolor}}>About
-                          </p>
-                        </a>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                  <img src="./images/photography/beachride.jpg" 
-                        style={{width:"100%",height:'auto'}}
-                        className={`card-img p-2 ${cardshadowcolor}`} 
-                        alt="card 2">
-                    </img>
-                  </div>
-              </div>
-              </div>
-          </div>
-
-          {/* ------------------------------------------------------------------------- */}
-
-          {/* ---------------------------------Sun Raise card --------------------------*/}
-
-        <div className="container pt-4">
-            <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-            <div className="row">
-                <div className="col-md-7">
-                  <img src="./images/photography/sunraise.jpg" 
-                        style={{width:"100%",height:'auto'}}
-                        className={`card-img p-2 ${cardshadowcolor}`} 
-                        alt="card 2">
-                    </img>
-                  </div>
-                  <div className="col-md-5">
-                    <div className="card-body">
-                      <h4 className="card-title" style={{color:cardheadcolor}}>Sun Rise</h4>
-                      <p className="card-text paraquote" style={{color:alltextcolor}}>
-                          <i className="fas fa-quote-left p-2"></i> 
-                          If you want to be reminded of the love of the Lord, just watch the sunrise.
-                          <i className="fas fa-quote-right p-2"></i>
-                      </p>
-                      <p className="card-text paradesp"
-                        style={{color:alltextcolor}}>Sunrise (or sunup) is the moment when the upper limb of the Sun appears on the horizon in the morning.[1] The term can also refer to the entire process of the solar disk crossing the horizon and its accompanying atmospheric effects.
-                      </p>
-                      <p className="card-text paradate" 
-                      style={{color:alltextcolor}}>Art Creation Date:
-                      <small className="text-primary"> 08-08-2017</small>
-                      </p>
-                        <a href="https://en.wikipedia.org/wiki/Sunrise#:~:text=Sunrise%20(or%20sunup)%20is%20the,and%20its%20accompanying%20atmospheric%20effects."  
-                          target="_blank" 
-                          className={`btn ${allbuttoncolor}`}>
-                          <p className="card-text aboutbuttontext" 
-                            style={{color:allbuttontextcolor}}>About Sunrise
-                          </p>
-                        </a>
-                    </div>
-                  </div>
-              </div>
-              </div>
-          </div>
-
-          {/* ------------------------------------------------------------------------- */}
-
-          {/* ---------------------------------Red rose card ---------------------------*/}
-
-          <div className="container pt-4">
-            <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-            <div className="row">
-                  <div className="col-md-7">
-                    <div className="card-body">
-                      <h4 className="card-title" style={{color:cardheadcolor}}>Red Rose</h4>
-                      <p className="card-text paraquote" style={{color:alltextcolor}}>
-                          <i className="fas fa-quote-left p-2"></i> 
-                          The red rose whispers of passion, And the white rose breathes of love; O, the red rose is a falcon, And the white rose is a dove.
-                      </p>
-                      <p className="card-text paradesp"
-                        style={{color:alltextcolor}}>A rose is a woody perennial flowering plant of the genus Rosa, in the family Rosaceae, or the flower it bears. There are over three hundred species and tens of thousands of cultivars.They form a group of plants that can be erect shrubs, climbing, or trailing, with stems that are often armed with sharp prickles.
-                      </p>
-                      <p className="card-text paradate" 
-                      style={{color:alltextcolor}}>Art Creation Date:
-                      <small className="text-primary"> 09-08-2018</small>
-                      </p>
-                        <a href="https://en.wikipedia.org/wiki/Rose"  
-                          target="_blank" 
-                          className={`btn ${allbuttoncolor}`}>
-                          <p className="card-text aboutbuttontext" 
-                            style={{color:allbuttontextcolor}}>About Red Rose
-                          </p>
-                        </a>
-                    </div>
-                  </div>
-                  <div className="col-md-5">
-                  <img src="./images/photography/redrose.jpg" 
-                        style={{width:"100%",height:'auto'}}
-                        className={`card-img p-2 ${cardshadowcolor}`} 
-                        alt="card 2">
-                    </img>
-                  </div>
-              </div>
-              </div>
-          </div>
-
-          {/* ------------------------------------------------------------------------- */}
-
-          {/* ---------------------------------Sun Set card --------------------------*/}
-
-        <div className="container pt-4">
-            <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-            <div className="row">
-                <div className="col-md-7">
-                  <img src="./images/photography/sunset.jpg" 
-                        style={{width:"100%",height:'auto'}}
-                        className={`card-img p-2 ${cardshadowcolor}`} 
-                        alt="card 2">
-                    </img>
-                  </div>
-                  <div className="col-md-5">
-                    <div className="card-body">
-                      <h4 className="card-title" style={{color:cardheadcolor}}>Sun Set</h4>
-                      <p className="card-text paraquote" style={{color:alltextcolor}}>
-                          <i className="fas fa-quote-left p-2"></i> 
-                          Clouds come floating into my life, no longer to carry rain or usher storm, but to add color to my sunset sky.
-                          <i className="fas fa-quote-right p-2"></i>
-                      </p>
-                      <p className="card-text paradesp"
-                        style={{color:alltextcolor}}>Sunset, also known as sundown, is the daily disappearance of the Sun below the horizon due to Earth's rotation. As viewed from the Equator, the equinox Sun sets exactly due west in both Spring and Autumn.
-                      </p>
-                      <p className="card-text paradate" 
-                      style={{color:alltextcolor}}>Art Creation Date:
-                      <small className="text-primary"> 08-08-2017</small>
-                      </p>
-                        <a href="https://en.wikipedia.org/wiki/Sunset"  
-                          target="_blank" 
-                          className={`btn ${allbuttoncolor}`}>
-                          <p className="card-text aboutbuttontext" 
-                            style={{color:allbuttontextcolor}}>About SunSet
-                          </p>
-                        </a>
-                    </div>
-                  </div>
-              </div>
-              </div>
-          </div>
-
-          {/* ------------------------------------------------------------------------- */}
-
-          {/* ---------------------------------Sun Shine card ---------------------------*/}
-
-          <div className="container pt-4">
-            <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-            <div className="row">
-                  <div className="col-md-5">
-                    <div className="card-body">
-                      <h4 className="card-title" style={{color:cardheadcolor}}>Sun Shine</h4>
-                      <p className="card-text paraquote" style={{color:alltextcolor}}>
-                          <i className="fas fa-quote-left p-2"></i> 
-                          We cannot endure to waste anything so precious as autumnal sunshine by staying in the house.
-                      </p>
-                      <p className="card-text paradesp"
-                        style={{color:alltextcolor}}>Sunshine is a 2007 science fiction psychological thriller film directed by Danny Boyle and written by Alex Garland. Taking place in the year 2057, the story follows a group of astronauts on a dangerous mission.
-                      </p>
-                      <p className="card-text paradate" 
-                      style={{color:alltextcolor}}>Art Creation Date:
-                      <small className="text-primary"> 08-08-2017</small>
-                      </p>
-                        <a href="https://en.wikipedia.org/wiki/Sunshine_(2007_film)"  
-                          target="_blank" 
-                          className={`btn ${allbuttoncolor}`}>
-                          <p className="card-text aboutbuttontext" 
-                            style={{color:allbuttontextcolor}}>About SunShine
-                          </p>
-                        </a>
-                    </div>
-                  </div>
-                  <div className="col-md-7">
-                  <img src="./images/photography/sunshine.jpg" 
-                        style={{width:"100%",height:'auto'}}
-                        className={`card-img p-2 ${cardshadowcolor}`} 
-                        alt="card 2">
-                    </img>
-                  </div>
-              </div>
-              </div>
-          </div>
-
-          {/* ------------------------------------------------------------------------- */}
-
-          {/* -------------------------------Beach waves card --------------------------*/}
-
-        <div className="container pt-4">
-            <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-            <div className="row">
-                <div className="col-md-7">
-                  <img src="./images/photography/beachwaves.jpg" 
-                        style={{width:"100%",height:'auto'}}
-                        className={`card-img p-2 ${cardshadowcolor}`} 
-                        alt="card 2">
-                    </img>
-                  </div>
-                  <div className="col-md-5">
-                    <div className="card-body">
-                      <h4 className="card-title" style={{color:cardheadcolor}}>Ocean Waves</h4>
-                      <p className="card-text paraquote" style={{color:alltextcolor}}>
-                          <i className="fas fa-quote-left p-2"></i> 
-                          The breaking of a wave cannot explain the whole sea or ocean.
-                          <i className="fas fa-quote-right p-2"></i>
-                      </p>
-                      <p className="card-text paradesp"
-                        style={{color:alltextcolor}}>Wind waves have a certain amount of randomness: subsequent waves differ in height, duration, and shape with limited predictability.
-                      </p>
-                      <p className="card-text paradate" 
-                      style={{color:alltextcolor}}>Art Creation Date:
-                      <small className="text-primary"> 08-08-2017</small>
-                      </p>
-                        <a href="https://en.wikipedia.org/wiki/Wind_wave"  
-                          target="_blank" 
-                          className={`btn ${allbuttoncolor}`}>
-                          <p className="card-text aboutbuttontext" 
-                            style={{color:allbuttontextcolor}}>About
-                          </p>
-                        </a>
-                    </div>
-                  </div>
-              </div>
-              </div>
-          </div>
-
-          {/* ------------------------------------------------------------------------- */}
-
-          {/* ---------------------------------River Shore card ---------------------------*/}
-
-          <div className="container pt-4 pb-4">
-            <div className={`card mb-2 shadow-lg ${cardcolor}`}>
-            <div className="row">
-                  <div className="col-md-5">
-                    <div className="card-body">
-                      <h4 className="card-title" style={{color:cardheadcolor}}>River Shore</h4>
-                      <p className="card-text paraquote" style={{color:alltextcolor}}>
-                          <i className="fas fa-quote-left p-2"></i> 
-                          Man cannot discover new oceans unless he has the courage to lose sight of the shore.
-                      </p>
-                      <p className="card-text paradesp"
-                        style={{color:alltextcolor}}>A shore or a shoreline is the fringe of land at the edge of a large body of water, such as an ocean, sea, or lake. In physical oceanography, a shore is the wider fringe that is geologically modified by the action of the body of water past and present.
-                      </p>
-                      <p className="card-text paradate" 
-                      style={{color:alltextcolor}}>Art Creation Date:
-                      <small className="text-primary"> 08-08-2017</small>
-                      </p>
-                        <a href="https://en.wikipedia.org/wiki/Shore"  
-                          target="_blank" 
-                          className={`btn ${allbuttoncolor}`}>
-                          <p className="card-text aboutbuttontext" 
-                            style={{color:allbuttontextcolor}}>About
-                          </p>
-                        </a>
-                    </div>
-                  </div>
-                  <div className="col-md-7">
-                  <img src="./images/photography/rivershore.jpg" 
-                        style={{width:"100%",height:'auto'}}
-                        className={`card-img p-2 ${cardshadowcolor}`} 
-                        alt="card 2">
-                    </img>
-                  </div>
-              </div>
-              </div>
-          </div>
-
-          {/* ------------------------------------------------------------------------- */}
 
           {/* --------------------------     footer part    --------------------------- */} 
       
@@ -1785,4 +1395,4 @@ const MainPage = (props) => {
           </Fragment>
   );
 }
-export default MainPage;
+export default PortraitSketch;

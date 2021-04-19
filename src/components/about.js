@@ -1,4 +1,4 @@
-import React, { Fragment,useState,useEffect } from 'react';
+import React, { Fragment,useState,useEffect,useRef } from 'react';
 import { Link } from "react-router-dom";
 import '../css/main.css'
 import PropTypes from 'prop-types';
@@ -73,6 +73,7 @@ import BrushIcon from '@material-ui/icons/Brush';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { useClipboard } from 'use-clipboard-copy';
 // import FormControl from '@material-ui/core/FormControl';
 // import FormLabel from '@material-ui/core/FormLabel';
 
@@ -226,6 +227,30 @@ const AboutPage = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
+  const [urltext, setUrltext] = useState(null);
+  const [copySuccess, setCopySuccess] = useState('');
+  const textAreaRef = useRef(null);
+  const [myurl,setMyurl] = useState("https://karanthartgallery.herokuapp.com");
+  const [showurl, setShowurl] = useState(true);
+
+  function copyToClipboard(e) {
+    textAreaRef.current.select();
+    document.execCommand('copy');
+    e.target.focus();
+    let timerId = setInterval(() => setCopySuccess('Link Copied!'),setMyurl(myurl), 0);
+    setTimeout(() => { clearInterval(timerId); setCopySuccess(null);setMyurl(null);setMyurl(''); }, 5000);  // after 5 seconds stop
+
+    // const timer = setInterval(() => {
+    //   setCopySuccess('Link Copied!');
+    // }, 1000);
+    // return () => clearTimeout(timer);
+    // setShowurl(false);
+    // if(showurl === true) {
+    //   setCopySuccess('Link Copied!');
+    // }else{
+    //   setCopySuccess(null);
+    // }
+  };
 
   const [togglestatus, setTogglestatus] = useState(false);
   const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
@@ -509,7 +534,6 @@ const AboutPage = (props) => {
         };
     
     useEffect(() => {
-      // paraanimation();
       artgalleryanimation();
       }, []);
 
@@ -590,8 +614,8 @@ const AboutPage = (props) => {
             {/* ----------------------------------------Heading part--------------------------------- */}
             
             <div className={classes.root}>
-            <div className="container-fluid">
-                    <div className={`card  mt-5 shadow-lg ${headertogglecolor}`}>
+            <div className="container-fluid mt-4">
+                    <div className={`card shadow-lg ${headertogglecolor}`}>
                       <div className="row no-gutters">
                         <div className="card-body">
                             <h3 style={{ color: headertextcolor}} 
@@ -615,11 +639,11 @@ const AboutPage = (props) => {
                           S
                         </Avatar></a>
                       }
-                      action={
-                        <IconButton aria-label="settings">
-                          <MoreVertIcon />
-                        </IconButton>
-                      }
+                      // action={
+                      //   <IconButton aria-label="settings">
+                      //     <MoreVertIcon />
+                      //   </IconButton>
+                      // }
                       title="Sanath S Karanth"
                       subheader="March 30, 2021"
                     />
@@ -659,9 +683,39 @@ const AboutPage = (props) => {
                       <IconButton aria-label="add to favorites">
                         <FavoriteIcon />
                       </IconButton>
-                      <IconButton aria-label="share">
-                        <ShareIcon />
-                      </IconButton>
+                      {/* <IconButton aria-label="share">
+                        <ShareIcon onClick={copyToClipboard} />
+                        { showurl && 
+                        <input  value={myurl} readOnly />
+                        }
+                      </IconButton> */}
+
+                      <div>
+                        {
+                        document.queryCommandSupported('copy') &&
+                          <div className="d-inline-block">
+                            <IconButton aria-label="share">
+                              <ShareIcon onClick={copyToClipboard} />
+                            </IconButton> 
+                          </div>
+                        }
+                        <div className="d-inline-block">
+                            <h5 style={{color: 'red'}} >{copySuccess}</h5>
+                          </div>
+                        <div className="d-inline-block ml-2">
+                          <form>
+                            <input className="d-inline-block text-white" 
+                                   ref={textAreaRef}
+                                   style={{backgroundColor: 'transparent',
+                                           border: '0px solid', 
+                                           color: 'red',
+                                           outline: 'none',
+                                           width: '500px'}} 
+                                   value={myurl} readOnly />
+                          </form>
+                        </div>
+                       
+                      </div>
                       <IconButton
                         className={clsx(classes.expand, {
                           [classes.expandOpen]: expanded,

@@ -4,9 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import MainPage from './components/mainPage';
 import FeedbackPage from './components/feedback';
 import About from './components/about';
-// import MarkerPage from './components/markerSketch';
-// import PortraitPage from './components/portraitSketch';
-// import PhotographyPage from './components/photography';
+import PortraitPage from './components/portrait';
+import PhotographyPage from './components/photography';
 import Demo from './components/demo';
 
 function App() {
@@ -14,6 +13,12 @@ function App() {
     <Switch>
      <Route exact path="/">
            <MainPage />
+     </Route>
+     <Route path="/portrait">
+           <PortraitPage />
+     </Route>
+     <Route path="/photography">
+           <PhotographyPage />
      </Route>
      <Route path="/about">
            <About />
