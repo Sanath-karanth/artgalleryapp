@@ -56,6 +56,7 @@ import anime from "animejs";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 // import Switch from '@material-ui/core/Switch';
 import ToggleButton from '../common/ToggleButton';
+import Header from '../common/header';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import '../css/aboutstyle.css'
 
@@ -330,91 +331,91 @@ const AboutPage = (props) => {
     }
  }
 
-  const Drawerlist = (ancher) => (
-    <div
-      className={clsx(classes.dralist, {
-        [classes.fulldraList]: ancher === 'left',
-      })}
-      role="presentation"
-    >
-        <List>
-        <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
-            <ListItem button>
-              <Tooltip title="Home">
-              <ListItemIcon>
-                   <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
-                      <HomeIcon />
-                    </Link>
-                 </ListItemIcon>
+ const Drawerlist = (ancher) => (
+  <div
+    className={clsx(classes.dralist, {
+      [classes.fulldraList]: ancher === 'left',
+    })}
+    role="presentation"
+  >
+      <List>
+      <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
+          <ListItem onClick={handleDrawerClose} button>
+            <Tooltip title="Home">
+                <ListItemIcon>
+                    <HomeIcon onClick={handleDrawerClose} />
+                </ListItemIcon>
+              </Tooltip>
+            <ListItemText onClick={handleDrawerClose} primary='Home' />
+          </ListItem>
+      </Link>
+
+          <Link to="/portrait" style={{color:"#000000", textDecoration:"none"}}>
+          <ListItem onClick={handleDrawerClose} button>
+              <Tooltip title="Arts works">
+                <ListItemIcon>
+                    <ColorLensIcon onClick={handleDrawerClose} />
+                </ListItemIcon>
                 </Tooltip>
-                <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
-                          <ListItemText primary='Home' />
-                </Link>
-              </ListItem>
-            </Link>
-
-            <ListItem button>
-                <Tooltip title="Arts works">
-                  <ListItemIcon>
-                      <ColorLensIcon />
-                  </ListItemIcon>
-                  </Tooltip>
                 <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
-            </ListItem>
+          </ListItem>
+          </Link>
 
-            <ListItem button>
+          <Link to="/photography" style={{color:"#000000", textDecoration:"none"}}>
+            <ListItem onClick={handleDrawerClose} button>
                 <Tooltip title="Photography">
-                      <ListItemIcon onClick={handleDrawerClose}>
-                  <CameraAltIcon />
+                      <ListItemIcon>
+                  <CameraAltIcon onClick={handleDrawerClose} />
                   </ListItemIcon>
                   </Tooltip>
                 <ListItemText onClick={handleDrawerClose} primary='Photography' />
               </ListItem>
-                </List>
-                <Divider />
-                <List>
-                    <ListItem button onClick={handleClickgradient}>
-                        <Tooltip title="Header Footer Theme">
-                          <ListItemIcon>
-                              <BrushIcon style={{color:"#000000"}} />
-                          </ListItemIcon>
-                        </Tooltip>
-                          <ListItemText primary='Gradient Theme' />
-                          {opengradient ? <ExpandLess /> : <ExpandMore />}
-                    </ListItem>
-                      <Collapse in={opengradient} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <ListItem button className={classes.nested}>
-                                <RadioGroup aria-label="gradient" 
-                                            name="gradient 1"
-                                            value={radiovalue} 
-                                            onChange={value => gradientselect(value)}>
-                                  <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
-                                  <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
-                                  <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
-                                  <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
-                                </RadioGroup>
-                          </ListItem>
-                        </List>
-                      </Collapse>
-                </List>
-                <Divider />
-                <List>
+            </Link>
+            
+              </List>
+              <Divider />
+              
+              <List>
+                  <ListItem button onClick={handleClickgradient}>
+                      <Tooltip title="Header Footer Theme">
+                        <ListItemIcon>
+                            <BrushIcon style={{color:"#000000"}} />
+                        </ListItemIcon>
+                      </Tooltip>
+                        <ListItemText primary='Gradient Theme' />
+                        {opengradient ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                    <Collapse in={opengradient} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        <ListItem button className={classes.nested}>
+                              <RadioGroup aria-label="gradient" 
+                                          name="gradient 1"
+                                          value={radiovalue} 
+                                          onChange={value => gradientselect(value)}>
+                                <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
+                                <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
+                                <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
+                                <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
+                              </RadioGroup>
+                        </ListItem>
+                      </List>
+                    </Collapse>
+              </List>
+              <Divider />
+              <List>
+                <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
                     <ListItem onClick={handleDrawerClose} button>
                         <Tooltip title="About">
                           <ListItemIcon>
-                            <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                              <AccountCircleIcon onClick={handleDrawerClose}/>
-                            </Link>
+                              <AccountCircleIcon onClick={handleDrawerClose} />
                           </ListItemIcon>
                         </Tooltip>
-                          <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                          <ListItemText primary='About' onClick={handleDrawerClose} />
-                          </Link>
+                          <ListItemText onClick={handleDrawerClose} primary='About' />
                     </ListItem>
-                </List>
-    </div>
-  );
+                </Link>
+              </List>
+  </div>
+);
 
     ////////////////   back to top function
 
@@ -540,7 +541,7 @@ const AboutPage = (props) => {
   return (
         <Fragment >
           <CssBaseline />
-            <AppBar
+          <AppBar
                   position="fixed"
                   className={clsx(classes.appBar, {
                   [classes.appBarShift]: open,
@@ -594,7 +595,6 @@ const AboutPage = (props) => {
                             </Link>
                           </IconButton>
                     </Tooltip>
-
                   </Toolbar>
               </AppBar>
                 <SwipeableDrawer

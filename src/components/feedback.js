@@ -1,9 +1,9 @@
 import React, { Fragment,useState,useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link ,useHistory} from "react-router-dom";
 import '../css/main.css'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
 // import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -43,7 +43,6 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
-// import Paper from '@material-ui/core/Paper';
 // import Grid from '@material-ui/core/Grid';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -56,6 +55,7 @@ import anime from "animejs";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 // import Switch from '@material-ui/core/Switch';
 import ToggleButton from '../common/ToggleButton';
+import Header from '../common/header';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import '../css/aboutstyle.css'
 
@@ -76,8 +76,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-// import FormControl from '@material-ui/core/FormControl';
-// import FormLabel from '@material-ui/core/FormLabel';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 
 
@@ -223,19 +228,29 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  // table: {
+  //   minWidth: 700,
+  // },
 }));
+
+
 
 const Feedbackpage = (props) => {
   const classes = useStyles();
   const theme = useTheme();
+  const history = useHistory();
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
   const [emailid, setEmailid] = useState('');
   const [username, setUsername] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const [rating, setRating] = useState('1');
   const [emailerr, setEmailerr] = useState(false);
   const [emailnull, setEmailnull] = useState(false);
   const [nameerr, setNameerr] = useState(false);
   const [namenull, setNamenull] = useState(false);
+  const [feedbackerr, setFeedbackerr] = useState(false);
+  const [feedbacknull, setFeedbacknull] = useState(false);
   const [submitdisable, setSubmitdisable] = useState(true);
 
   const confirmEmailid = async(event) => {
@@ -277,6 +292,29 @@ const Feedbackpage = (props) => {
     } 
   }
 
+  const confirmFeedback = async(event) => {
+    setFeedback(event.target.value);
+    let regex = /^[a-zA-Z0-9 #@$%^&*+=-_,.'";:?]+$/;
+    if(regex.test(event.target.value))
+    {
+      setSubmitdisable(false);
+      setFeedbackerr(false);
+      setFeedbacknull(false);
+      console.log('valid');
+    }
+    else
+    {
+      setSubmitdisable(true);
+      setFeedbackerr(true);
+      setFeedbacknull(false);
+      console.log('invalid');
+    } 
+  }
+
+  const confirmrating = async(event) => {
+    setRating(event.target.value);
+  }
+
   const feedbacksubmitvalidation = () => {
     if(emailid == '' || emailid == null)
     {
@@ -284,13 +322,73 @@ const Feedbackpage = (props) => {
     }
     else if(username == '' || username == null)
     {
-      setUsername(true);
+      setNamenull(true);
+    }
+    else if(feedback == '' || feedback == null)
+    {
+      setFeedbacknull(true);
+    }
+    else
+    {
+      feedbacksubmit();
     }
   }
 
+  const [datatoggle, setDatatoggle] = useState(" ");
+  const [datatarget, setDatatarget] = useState(" ");
+  
   const feedbacksubmit = () => {
-    console.log('pressed');
+    
+    localStorage.setItem('Emailid', emailid);
+    localStorage.setItem('Username', username);
+    localStorage.setItem('Feedback', feedback);
+    localStorage.setItem('Rating', rating);
+    setDatatoggle("modal");
+    setDatatarget("#exampleModalLong");
+    
   }
+
+  const [storeemailid, setStoreemailid] = useState('');
+  const [storeusername, setStoreusername] = useState('');
+  const [storefeedback, setStorefeedback] = useState('');
+  const [storerating, setStorerating] = useState('');
+
+  const [token, setToken] = useState('karanth123');
+  const getfeedbackvalues = () => {
+    let emailvalue = localStorage.getItem('Emailid');
+    let namevalue = localStorage.getItem('Username');
+    let feedbackvalue = localStorage.getItem('Feedback');
+    let ratingvalue = localStorage.getItem('Rating');
+    
+
+    localStorage.setItem('tokenofart', token);
+    let tokenvalue = localStorage.getItem('tokenofart');
+
+    setStoreemailid(emailvalue);
+    setStoreusername(namevalue);
+    setStorefeedback(feedbackvalue);
+    setStorerating(ratingvalue);
+    setToken(tokenvalue);
+  };
+
+  const [feeddisplay, setFeeddisplay] = useState(false);
+  const feddbackdisplay = () => {
+    let emailvalueofsanath = localStorage.getItem('Emailid');
+    if(emailvalueofsanath === 'sanathsk97@gmail.com')
+    {
+      setFeeddisplay(true);
+    }
+  };
+
+  const tablevalues = [
+    {
+      idval: 1,
+      nameval: storeusername,
+      emailval: storeemailid,
+      ratingval: storerating,
+      feedbackval: storefeedback,
+    },
+  ];
 
   const [togglestatus, setTogglestatus] = useState(false);
   const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
@@ -379,37 +477,38 @@ const Feedbackpage = (props) => {
   >
       <List>
       <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
-            <ListItem button>
-              <Tooltip title="Home">
-              <ListItemIcon>
-                   <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
-                      <HomeIcon />
-                    </Link>
-                 </ListItemIcon>
-                </Tooltip>
-                <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
-                          <ListItemText primary='Home' />
-                </Link>
-              </ListItem>
-            </Link>
+          <ListItem onClick={handleDrawerClose} button>
+            <Tooltip title="Home">
+                <ListItemIcon>
+                    <HomeIcon onClick={handleDrawerClose} />
+                </ListItemIcon>
+              </Tooltip>
+            <ListItemText onClick={handleDrawerClose} primary='Home' />
+          </ListItem>
+      </Link>
 
-          <ListItem button>
+          <Link to="/portrait" style={{color:"#000000", textDecoration:"none"}}>
+          <ListItem onClick={handleDrawerClose} button>
               <Tooltip title="Arts works">
                 <ListItemIcon>
-                    <ColorLensIcon />
+                    <ColorLensIcon onClick={handleDrawerClose} />
                 </ListItemIcon>
                 </Tooltip>
-              <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
+                <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
           </ListItem>
+          </Link>
 
-          <ListItem button>
-              <Tooltip title="Photography">
-                    <ListItemIcon onClick={handleDrawerClose}>
-                <CameraAltIcon />
-                </ListItemIcon>
-                </Tooltip>
-              <ListItemText onClick={handleDrawerClose} primary='Photography' />
-            </ListItem>
+          <Link to="/photography" style={{color:"#000000", textDecoration:"none"}}>
+            <ListItem onClick={handleDrawerClose} button>
+                <Tooltip title="Photography">
+                      <ListItemIcon>
+                  <CameraAltIcon onClick={handleDrawerClose} />
+                  </ListItemIcon>
+                  </Tooltip>
+                <ListItemText onClick={handleDrawerClose} primary='Photography' />
+              </ListItem>
+            </Link>
+            
               </List>
               <Divider />
               
@@ -442,17 +541,13 @@ const Feedbackpage = (props) => {
               <Divider />
               <List>
                 <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                    <ListItem button>
+                    <ListItem onClick={handleDrawerClose} button>
                         <Tooltip title="About">
                           <ListItemIcon>
-                            <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                              <AccountCircleIcon />
-                            </Link>
+                              <AccountCircleIcon onClick={handleDrawerClose} />
                           </ListItemIcon>
                         </Tooltip>
-                          <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                          <ListItemText primary='About' />
-                          </Link>
+                          <ListItemText onClick={handleDrawerClose} primary='About' />
                     </ListItem>
                 </Link>
               </List>
@@ -575,14 +670,77 @@ const Feedbackpage = (props) => {
               setImgshow(true);
             } 
         };
-    
+
+        const options = [
+          {
+            label: "1",
+            value: "1",
+          },
+          {
+            label: "2",
+            value: "2",
+          },
+          {
+            label: "3",
+            value: "3",
+          },
+          {
+            label: "4",
+            value: "4",
+          },
+          {
+            label: "5",
+            value: "5",
+          },
+        ];
+        
+
+        function clickclose() {
+          history.push("/");
+        }
+
+        const Feedbackmodal = () => {
+
+          return(<Fragment>
+            <div className="modal fade m-5 pt-4" 
+                 id="exampleModalLong"  
+                 role="dialog" 
+                 aria-labelledby="exampleModalLongTitle" 
+                 aria-hidden="true">
+                            <div className="modal-dialog" role="document">
+                              <div className="modal-content">
+                                <div className="modal-header">
+                                  <h5 className="modal-title " id="exampleModalLongTitle">Feedback Message</h5>
+                                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div className="modal-body">
+                                <h5 className="text-success">Thanks for your valuable feedback.</h5>
+                                </div>
+                                <div className="modal-footer">
+                                  <button type="button"
+                                          onClick={clickclose} 
+                                          className="btn btn-primary" 
+                                          data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+            </Fragment>
+            )
+        }
+        
     useEffect(() => {
-      // paraanimation();
+      feddbackdisplay();
+      getfeedbackvalues();
       artgalleryanimation();
       }, []);
 
+
   return (
         <Fragment >
+          <Feedbackmodal />
           <CssBaseline />
             <AppBar
                   position="fixed"
@@ -640,6 +798,7 @@ const Feedbackpage = (props) => {
                     </Tooltip>
                   </Toolbar>
               </AppBar>
+              
                 <SwipeableDrawer
                   anchor={ancher}
                   open={open}
@@ -671,6 +830,9 @@ const Feedbackpage = (props) => {
                 </div>
                 
             {/* ------------------------------------------------------------------------- */}
+
+            
+
             <div className="container">
             <div className="card p-2">
                 <div className="card-body">
@@ -685,7 +847,7 @@ const Feedbackpage = (props) => {
                         </div>
                         { nameerr ? 
                         <div>
-                           <p style={{color:'red',fontFamily:'Century Gothic'}}>Please Enter a Valid Email ID</p>
+                           <p style={{color:'red',fontFamily:'Century Gothic'}}>Please Enter a Valid User Name</p>
                         </div>:null
                         }
                         { namenull ? 
@@ -714,27 +876,42 @@ const Feedbackpage = (props) => {
 
                         <div className="form-group">
                             <label for="exampleFormControlTextarea1">Your valuable feedback:</label>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea className="form-control" 
+                                      id="exampleFormControlTextarea1"
+                                      placeholder="Please type your valuable feedback"
+                                      onChange={feedback => confirmFeedback(feedback)} 
+                                      rows="2">
+                            </textarea>
                         </div>
+                        { feedbacknull ? 
+                        <div>
+                           <p style={{color:'red',fontFamily:'Century Gothic'}}>This field is required!!</p>
+                        </div>:null
+                        }
                         <div className="form-group">
                             <label for="exampleFormControlSelect1">Overall Rating:</label>
-                            <select className="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <select onChange={confirmrating}
+                              className="form-control"
+                              id="exampleFormControlSelect1"
+                            >
+                              {options.map((option,index) => (
+                                <option key={index} value={option.value}>{option.label}</option>
+                              ))}
                             </select>
                         </div>
                         <button type="button" 
                                 disabled={submitdisable}
                                 onClick={feedbacksubmitvalidation} 
-                                className="btn btn-primary">SUBMIT</button>
+                                className="btn btn-primary"
+                                data-toggle={datatoggle} 
+                                data-target={datatarget}>SUBMIT
+                        </button>
+                        
                     </form>
                     </div>
                 </div>
             </div>
-
+            { feeddisplay ?
             <div className="container mt-4 mb-2">
               <Accordion>
                 <AccordionSummary
@@ -745,13 +922,34 @@ const Feedbackpage = (props) => {
                   <Typography >View Feedback</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                    sit amet blandit leo lobortis eget.
-                  </Typography>
+                <TableContainer component={Paper}>
+                <table className="table table-lg table-hover tabletext">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">User Name</th>
+                      <th scope="col">Email ID</th>
+                      <th scope="col">Rating</th>
+                      <th scope="col">Feedback</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tablevalues.map((item,index) => (
+                                <tr key={index}>
+                                <th scope="row">{index+1}</th>
+                                <td>{item.nameval}</td>
+                                <td>{item.emailval}</td>
+                                <td>{item.ratingval}</td>
+                                <td>{item.feedbackval}</td>
+                              </tr>
+                              ))}
+                  </tbody>
+                </table>
+                </TableContainer>
                 </AccordionDetails>
               </Accordion>
             </div>
+            :null }
 
             {/* ------------------------------------------------------------------------- */}
           </div>  

@@ -63,7 +63,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import FormControl from '@material-ui/core/FormControl';
 // import FormLabel from '@material-ui/core/FormLabel';
 import ToggleButton from '../common/ToggleButton';
-import TeaxtAnimation from '../common/textanimation';
+import Header from '../common/header';
 import '../css/custom.css'
 
 
@@ -258,92 +258,91 @@ const MainPage = (props) => {
     }
  }
 
-  const Drawerlist = (ancher) => (
-    <div
-      className={clsx(classes.dralist, {
-        [classes.fulldraList]: ancher === 'left',
-      })}
-      role="presentation"
-    >
-        <List>
-        <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
-                <ListItem button>
-                <Tooltip title="Home">
-                    <ListItemIcon>
-                        <HomeIcon />
-                    </ListItemIcon>
-                    </Tooltip>
-                <ListItemText primary='Home' />
-                </ListItem>
-            </Link>
+ const Drawerlist = (ancher) => (
+  <div
+    className={clsx(classes.dralist, {
+      [classes.fulldraList]: ancher === 'left',
+    })}
+    role="presentation"
+  >
+      <List>
+      <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
+          <ListItem onClick={handleDrawerClose} button>
+            <Tooltip title="Home">
+                <ListItemIcon>
+                    <HomeIcon onClick={handleDrawerClose} />
+                </ListItemIcon>
+              </Tooltip>
+            <ListItemText onClick={handleDrawerClose} primary='Home' />
+          </ListItem>
+      </Link>
 
-            <Link to="/portrait" style={{color:"#000000", textDecoration:"none"}}>
-            <ListItem button>
-                <Tooltip title="Arts works">
-                  <ListItemIcon>
-                      <ColorLensIcon />
-                  </ListItemIcon>
-                  </Tooltip>
-                  <ListItemText primary="Portrait Sketchings" />
-            </ListItem>
-            </Link>
+          <Link to="/portrait" style={{color:"#000000", textDecoration:"none"}}>
+          <ListItem onClick={handleDrawerClose} button>
+              <Tooltip title="Arts works">
+                <ListItemIcon>
+                    <ColorLensIcon onClick={handleDrawerClose} />
+                </ListItemIcon>
+                </Tooltip>
+                <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
+          </ListItem>
+          </Link>
 
-            <ListItem button>
+          <Link to="/photography" style={{color:"#000000", textDecoration:"none"}}>
+            <ListItem onClick={handleDrawerClose} button>
                 <Tooltip title="Photography">
-                      <ListItemIcon onClick={handleDrawerClose}>
-                  <CameraAltIcon />
+                      <ListItemIcon>
+                  <CameraAltIcon onClick={handleDrawerClose} />
                   </ListItemIcon>
                   </Tooltip>
                 <ListItemText onClick={handleDrawerClose} primary='Photography' />
               </ListItem>
-                </List>
-                <Divider />
-                
-                <List>
-                    <ListItem button onClick={handleClickgradient}>
-                        <Tooltip title="Header Footer Theme">
+            </Link>
+            
+              </List>
+              <Divider />
+              
+              <List>
+                  <ListItem button onClick={handleClickgradient}>
+                      <Tooltip title="Header Footer Theme">
+                        <ListItemIcon>
+                            <BrushIcon style={{color:"#000000"}} />
+                        </ListItemIcon>
+                      </Tooltip>
+                        <ListItemText primary='Gradient Theme' />
+                        {opengradient ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                    <Collapse in={opengradient} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        <ListItem button className={classes.nested}>
+                              <RadioGroup aria-label="gradient" 
+                                          name="gradient 1"
+                                          value={radiovalue} 
+                                          onChange={value => gradientselect(value)}>
+                                <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
+                                <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
+                                <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
+                                <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
+                              </RadioGroup>
+                        </ListItem>
+                      </List>
+                    </Collapse>
+              </List>
+              <Divider />
+              <List>
+                <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
+                    <ListItem onClick={handleDrawerClose} button>
+                        <Tooltip title="About">
                           <ListItemIcon>
-                              <BrushIcon style={{color:"#000000"}} />
+                              <AccountCircleIcon onClick={handleDrawerClose} />
                           </ListItemIcon>
                         </Tooltip>
-                          <ListItemText primary='Gradient Theme' />
-                          {opengradient ? <ExpandLess /> : <ExpandMore />}
+                          <ListItemText onClick={handleDrawerClose} primary='About' />
                     </ListItem>
-                      <Collapse in={opengradient} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <ListItem button className={classes.nested}>
-                                <RadioGroup aria-label="gradient" 
-                                            name="gradient 1"
-                                            value={radiovalue} 
-                                            onChange={value => gradientselect(value)}>
-                                  <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
-                                  <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
-                                  <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
-                                  <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
-                                </RadioGroup>
-                          </ListItem>
-                        </List>
-                      </Collapse>
-                </List>
-                <Divider />
-                <List>
-                  <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                      <ListItem button>
-                          <Tooltip title="About">
-                            <ListItemIcon>
-                              <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                                <AccountCircleIcon />
-                              </Link>
-                            </ListItemIcon>
-                          </Tooltip>
-                            <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                            <ListItemText primary='About' />
-                            </Link>
-                      </ListItem>
-                  </Link>
-                </List>
-    </div>
-  );
+                </Link>
+              </List>
+  </div>
+);
 
     ////////////////   back to top function
 
@@ -452,7 +451,6 @@ const MainPage = (props) => {
 
   return (
         <Fragment >
-          {/* <TeaxtAnimation /> */}
           <CssBaseline />
             <AppBar
                   position="fixed"
