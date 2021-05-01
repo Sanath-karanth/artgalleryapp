@@ -680,9 +680,9 @@ const AboutPage = (props) => {
                     </p>
                     </CardContent>
                     <CardActions disableSpacing>
-                      <IconButton aria-label="add to favorites">
+                      {/* <IconButton aria-label="add to favorites">
                         <FavoriteIcon />
-                      </IconButton>
+                      </IconButton> */}
                       {/* <IconButton aria-label="share">
                         <ShareIcon onClick={copyToClipboard} />
                         { showurl && 
