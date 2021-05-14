@@ -83,9 +83,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import * as emailjs from 'emailjs-com';
+import { SMTPClient } from 'emailjs';
 
-
-
+const nodemailer = require("nodemailer");
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -337,16 +338,65 @@ const Feedbackpage = (props) => {
   const [datatoggle, setDatatoggle] = useState(" ");
   const [datatarget, setDatatarget] = useState(" ");
   
-  const feedbacksubmit = () => {
+
+  // function sendEmail() {
+  //   const client = new SMTPClient({
+  //     user: 'user',
+  //     password: 'password',
+  //     host: 'smtp.your-email.com',
+  //     ssl: true,
+  //   });
     
-    localStorage.setItem('Emailid', emailid);
-    localStorage.setItem('Username', username);
-    localStorage.setItem('Feedback', feedback);
-    localStorage.setItem('Rating', rating);
-    setDatatoggle("modal");
-    setDatatarget("#exampleModalLong");
-    
-  }
+  //   // send the message and get a callback with an error or details of the message that was sent
+  //   client.send(
+  //     {
+  //       text: 'i hope this works',
+  //       from: 'you <username@your-email.com>',
+  //       to: 'someone <someone@your-email.com>, another <another@your-email.com>',
+  //       cc: 'else <else@your-email.com>',
+  //       subject: 'testing emailjs',
+  //     },
+  //     (err, message) => {
+  //       console.log(err || message);
+  //     }
+  //   );
+  // }
+
+
+  
+
+  function handleSendemail() {
+    // e.preventDefault();
+    let templateParams = {
+      from_name: emailid,
+      to_name: "Sanath S Karanth",
+      subject: 'Art Gallery Feedback',
+      message_html: "Thanks for your valuable feedback!!!!",
+     }
+     console.log(templateParams);
+     emailjs.send(
+      'service_f80mipe',
+      'template_ehjow9y',
+       templateParams,
+      'user_y7cXEoIFkfSP9w9zqTHyq'
+     )
+     .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+    })
+    .catch((err) => {
+      console.log('FAILED...', err);
+    });
+ }
+
+ const feedbacksubmit = () => {
+  localStorage.setItem('Emailid', emailid);
+  localStorage.setItem('Username', username);
+  localStorage.setItem('Feedback', feedback);
+  localStorage.setItem('Rating', rating);
+  // handleSendemail();
+  setDatatoggle("modal");
+  setDatatarget("#exampleModalLong");
+}
 
   const [storeemailid, setStoreemailid] = useState('');
   const [storeusername, setStoreusername] = useState('');
