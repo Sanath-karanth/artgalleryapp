@@ -335,6 +335,16 @@ const Feedbackpage = (props) => {
     }
   }
 
+  const feedbacksubmit = () => {
+    localStorage.setItem('Emailid', emailid);
+    localStorage.setItem('Username', username);
+    localStorage.setItem('Feedback', feedback);
+    localStorage.setItem('Rating', rating);
+    // handleSendemail();
+    setDatatoggle("modal");
+    setDatatarget("#exampleModalLong");
+  }
+
   const [datatoggle, setDatatoggle] = useState(" ");
   const [datatarget, setDatatarget] = useState(" ");
   
@@ -388,15 +398,7 @@ const Feedbackpage = (props) => {
     });
  }
 
- const feedbacksubmit = () => {
-  localStorage.setItem('Emailid', emailid);
-  localStorage.setItem('Username', username);
-  localStorage.setItem('Feedback', feedback);
-  localStorage.setItem('Rating', rating);
-  // handleSendemail();
-  setDatatoggle("modal");
-  setDatatarget("#exampleModalLong");
-}
+
 
   const [storeemailid, setStoreemailid] = useState('');
   const [storeusername, setStoreusername] = useState('');
