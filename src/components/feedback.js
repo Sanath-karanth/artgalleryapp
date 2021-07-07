@@ -329,6 +329,10 @@ const Feedbackpage = (props) => {
     {
       setFeedbacknull(true);
     }
+    else if(emailerr == true || nameerr == true || feedbackerr == true)
+    {
+      
+    }
     else
     {
       feedbacksubmit();
