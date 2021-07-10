@@ -3,8 +3,7 @@ import { Link ,useHistory} from "react-router-dom";
 import '../css/main.css'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
-// import Drawer from '@material-ui/core/Drawer';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -13,61 +12,33 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-// import NotesIcon from '@material-ui/icons/Notes';
-// import ViewDayIcon from '@material-ui/icons/ViewDay';
-// import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import HomeIcon from '@material-ui/icons/Home';
 import Collapse from '@material-ui/core/Collapse';
-// import StarBorder from '@material-ui/icons/StarBorder';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-// import BlurLinearIcon from '@material-ui/icons/BlurLinear';
-// import DashboardIcon from '@material-ui/icons/Dashboard';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-// import AccountCircle from '@material-ui/icons/AccountCircle';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import Menu from '@material-ui/core/Menu';
 import Tooltip from '@material-ui/core/Tooltip';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-// import Box from '@material-ui/core/Box';
-// import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
-// import Grid from '@material-ui/core/Grid';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import PhoneIcon from '@material-ui/icons/Phone';
-// import Button from "@material-ui/core/Button";
-// import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { red, blue, green } from "@material-ui/core/colors";
-// import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
+import { red } from "@material-ui/core/colors";
 import anime from "animejs";
-// import TextTransition, { presets } from "react-text-transition";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-// import Switch from '@material-ui/core/Switch';
 import ToggleButton from '../common/ToggleButton';
-import Header from '../common/header';
 import FeedbackIcon from '@material-ui/icons/Feedback';
+import DeleteIcon from '@material-ui/icons/Delete';
 import '../css/aboutstyle.css'
 
-// import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardActions from '@material-ui/core/CardActions';
-// import Avatar from '@material-ui/core/Avatar';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import ShareIcon from '@material-ui/icons/Share';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import BrushIcon from '@material-ui/icons/Brush';
 import Radio from '@material-ui/core/Radio';
@@ -76,17 +47,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import * as emailjs from 'emailjs-com';
-import { SMTPClient } from 'emailjs';
+import { useAuth } from "../contexts/AuthContext"
 
-const nodemailer = require("nodemailer");
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -191,15 +155,6 @@ const useStyles = makeStyles((theme) => ({
   aboutcardroot: {
     maxWidth: "100%",
   },
-  // mediaimage: {
-  //   height: "auto",
-  //   width:"50%",
-  //   padding: '25%',
-  //   alignItems: 'center',
-  //   borderRadius:'80%',
-  //   justifyContent:'center',
-  //   marginLeft:'25%' 
-  // },
   mediaimage: {
     height: "auto",
     width:"50%",
@@ -238,8 +193,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Feedbackpage = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
   const history = useHistory();
+  const { getAlldata,createdata,updatedata,deletedata,deleteAlldata } = useAuth()
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
   const [emailid, setEmailid] = useState('');
@@ -254,197 +209,17 @@ const Feedbackpage = (props) => {
   const [feedbacknull, setFeedbacknull] = useState(false);
   const [submitdisable, setSubmitdisable] = useState(true);
 
-  const confirmEmailid = async(event) => {
-    setEmailid(event.target.value);
-    let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    // let regex = /^[0-9]{10}$/;
-    if(regex.test(event.target.value))
-    {
-      setSubmitdisable(false);
-      setEmailerr(false);
-      setEmailnull(false);
-      console.log('valid');
-    }
-    else
-    {
-      setSubmitdisable(true);
-      setEmailerr(true);
-      setEmailnull(false);
-      console.log('invalid');
-    } 
-  }
-
-  const confirmUsername = async(event) => {
-    setUsername(event.target.value);
-    let regex = /^[a-zA-Z ]+$/;
-    if(regex.test(event.target.value))
-    {
-      setSubmitdisable(false);
-      setNameerr(false);
-      setNamenull(false);
-      console.log('valid');
-    }
-    else
-    {
-      setSubmitdisable(true);
-      setNameerr(true);
-      setNamenull(false);
-      console.log('invalid');
-    } 
-  }
-
-  const confirmFeedback = async(event) => {
-    setFeedback(event.target.value);
-    let regex = /^[a-zA-Z0-9 #@$%^&*+=-_,.'";:?]+$/;
-    if(regex.test(event.target.value))
-    {
-      setSubmitdisable(false);
-      setFeedbackerr(false);
-      setFeedbacknull(false);
-      console.log('valid');
-    }
-    else
-    {
-      setSubmitdisable(true);
-      setFeedbackerr(true);
-      setFeedbacknull(false);
-      console.log('invalid');
-    } 
-  }
-
-  const confirmrating = async(event) => {
-    setRating(event.target.value);
-  }
-
-  const feedbacksubmitvalidation = () => {
-    if(emailid == '' || emailid == null)
-    {
-      setEmailnull(true);
-    }
-    else if(username == '' || username == null)
-    {
-      setNamenull(true);
-    }
-    else if(feedback == '' || feedback == null)
-    {
-      setFeedbacknull(true);
-    }
-    else if(emailerr == true || nameerr == true || feedbackerr == true)
-    {
-      
-    }
-    else
-    {
-      feedbacksubmit();
-    }
-  }
-
-  const feedbacksubmit = () => {
-    localStorage.setItem('Emailid', emailid);
-    localStorage.setItem('Username', username);
-    localStorage.setItem('Feedback', feedback);
-    localStorage.setItem('Rating', rating);
-    // handleSendemail();
-    setDatatoggle("modal");
-    setDatatarget("#exampleModalLong");
-  }
-
+  
   const [datatoggle, setDatatoggle] = useState(" ");
   const [datatarget, setDatatarget] = useState(" ");
-  
-
-  // function sendEmail() {
-  //   const client = new SMTPClient({
-  //     user: 'user',
-  //     password: 'password',
-  //     host: 'smtp.your-email.com',
-  //     ssl: true,
-  //   });
-    
-  //   // send the message and get a callback with an error or details of the message that was sent
-  //   client.send(
-  //     {
-  //       text: 'i hope this works',
-  //       from: 'you <username@your-email.com>',
-  //       to: 'someone <someone@your-email.com>, another <another@your-email.com>',
-  //       cc: 'else <else@your-email.com>',
-  //       subject: 'testing emailjs',
-  //     },
-  //     (err, message) => {
-  //       console.log(err || message);
-  //     }
-  //   );
-  // }
-
 
   
-
-  function handleSendemail() {
-    // e.preventDefault();
-    let templateParams = {
-      from_name: emailid,
-      to_name: "Sanath S Karanth",
-      subject: 'Art Gallery Feedback',
-      message_html: "Thanks for your valuable feedback!!!!",
-     }
-     console.log(templateParams);
-     emailjs.send(
-      'service_f80mipe',
-      'template_ehjow9y',
-       templateParams,
-      'user_y7cXEoIFkfSP9w9zqTHyq'
-     )
-     .then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
-    })
-    .catch((err) => {
-      console.log('FAILED...', err);
-    });
- }
-
-
-
   const [storeemailid, setStoreemailid] = useState('');
   const [storeusername, setStoreusername] = useState('');
   const [storefeedback, setStorefeedback] = useState('');
   const [storerating, setStorerating] = useState('');
 
   const [token, setToken] = useState('karanth123');
-  const getfeedbackvalues = () => {
-    let emailvalue = localStorage.getItem('Emailid');
-    let namevalue = localStorage.getItem('Username');
-    let feedbackvalue = localStorage.getItem('Feedback');
-    let ratingvalue = localStorage.getItem('Rating');
-    
-
-    localStorage.setItem('tokenofart', token);
-    let tokenvalue = localStorage.getItem('tokenofart');
-
-    setStoreemailid(emailvalue);
-    setStoreusername(namevalue);
-    setStorefeedback(feedbackvalue);
-    setStorerating(ratingvalue);
-    setToken(tokenvalue);
-  };
-
-  const [feeddisplay, setFeeddisplay] = useState(false);
-  const feddbackdisplay = () => {
-    let emailvalueofsanath = localStorage.getItem('Emailid');
-    if(emailvalueofsanath === 'sanathsk97@gmail.com')
-    {
-      setFeeddisplay(true);
-    }
-  };
-
-  const tablevalues = [
-    {
-      idval: 1,
-      nameval: storeusername,
-      emailval: storeemailid,
-      ratingval: storerating,
-      feedbackval: storefeedback,
-    },
-  ];
 
   const [togglestatus, setTogglestatus] = useState(false);
   const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
@@ -457,6 +232,7 @@ const Feedbackpage = (props) => {
   const [cardheadcolor, setCardheadcolor] = useState('#5D6D7E');
   const [alltextcolor, setAlltextcolor] = useState('#000000');
   const [allbuttontextcolor, setAllbuttontextcolor] = useState('#FFFFFF');
+  
 
   const [gradient1, setGradient1] = useState(classes.headergradientD);
 
@@ -503,6 +279,7 @@ const Feedbackpage = (props) => {
   };
 
   const [radiovalue, setRadiovalue] = useState('Gradient 1');
+  
   const gradientselect = (event) => {
     console.log(event.target.value);
     setRadiovalue(event.target.value);
@@ -524,158 +301,209 @@ const Feedbackpage = (props) => {
     }
  }
 
- const Drawerlist = (ancher) => (
-  <div
-    className={clsx(classes.dralist, {
-      [classes.fulldraList]: ancher === 'left',
-    })}
-    role="presentation"
-  >
-      <List>
-      <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
-          <ListItem onClick={handleDrawerClose} button>
-            <Tooltip title="Home">
-                <ListItemIcon>
-                    <HomeIcon onClick={handleDrawerClose} />
-                </ListItemIcon>
-              </Tooltip>
-            <ListItemText onClick={handleDrawerClose} primary='Home' />
-          </ListItem>
-      </Link>
+ const [feeddisplay, setFeeddisplay] = useState(false);
+ const [modalsuccessdisplay, setModalsuccessdisplay] = useState(false);
+ const [modalfaildisplay, setModalfaildisplay] = useState(false);
+ const [modeldelltedisplay,setModeldelltedisplay] = useState(false);
+ const [tablevalues,setTablevalues] = useState([]);
+ 
 
-          <Link to="/portrait" style={{color:"#000000", textDecoration:"none"}}>
-          <ListItem onClick={handleDrawerClose} button>
-              <Tooltip title="Arts works">
-                <ListItemIcon>
-                    <ColorLensIcon onClick={handleDrawerClose} />
-                </ListItemIcon>
-                </Tooltip>
-                <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
-          </ListItem>
-          </Link>
+  const confirmEmailid = async(event) => {
+    setEmailid(event.target.value);
+    let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if(regex.test(event.target.value))
+    {
+      setSubmitdisable(false);
+      setEmailerr(false);
+      setEmailnull(false);
+      console.log('valid');
+    }
+    else
+    {
+      setSubmitdisable(true);
+      setEmailerr(true);
+      setEmailnull(false);
+      console.log('invalid');
+    } 
+  }
 
-          <Link to="/photography" style={{color:"#000000", textDecoration:"none"}}>
+  const confirmUsername = async(event) => {
+    setUsername(event.target.value);
+    let regex = /^[a-zA-Z ]+$/;
+    if(regex.test(event.target.value))
+    {
+      setSubmitdisable(false);
+      setNameerr(false);
+      setNamenull(false);
+    }
+    else
+    {
+      setSubmitdisable(true);
+      setNameerr(true);
+      setNamenull(false);
+    } 
+  }
+
+  const confirmFeedback = async(event) => {
+    setFeedback(event.target.value);
+    let regex = /^[a-zA-Z0-9 #@$%^&*+=-_,.'";:?]+$/;
+    if(regex.test(event.target.value))
+    {
+      setSubmitdisable(false);
+      setFeedbackerr(false);
+      setFeedbacknull(false);
+    }
+    else
+    {
+      setSubmitdisable(true);
+      setFeedbackerr(true);
+      setFeedbacknull(false);
+    } 
+  }
+
+  const confirmrating = async(event) => {
+    setRating(event.target.value);
+  }
+
+  const Drawerlist = (ancher) => (
+    <div
+      className={clsx(classes.dralist, {
+        [classes.fulldraList]: ancher === 'left',
+      })}
+      role="presentation"
+    >
+        <List>
+        <Link to="/" style={{color:"#000000", textDecoration:"none"}}>
             <ListItem onClick={handleDrawerClose} button>
-                <Tooltip title="Photography">
-                      <ListItemIcon>
-                  <CameraAltIcon onClick={handleDrawerClose} />
+              <Tooltip title="Home">
+                  <ListItemIcon>
+                      <HomeIcon onClick={handleDrawerClose} />
+                  </ListItemIcon>
+                </Tooltip>
+              <ListItemText onClick={handleDrawerClose} primary='Home' />
+            </ListItem>
+        </Link>
+  
+            <Link to="/portrait" style={{color:"#000000", textDecoration:"none"}}>
+            <ListItem onClick={handleDrawerClose} button>
+                <Tooltip title="Arts works">
+                  <ListItemIcon>
+                      <ColorLensIcon onClick={handleDrawerClose} />
                   </ListItemIcon>
                   </Tooltip>
-                <ListItemText onClick={handleDrawerClose} primary='Photography' />
-              </ListItem>
+                  <ListItemText onClick={handleDrawerClose} primary="Portrait Sketchings" />
+            </ListItem>
             </Link>
-            
-              </List>
-              <Divider />
-              
-              <List>
-                  <ListItem button onClick={handleClickgradient}>
-                      <Tooltip title="Header Footer Theme">
+  
+            <Link to="/photography" style={{color:"#000000", textDecoration:"none"}}>
+              <ListItem onClick={handleDrawerClose} button>
+                  <Tooltip title="Photography">
                         <ListItemIcon>
-                            <BrushIcon style={{color:"#000000"}} />
-                        </ListItemIcon>
-                      </Tooltip>
-                        <ListItemText primary='Gradient Theme' />
-                        {opengradient ? <ExpandLess /> : <ExpandMore />}
-                  </ListItem>
-                    <Collapse in={opengradient} timeout="auto" unmountOnExit>
-                      <List component="div" disablePadding>
-                        <ListItem button className={classes.nested}>
-                              <RadioGroup aria-label="gradient" 
-                                          name="gradient 1"
-                                          value={radiovalue} 
-                                          onChange={value => gradientselect(value)}>
-                                <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
-                                <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
-                                <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
-                                <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
-                              </RadioGroup>
-                        </ListItem>
-                      </List>
-                    </Collapse>
-              </List>
-              <Divider />
-              <List>
-                <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
-                    <ListItem onClick={handleDrawerClose} button>
-                        <Tooltip title="About">
+                    <CameraAltIcon onClick={handleDrawerClose} />
+                    </ListItemIcon>
+                    </Tooltip>
+                  <ListItemText onClick={handleDrawerClose} primary='Photography' />
+                </ListItem>
+              </Link>
+              
+                </List>
+                <Divider />
+                
+                <List>
+                    <ListItem button onClick={handleClickgradient}>
+                        <Tooltip title="Header Footer Theme">
                           <ListItemIcon>
-                              <AccountCircleIcon onClick={handleDrawerClose} />
+                              <BrushIcon style={{color:"#000000"}} />
                           </ListItemIcon>
                         </Tooltip>
-                          <ListItemText onClick={handleDrawerClose} primary='About' />
+                          <ListItemText primary='Gradient Theme' />
+                          {opengradient ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
-                </Link>
-              </List>
-  </div>
-);
-
-    ////////////////   back to top function
-
-    function ScrollTop(props) {
-      const { children, window } = props;
-      const classes = useStyles();
-      // Note that you normally won't need to set the window ref as useScrollTrigger
-      // will default to window.
-      // This is only being set here because the demo is in an iframe.
-      const trigger = useScrollTrigger({
-        target: window ? window() : undefined,
-        disableHysteresis: true,
-        threshold: 100,
-      });
-
-      const handleClick = (event) => {
-        const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
-
-        if (anchor) {
-          anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+                      <Collapse in={opengradient} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <ListItem button className={classes.nested}>
+                                <RadioGroup aria-label="gradient" 
+                                            name="gradient 1"
+                                            value={radiovalue} 
+                                            onChange={value => gradientselect(value)}>
+                                  <FormControlLabel value="GradientD" control={<Radio />} label="Default Gradient" />
+                                  <FormControlLabel value="GradientR" control={<Radio />} label="Red Gradient" />
+                                  <FormControlLabel value="GradientG" control={<Radio />} label="Green Gradient" />
+                                  <FormControlLabel value="GradientB" control={<Radio />} label="Blue Gradient" />
+                                </RadioGroup>
+                          </ListItem>
+                        </List>
+                      </Collapse>
+                </List>
+                <Divider />
+                <List>
+                  <Link to="/about" style={{color:"#000000", textDecoration:"none"}}>
+                      <ListItem onClick={handleDrawerClose} button>
+                          <Tooltip title="About">
+                            <ListItemIcon>
+                                <AccountCircleIcon onClick={handleDrawerClose} />
+                            </ListItemIcon>
+                          </Tooltip>
+                            <ListItemText onClick={handleDrawerClose} primary='About' />
+                      </ListItem>
+                  </Link>
+                </List>
+    </div>
+  );
+  
+      ////////////////   back to top function
+  
+      function ScrollTop(props) {
+        const { children, window } = props;
+        const classes = useStyles();
+        const trigger = useScrollTrigger({
+          target: window ? window() : undefined,
+          disableHysteresis: true,
+          threshold: 100,
+        });
+  
+        const handleClick = (event) => {
+          const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
+  
+          if (anchor) {
+            anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        };
+  
+        return (
+          <Zoom in={trigger}>
+            <div onClick={handleClick} role="presentation" className={classes.backroot}>
+              {children}
+            </div>
+          </Zoom>
+        );
+      }
+  
+      ScrollTop.propTypes = {
+        children: PropTypes.element.isRequired,
+        window: PropTypes.func,
       };
-
-      return (
-        <Zoom in={trigger}>
-          <div onClick={handleClick} role="presentation" className={classes.backroot}>
-            {children}
-          </div>
-        </Zoom>
-      );
-    }
-
-    ScrollTop.propTypes = {
-      children: PropTypes.element.isRequired,
-      /**
-       * Injected by the documentation to work in an iframe.
-       * You won't need it on your project.
-       */
-      window: PropTypes.func,
-    };
-
-    ScrollTop.propTypes = {
-      children: PropTypes.element.isRequired,
-      /**
-       * Injected by the documentation to work in an iframe.
-       * You won't need it on your project.
-       */
-      window: PropTypes.func,
-    };
-
-          /////////////////////  Heading Animation
-      
-          const paraanimation = () => {
-            var textWrapper = document.querySelector('.paradesp');
-            textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+  
+      ScrollTop.propTypes = {
+        children: PropTypes.element.isRequired,
+        window: PropTypes.func,
+      };
+  
+            /////////////////////  Heading Animation
+  
+    
+    const artgalleryanimation = () => {
             
             anime.timeline({loop: true})
             .add({
-              targets: '.paradesp .letter',
-              scale: [4,1],
+              targets: '.artanimation .word',
+              scale: [14,1],
               opacity: [0,1],
-              translateZ: 0,
-              easing: "easeOutExpo",
-              duration: 950,
-              delay: (el, i) => 70*i
+              easing: "easeOutCirc",
+              duration: 1500,
+              delay: (el, i) => 800 * i
             }).add({
-              targets: '.paradesp',
+              targets: '.artanimation',
               opacity: 0,
               duration: 1000,
               easing: "easeOutExpo",
@@ -683,120 +511,258 @@ const Feedbackpage = (props) => {
             });
         }
   
-        const artgalleryanimation = () => {
-          
-          anime.timeline({loop: true})
-          .add({
-            targets: '.artanimation .word',
-            scale: [14,1],
-            opacity: [0,1],
-            easing: "easeOutCirc",
-            duration: 1500,
-            delay: (el, i) => 800 * i
-          }).add({
-            targets: '.artanimation',
-            opacity: 0,
-            duration: 1000,
-            easing: "easeOutExpo",
-            delay: 1000
-          });
-      }
-
-      
-      
-      // ///////////////////  expand card function
-      
-      const [expanded, setExpanded] = React.useState(false);
-      const [imgexpand, setImgexpanded] = React.useState(false);
-      const [imgshow, setImgshow] = React.useState(false);
-      
-        const handleExpandClick = () => {
-          setExpanded(!expanded);
-        };
-        const handleimageclick = () => {
-          // setImgexpanded(!imgexpand);
-          // setImgshow(true);
-          if(imgexpand === true) {
-            setImgexpanded(false);
-            setImgshow(false);
-            }
-            else
+      const options = [
             {
-              setImgexpanded(true);
-              setImgshow(true);
-            } 
-        };
-
-        const options = [
-          {
-            label: "1",
-            value: "1",
-          },
-          {
-            label: "2",
-            value: "2",
-          },
-          {
-            label: "3",
-            value: "3",
-          },
-          {
-            label: "4",
-            value: "4",
-          },
-          {
-            label: "5",
-            value: "5",
-          },
-        ];
-        
-
+              label: "1",
+              value: "1",
+            },
+            {
+              label: "2",
+              value: "2",
+            },
+            {
+              label: "3",
+              value: "3",
+            },
+            {
+              label: "4",
+              value: "4",
+            },
+            {
+              label: "5",
+              value: "5",
+            },
+          ];
+          
+  
         function clickclose() {
-          history.push("/");
-        }
+            history.push("/");
+          }
 
-        const Feedbackmodal = () => {
+  const feedbacksubmitvalidation = () => {
+      
+       if(username == '' || username == null)
+      {
+        setNamenull(true);
+      }
+      else if(emailid == '' || emailid == null)
+      {
+        setEmailnull(true);
+      }
+      else if(feedback == '' || feedback == null)
+      {
+        setFeedbacknull(true);
+      }
+      else if(emailerr == true || nameerr == true || feedbackerr == true)
+      {
+        
+      }
+      else
+      {
+        feedbacksubmit();
+      }
+  }
 
+  const modalshow = () => {
+    setDatatoggle("modal");
+    setDatatarget("#exampleModalCenter");
+  }
+
+
+  const feedbacksubmit = async() => {
+    let emailvalue = localStorage.getItem('Emailid');
+    if(emailvalue == emailid)
+    {
+      console.log("emailid equal");
+      setModalfaildisplay(true);
+      modalshow();
+    }
+    else
+    {
+      console.log("emailid not equal");
+      localStorage.setItem('Emailid', emailid);
+      setModalsuccessdisplay(true);
+      modalshow();
+      let uniqueID = Math.floor(Math.random() * 1000);
+      let formfielddata = {uniqueID,emailid,username,feedback,rating}
+      try {
+        await createdata('feedbackdata',formfielddata)
+      } catch(err) {
+        console.log(err)
+      }
+    }
+    
+  }
+
+    const [pathvalue,setPathvalue] = useState('');
+    const [idvalue,setIdvalue] = useState('');
+    const [dismiss,setDismiss] = useState('');
+    const deletepopup = (pathval,idval) => {
+      setModeldelltedisplay(true);
+      setPathvalue(pathval);
+      setIdvalue(idval);
+      modalshow();
+      setDismiss('modal');
+    }
+
+    const feedbackdelete = () => {
+      deletedata(pathvalue,idvalue)
+      .then(() => {
+        feddbackdisplay();
+        console.log('deleted successfully');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    }
+
+    const feddbackdisplay = async() => {
+      try {
+        getAlldata('feedbackdata').on('value', snapshot => {
+         if (snapshot.val() != null) {
+           
+           let mainarr = [];
+           snapshot.forEach((item) => {
+            let dbkey = item.key;
+            let data = item.val();
+            mainarr.push({
+              dbkey: dbkey,
+              uniqueID:data.uniqueID,
+              emailid: data.emailid,
+              username: data.username,
+              rating:data.rating,
+              feedback: data.feedback,
+            });
+          });
+          //  const uid = Object.keys(usersObject);
+          //  setDbuid(uid);
+          //  console.log("keys  ",uid);
+          //  const usersObject = snapshot.val();
+          //  const resval = Object.keys(usersObject).map(key => ({
+          //    ...usersObject[key],
+          //    uid: key,
+          //  }));
+           setTablevalues(mainarr);
+           console.log("mail arr  ",mainarr);
+           const myemail = mainarr.find((item) => {
+             return(item.emailid === "sanathsk97@gmail.com");
+           })
+           if (myemail.emailid === "sanathsk97@gmail.com") 
+          {
+            setFeeddisplay(true);
+          } 
+       }  
+       else
+       {
+         setFeeddisplay(false);
+       }
+       })
+     } catch(err) {
+       console.log(err)
+     }
+    };
+
+
+      const Feedbackmodalsuccess = () => {
           return(<Fragment>
-            <div className="modal fade m-5 pt-4" 
-                 id="exampleModalLong"  
-                 role="dialog" 
-                 aria-labelledby="exampleModalLongTitle" 
-                 aria-hidden="true">
-                            <div className="modal-dialog" role="document">
-                              <div className="modal-content">
-                                <div className="modal-header">
-                                  <h5 className="modal-title " id="exampleModalLongTitle">Feedback Message</h5>
-                                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div className="modal-body">
-                                <h5 className="text-success">Thanks for your valuable feedback.</h5>
-                                </div>
-                                <div className="modal-footer">
-                                  <button type="button"
+                  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Feedback Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  {/* <span aria-hidden="true">&times;</span> */}
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                  <h4 className="text-success">Thanks for your valuable feedback.</h4>
+                              </div>
+                              <div class="modal-footer">
+                              <button type="button"
                                           onClick={clickclose} 
                                           className="btn btn-primary" 
                                           data-dismiss="modal">Close</button>
-                                </div>
                               </div>
                             </div>
                           </div>
-            </Fragment>
+                    </div>
+              </Fragment>
+            )
+        }
+
+        const Feedbackmodalfail = () => {
+          return(<Fragment>
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Feedback Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  {/* <span aria-hidden="true">&times;</span> */}
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                  <h4 className="text-danger">You have already Submitted the feedback, Thamk you!</h4>
+                              </div>
+                              <div class="modal-footer">
+                              <button type="button"
+                                          onClick={clickclose} 
+                                          className="btn btn-primary" 
+                                          data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                    </div>        
+              </Fragment>
             )
         }
         
+
+        const Deletemodal = () => {
+          return(<Fragment>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmation Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  <h4 className="text-danger">Are you Sure?</h4>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" 
+                            class="btn btn-primary"
+                            data-dismiss={dismiss}
+                            onClick={feedbackdelete}>
+                        Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Fragment>)
+        }
+
+        
     useEffect(() => {
       feddbackdisplay();
-      getfeedbackvalues();
       artgalleryanimation();
       }, []);
 
-
   return (
         <Fragment >
-          <Feedbackmodal />
+          {
+          modalsuccessdisplay && <Feedbackmodalsuccess />
+          }
+          {
+          modalfaildisplay && <Feedbackmodalfail />
+          }
+          {
+          modeldelltedisplay && <Deletemodal />
+          }
           <CssBaseline />
             <AppBar
                   position="fixed"
@@ -864,11 +830,9 @@ const Feedbackpage = (props) => {
                 <Drawerlist anchorvalue={ancher} />
                 </SwipeableDrawer>
 
-           
               <Toolbar id="back-to-top-anchor" />
-
-              
-              <div className='pb-4' style={{backgroundColor:togglemaincolor}}>
+          
+          <div className='pb-4' style={{backgroundColor:togglemaincolor}}>
             {/* ----------------------------------------Heading part--------------------------------- */}
             
             <div className={classes.root}>
@@ -894,7 +858,7 @@ const Feedbackpage = (props) => {
                 <div className="card-body">
                     <form>
                     <div className="form-group">
-                            <label for="exampleFormControlTextarea1">Name:</label>
+                            <label htmlFor="exampleFormControlTextarea1">Name:</label>
                             <input type="text" 
                                    className="form-control"
                                    onChange={username => confirmUsername(username)}
@@ -912,7 +876,7 @@ const Feedbackpage = (props) => {
                         </div>:null
                         }
                         <div className="form-group">
-                            <label for="exampleFormControlInput1">Email ID:</label>
+                            <label htmlFor="exampleFormControlInput1">Email ID:</label>
                             <input type="text" 
                                    className="form-control"
                                    onChange={emailid => confirmEmailid(emailid)}
@@ -931,7 +895,7 @@ const Feedbackpage = (props) => {
                         }
 
                         <div className="form-group">
-                            <label for="exampleFormControlTextarea1">Your valuable feedback:</label>
+                            <label htmlFor="exampleFormControlTextarea1">Your valuable feedback:</label>
                             <textarea className="form-control" 
                                       id="exampleFormControlTextarea1"
                                       placeholder="Please type your valuable feedback"
@@ -945,7 +909,7 @@ const Feedbackpage = (props) => {
                         </div>:null
                         }
                         <div className="form-group">
-                            <label for="exampleFormControlSelect1">Overall Rating:</label>
+                            <label htmlFor="exampleFormControlSelect1">Overall Rating:</label>
                             <select onChange={confirmrating}
                               className="form-control"
                               id="exampleFormControlSelect1"
@@ -954,9 +918,9 @@ const Feedbackpage = (props) => {
                                 <option key={index} value={option.value}>{option.label}</option>
                               ))}
                             </select>
-                        </div>
+                        </div>  
                         <button type="button" 
-                                disabled={submitdisable}
+                                // disabled={submitdisable}
                                 onClick={feedbacksubmitvalidation} 
                                 className="btn btn-primary"
                                 data-toggle={datatoggle} 
@@ -987,18 +951,28 @@ const Feedbackpage = (props) => {
                       <th scope="col">Email ID</th>
                       <th scope="col">Rating</th>
                       <th scope="col">Feedback</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {tablevalues.map((item,index) => (
-                                <tr key={index}>
+                    {
+                    tablevalues.map((item,index) => (
+                                <tr key={item.uniqueID}>
                                 <th scope="row">{index+1}</th>
-                                <td>{item.nameval}</td>
-                                <td>{item.emailval}</td>
-                                <td>{item.ratingval}</td>
-                                <td>{item.feedbackval}</td>
+                                <td>{item.username}</td>
+                                <td>{item.emailid}</td>
+                                <td>{item.rating}</td>
+                                <td>{item.feedback}</td>
+                                <td>
+                                  <div data-toggle={datatoggle} 
+                                         data-target={datatarget} 
+                                         onClick={() => deletepopup('feedbackdata',item.dbkey)}>
+                                      <DeleteIcon color="secondary" />
+                                  </div>
+                                </td>
                               </tr>
-                              ))}
+                    ))
+                    }
                   </tbody>
                 </table>
                 </TableContainer>
@@ -1008,9 +982,10 @@ const Feedbackpage = (props) => {
             :null }
 
             {/* ------------------------------------------------------------------------- */}
-          </div>  
+          </div>
+          
             {/* ------------------------------------------------------------------------- */}
-
+            
             {/* --------------------------    footer part   --------------------------------- */}
 
                 <div className={clsx(classes.footerroot),(gradient1)}>
@@ -1019,12 +994,6 @@ const Feedbackpage = (props) => {
                                 <div className="container-fluid">
                                     <div className="row">
                                         <div className="col-sm-6 col-md-2 item">
-                                            {/* <h3>Services</h3>
-                                            <ul>
-                                                <li><a href="#">Web design</a></li>
-                                                <li><a href="#">Development</a></li>
-                                                <li><a href="#">Hosting</a></li>
-                                            </ul> */}
                                         </div>
                                         <div className="col-sm-6 col-md-4 item">
                                             <h3>About</h3>

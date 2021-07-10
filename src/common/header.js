@@ -1,9 +1,8 @@
 import React, { Fragment,useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import '../css/main.css'
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -12,56 +11,24 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-// import NotesIcon from '@material-ui/icons/Notes';
-// import ViewDayIcon from '@material-ui/icons/ViewDay';
-// import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import HomeIcon from '@material-ui/icons/Home';
 import Collapse from '@material-ui/core/Collapse';
-// import StarBorder from '@material-ui/icons/StarBorder';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-// import BlurLinearIcon from '@material-ui/icons/BlurLinear';
-// import DashboardIcon from '@material-ui/icons/Dashboard';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-// import AccountCircle from '@material-ui/icons/AccountCircle';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import Menu from '@material-ui/core/Menu';
 import Tooltip from '@material-ui/core/Tooltip';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-// import Box from '@material-ui/core/Box';
-// import Container from '@material-ui/core/Container';
-import Fab from '@material-ui/core/Fab';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Zoom from '@material-ui/core/Zoom';
-// import Paper from '@material-ui/core/Paper';
-// import Grid from '@material-ui/core/Grid';
-import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
-import PhoneIcon from '@material-ui/icons/Phone';
-// import Button from "@material-ui/core/Button";
-// import useMediaQuery from "@material-ui/core/useMediaQuery";
-// import { red, blue, green } from "@material-ui/core/colors";
-// import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import anime from "animejs";
-// import TextTransition, { presets } from "react-text-transition";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-// import Switch from '@material-ui/core/Switch';
 import FeedbackIcon from '@material-ui/icons/Feedback';
-// import InvertColorsIcon from '@material-ui/icons/InvertColors';
 import BrushIcon from '@material-ui/icons/Brush';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import FormControl from '@material-ui/core/FormControl';
-// import FormLabel from '@material-ui/core/FormLabel';
 import ToggleButton from '../common/ToggleButton';
 import '../css/custom.css'
 
@@ -174,13 +141,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Headerpage = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
   
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
 
   const [togglestatus, setTogglestatus] = useState(false);
-  const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
+  // const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
   const [togglemaincolor, setTogglemaincolor] = useState('#EEECEB');
   const [headertogglecolor, setHeadertogglecolor] = useState('bg-light');
   const [headertextcolor, setHeadertextcolor] = useState('#000000');
