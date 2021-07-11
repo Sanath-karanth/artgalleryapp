@@ -650,6 +650,10 @@ const Feedbackpage = (props) => {
            if (myemail.emailid === "sanathsk97@gmail.com") 
           {
             setFeeddisplay(true);
+          }
+          else
+          {
+            setFeeddisplay(false);
           } 
        }  
        else
@@ -665,7 +669,12 @@ const Feedbackpage = (props) => {
 
       const Feedbackmodalsuccess = () => {
           return(<Fragment>
-                  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal fade" 
+                       id="exampleModalCenter" 
+                       tabindex="-1" 
+                       role="dialog" 
+                       aria-labelledby="exampleModalCenterTitle" 
+                       aria-hidden="true" data-keyboard="false" data-backdrop="static">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -692,7 +701,12 @@ const Feedbackpage = (props) => {
 
         const Feedbackmodalfail = () => {
           return(<Fragment>
-                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal fade" 
+                       id="exampleModalCenter" 
+                       tabindex="-1" 
+                       role="dialog" 
+                       aria-labelledby="exampleModalCenterTitle" 
+                       aria-hidden="true" data-keyboard="false" data-backdrop="static">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
