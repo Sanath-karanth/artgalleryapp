@@ -49,7 +49,8 @@ import BrushIcon from '@material-ui/icons/Brush';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import moment from 'moment';
+import { Today } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -200,11 +201,11 @@ const AboutPage = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
-  const [urltext, setUrltext] = useState(null);
   const [copySuccess, setCopySuccess] = useState('');
   const textAreaRef = useRef(null);
-  const [myurl,setMyurl] = useState("https://karanthartgallery.herokuapp.com");
-  const [showurl, setShowurl] = useState(true);
+  const [myurl,setMyurl] = useState("https://karanthartgallery.netlify.com");
+  const today = moment();
+  const lastdate = today.calendar();
 
   function copyToClipboard(e) {
     textAreaRef.current.select();
@@ -599,7 +600,7 @@ const AboutPage = (props) => {
                         </Avatar></a>
                       }
                       title="Sanath S Karanth"
-                      subheader="March 30, 2021"
+                      subheader={lastdate}
                     />
                     <div>
                       { imgshow ? 

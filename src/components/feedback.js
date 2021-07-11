@@ -702,7 +702,7 @@ const Feedbackpage = (props) => {
                                 </button>
                               </div>
                               <div class="modal-body">
-                                  <h4 className="text-danger">You have already Submitted the feedback, Thamk you!</h4>
+                                  <h4 className="text-danger">You have already Submitted the feedback, Thank you!</h4>
                               </div>
                               <div class="modal-footer">
                               <button type="button"
