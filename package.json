@@ -24,7 +24,7 @@
     "emailjs-com": "^2.6.4",
     "firebase": "^8.7.0",
     "font-awesome": "^4.7.0",
-    "formik": "^2.2.6",
+    "formik": "^2.2.9",
     "jquery": "^3.6.0",
     "material-auto-rotating-carousel": "^3.0.2",
     "moment": "^2.29.1",
