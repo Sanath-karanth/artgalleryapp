@@ -28,6 +28,7 @@
     "jquery": "^3.6.0",
     "material-auto-rotating-carousel": "^3.0.2",
     "moment": "^2.29.1",
+    "netlify-cli": "^6.9.28",
     "nodemailer": "^6.6.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
