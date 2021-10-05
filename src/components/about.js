@@ -623,7 +623,7 @@ const AboutPage = (props) => {
                           onMouseOver={handleimageclick}
                           aria-expanded={imgexpand}
                           aria-label="show more"
-                          image="./images/Sanath.jpg"
+                          image="./images/Sanath3.jpg"
                           title="Paella dish" />
                         }
                     </div>
