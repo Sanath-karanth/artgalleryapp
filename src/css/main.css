@@ -1,7 +1,5 @@
 body {
     display: -ms-flexbox;
-    /* display: flex; */
-
     background-color: #f7f7f7 !important;
   }
 .title

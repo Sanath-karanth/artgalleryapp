@@ -77,7 +77,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
   content: {
@@ -117,7 +116,6 @@ const useStyles = makeStyles((theme) => ({
   },
   footerroot: {
       display: 'flex',
-      // flexGrow: 1,
       position: 'static',
       left: 0,
       bottom: 0,
@@ -155,7 +153,6 @@ const MainPage = (props) => {
   const [ancher, setAncher] = useState('left');
 
   const [togglestatus, setTogglestatus] = useState(false);
-  // const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
   const [togglemaincolor, setTogglemaincolor] = useState('#EEECEB');
   const [headertogglecolor, setHeadertogglecolor] = useState('bg-light');
   const [headertextcolor, setHeadertextcolor] = useState('#000000');
@@ -433,7 +430,6 @@ const MainPage = (props) => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             edge="end"
-                            // onClick={feedbackmodal}
                             color="inherit"
                             >
                             <Link to="/feedback" style={{color:"#ffffff", textDecoration:"none"}}>
@@ -953,13 +949,13 @@ const MainPage = (props) => {
                   </p>
                   
                   <p className="card-text paradate" 
-                                style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 31-03-2018</small></p>
-                              <a href="https://en.wikipedia.org/wiki/Water_scarcity"  
-                                target="_blank" 
-                                className={`btn ${allbuttoncolor}`}>
-                                  <p className="card-text aboutbuttontext" 
-                                      style={{color:allbuttontextcolor}}>About Water scarcity</p>
-                              </a>
+                      style={{color:alltextcolor}}>Art Creation Date:<small className="text-primary"> 31-03-2018</small></p>
+                    <a href="https://en.wikipedia.org/wiki/Water_scarcity"  
+                      target="_blank" 
+                      className={`btn ${allbuttoncolor}`}>
+                        <p className="card-text aboutbuttontext" 
+                            style={{color:allbuttontextcolor}}>About Water scarcity</p>
+                    </a>
                 </div>
               </div>
             </div>
@@ -978,12 +974,12 @@ const MainPage = (props) => {
                      style={{color:alltextcolor}}>Art Creation Date:
                      <small className="text-primary"> 02-05-2020</small>
                   </p>
-                              <a href="https://en.wikipedia.org/wiki/Om"  
-                                target="_blank" 
-                                className={`btn ${allbuttoncolor}`}>
-                                  <p className="card-text aboutbuttontext" 
-                                      style={{color:allbuttontextcolor}}>About</p>
-                              </a>
+                    <a href="https://en.wikipedia.org/wiki/Om"  
+                      target="_blank" 
+                      className={`btn ${allbuttoncolor}`}>
+                        <p className="card-text aboutbuttontext" 
+                            style={{color:allbuttontextcolor}}>About</p>
+                    </a>
                 </div>
               </div>
             </div>
@@ -1642,12 +1638,6 @@ const MainPage = (props) => {
                                 <div className="container-fluid">
                                     <div className="row">
                                         <div className="col-sm-6 col-md-2 item">
-                                            {/* <h3>Services</h3>
-                                            <ul>
-                                                <li><a href="#">Web design</a></li>
-                                                <li><a href="#">Development</a></li>
-                                                <li><a href="#">Hosting</a></li>
-                                            </ul> */}
                                         </div>
                                         <div className="col-sm-6 col-md-4 item">
                                             <h3>About</h3>
@@ -1659,7 +1649,7 @@ const MainPage = (props) => {
                                                   <a>
                                                     <BusinessCenterIcon style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
                                                     <span  
-                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Associate Software Engineer
+                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Software Engineer
                                                     </span>
                                                     </a>
                                                 </li>
@@ -1701,7 +1691,7 @@ const MainPage = (props) => {
                                           </a>
                                           </div>
                                     </div>
-                                    <p className="copyright">© 2021 Copyright karanthartgallery.com</p>
+                                    <p className="copyright">© 2022 Copyright karanthartgallery.com</p>
                                 </div>
                             </footer>
                         </div>

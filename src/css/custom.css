@@ -62,12 +62,6 @@ ol li.list-group-item {
     align-items: center;
 }
   
-  /* @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  } */
-  
   .App-header {
     background-color: #282c34;
     min-height: 100vh;
@@ -167,31 +161,11 @@ ol li.list-group-item {
     }
   }
   
-/*@media only screen and (max-width: 992px) {
-   .downButton {
-           margin-top: 17%;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-   .downButton {
-           margin-top: 22%;
-    }
-}
-@media only screen and (max-width: 320px) {
-   .downButton {
-           margin-top: 100%;
-       background-color: chartreuse;
-    }
-}*/
 
 /* -----------------------      Animation styles    ---------------------- */
 
 
 .artanimation {
-  /* font-weight: 800; */
-  /* font-size: 3.8em; */
-  /* text-transform: uppercase; */
   letter-spacing: 0.5em;
   animation-iteration-count: 10;
 }
@@ -350,7 +324,6 @@ ol li.list-group-item {
 .footer-dark {
   padding:20px 0;
   color:#f0f9ff;
-  /* background-color:#282d32; */
 }
 
 .footer-dark h3 {

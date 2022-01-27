@@ -126,7 +126,6 @@ const useStyles = makeStyles((theme) => ({
   },
   footerroot: {
       display: 'flex',
-      // flexGrow: 1,
       position: 'static',
       left: 0,
       bottom: 0,
@@ -184,9 +183,6 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
-  // table: {
-  //   minWidth: 700,
-  // },
 }));
 
 
@@ -194,7 +190,7 @@ const useStyles = makeStyles((theme) => ({
 const Feedbackpage = (props) => {
   const classes = useStyles();
   const history = useHistory();
-  const { getAlldata,createdata,updatedata,deletedata,deleteAlldata } = useAuth()
+  const { getAlldata,createdata,deletedata } = useAuth()
   const [open, setOpen] = useState(false);
   const [ancher, setAncher] = useState('left');
   const [emailid, setEmailid] = useState('');
@@ -213,16 +209,7 @@ const Feedbackpage = (props) => {
   const [datatoggle, setDatatoggle] = useState(" ");
   const [datatarget, setDatatarget] = useState(" ");
 
-  
-  const [storeemailid, setStoreemailid] = useState('');
-  const [storeusername, setStoreusername] = useState('');
-  const [storefeedback, setStorefeedback] = useState('');
-  const [storerating, setStorerating] = useState('');
-
-  const [token, setToken] = useState('karanth123');
-
   const [togglestatus, setTogglestatus] = useState(false);
-  const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
   const [togglemaincolor, setTogglemaincolor] = useState('#EEECEB');
   const [headertogglecolor, setHeadertogglecolor] = useState('bg-light');
   const [headertextcolor, setHeadertextcolor] = useState('#000000');
@@ -634,14 +621,7 @@ const Feedbackpage = (props) => {
               feedback: data.feedback,
             });
           });
-          //  const uid = Object.keys(usersObject);
-          //  setDbuid(uid);
-          //  console.log("keys  ",uid);
-          //  const usersObject = snapshot.val();
-          //  const resval = Object.keys(usersObject).map(key => ({
-          //    ...usersObject[key],
-          //    uid: key,
-          //  }));
+
            setTablevalues(mainarr);
            console.log("mail arr  ",mainarr);
            const myemail = mainarr.find((item) => {
@@ -680,7 +660,6 @@ const Feedbackpage = (props) => {
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLongTitle">Feedback Message</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  {/* <span aria-hidden="true">&times;</span> */}
                                 </button>
                               </div>
                               <div class="modal-body">
@@ -688,9 +667,9 @@ const Feedbackpage = (props) => {
                               </div>
                               <div class="modal-footer">
                               <button type="button"
-                                          onClick={clickclose} 
-                                          className="btn btn-primary" 
-                                          data-dismiss="modal">Close</button>
+                                      onClick={clickclose} 
+                                      className="btn btn-primary" 
+                                      data-dismiss="modal">Close</button>
                               </div>
                             </div>
                           </div>
@@ -712,7 +691,6 @@ const Feedbackpage = (props) => {
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLongTitle">Feedback Message</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  {/* <span aria-hidden="true">&times;</span> */}
                                 </button>
                               </div>
                               <div class="modal-body">
@@ -720,9 +698,9 @@ const Feedbackpage = (props) => {
                               </div>
                               <div class="modal-footer">
                               <button type="button"
-                                          onClick={clickclose} 
-                                          className="btn btn-primary" 
-                                          data-dismiss="modal">Close</button>
+                                      onClick={clickclose} 
+                                      className="btn btn-primary" 
+                                      data-dismiss="modal">Close</button>
                               </div>
                             </div>
                           </div>
@@ -824,7 +802,6 @@ const Feedbackpage = (props) => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             edge="end"
-                            // onClick={feedbackmodal}
                             color="inherit"
                             >
                             <Link to="/feedback" style={{color:"#ffffff", textDecoration:"none"}}>
@@ -847,6 +824,7 @@ const Feedbackpage = (props) => {
               <Toolbar id="back-to-top-anchor" />
           
           <div className='pb-4' style={{backgroundColor:togglemaincolor}}>
+
             {/* ----------------------------------------Heading part--------------------------------- */}
             
             <div className={classes.root}>
@@ -933,8 +911,7 @@ const Feedbackpage = (props) => {
                               ))}
                             </select>
                         </div>  
-                        <button type="button" 
-                                // disabled={submitdisable}
+                        <button type="button"
                                 onClick={feedbacksubmitvalidation} 
                                 className="btn btn-primary"
                                 data-toggle={datatoggle} 
@@ -1019,7 +996,7 @@ const Feedbackpage = (props) => {
                                                   <a>
                                                     <BusinessCenterIcon style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
                                                     <span  
-                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Associate Software Engineer
+                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Software Engineer
                                                     </span>
                                                     </a>
                                                 </li>
@@ -1061,7 +1038,7 @@ const Feedbackpage = (props) => {
                                           </a>
                                           </div>
                                     </div>
-                                    <p className="copyright">© 2021 Copyright karanthartgallery.com</p>
+                                    <p className="copyright">© 2022 Copyright karanthartgallery.com</p>
                                 </div>
                             </footer>
                         </div>

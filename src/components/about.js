@@ -50,7 +50,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import moment from 'moment';
-import { Today } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -128,7 +127,6 @@ const useStyles = makeStyles((theme) => ({
   },
   footerroot: {
       display: 'flex',
-      // flexGrow: 1,
       position: 'static',
       left: 0,
       bottom: 0,
@@ -157,15 +155,6 @@ const useStyles = makeStyles((theme) => ({
   aboutcardroot: {
     maxWidth: "100%",
   },
-  // mediaimage: {
-  //   height: "auto",
-  //   width:"50%",
-  //   padding: '25%',
-  //   alignItems: 'center',
-  //   borderRadius:'80%',
-  //   justifyContent:'center',
-  //   marginLeft:'25%' 
-  // },
   mediaimage: {
     height: "auto",
     width:"50%",
@@ -204,8 +193,8 @@ const AboutPage = (props) => {
   const [copySuccess, setCopySuccess] = useState('');
   const textAreaRef = useRef(null);
   const [myurl,setMyurl] = useState("https://karanthartgallery.netlify.com");
-  const today = moment();
-  const lastdate = today.calendar();
+  const today = moment('Feb 01, 2022');
+  const lastdate = today.format('ll');
 
   function copyToClipboard(e) {
     textAreaRef.current.select();
@@ -214,20 +203,9 @@ const AboutPage = (props) => {
     let timerId = setInterval(() => setCopySuccess('Link Copied!'),setMyurl(myurl), 0);
     setTimeout(() => { clearInterval(timerId); setCopySuccess(null);setMyurl(null);setMyurl(''); }, 5000);  // after 5 seconds stop
 
-    // const timer = setInterval(() => {
-    //   setCopySuccess('Link Copied!');
-    // }, 1000);
-    // return () => clearTimeout(timer);
-    // setShowurl(false);
-    // if(showurl === true) {
-    //   setCopySuccess('Link Copied!');
-    // }else{
-    //   setCopySuccess(null);
-    // }
   };
 
   const [togglestatus, setTogglestatus] = useState(false);
-  const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
   const [togglemaincolor, setTogglemaincolor] = useState('#EEECEB');
   const [headertogglecolor, setHeadertogglecolor] = useState('bg-light');
   const [headertextcolor, setHeadertextcolor] = useState('#000000');
@@ -547,7 +525,6 @@ const AboutPage = (props) => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             edge="end"
-                            // onClick={feedbackmodal}
                             color="inherit"
                             >
                             <Link to="/feedback" style={{color:"#ffffff", textDecoration:"none"}}>
@@ -612,7 +589,7 @@ const AboutPage = (props) => {
                           onMouseOver={handleimageclick}
                           aria-expanded={imgexpand}
                           aria-label="show more"
-                          image="./images/Sanath2.jpg"
+                          image="./images/Sanath5.jpg"
                           title="Paella dish" />
                           :
                           <CardMedia
@@ -677,7 +654,7 @@ const AboutPage = (props) => {
                       <CardContent>
                         <h5 paragraph>Sanath S Karanth</h5>
                         <p className='paradesp mt-2'>
-                        Associate Software Engineer
+                         Software Engineer
                         <p className='paradesp mt-2'>
                           Contact - +919449685219
                           <p className='paradesp mt-2'>
@@ -713,7 +690,7 @@ const AboutPage = (props) => {
                                                   <a>
                                                     <BusinessCenterIcon style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
                                                     <span  
-                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Associate Software Engineer
+                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Software Engineer
                                                     </span>
                                                     </a>
                                                 </li>
@@ -755,7 +732,7 @@ const AboutPage = (props) => {
                                           </a>
                                           </div>
                                     </div>
-                                    <p className="copyright">© 2021 Copyright karanthartgallery.com</p>
+                                    <p className="copyright">© 2022 Copyright karanthartgallery.com</p>
                                 </div>
                             </footer>
                         </div>

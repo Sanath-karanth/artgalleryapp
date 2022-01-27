@@ -117,7 +117,6 @@ const useStyles = makeStyles((theme) => ({
   },
   footerroot: {
       display: 'flex',
-      // flexGrow: 1,
       position: 'static',
       left: 0,
       bottom: 0,
@@ -155,7 +154,6 @@ const PortraitSketch = (props) => {
   const [ancher, setAncher] = useState('left');
 
   const [togglestatus, setTogglestatus] = useState(false);
-  const [headgradient, setHeadgradient] = useState('linear-gradient(to right,rgb(0, 0, 0), rgb(106, 133, 182))');
   const [togglemaincolor, setTogglemaincolor] = useState('#EEECEB');
   const [headertogglecolor, setHeadertogglecolor] = useState('bg-light');
   const [headertextcolor, setHeadertextcolor] = useState('#000000');
@@ -433,7 +431,6 @@ const PortraitSketch = (props) => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             edge="end"
-                            // onClick={feedbackmodal}
                             color="inherit"
                             >
                             <Link to="/feedback" style={{color:"#ffffff", textDecoration:"none"}}>
@@ -1269,7 +1266,7 @@ const PortraitSketch = (props) => {
                                                   <a>
                                                     <BusinessCenterIcon style={{color:'white',fontSize:"20px",marginRight:'10px'}} />
                                                     <span  
-                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Associate Software Engineer
+                                                        style={{color:'white',fontSize:"15px",fontFamily:"Roboto Mono"}}>Software Engineer
                                                     </span>
                                                     </a>
                                                 </li>
@@ -1311,7 +1308,7 @@ const PortraitSketch = (props) => {
                                           </a>
                                           </div>
                                     </div>
-                                    <p className="copyright">© 2021 Copyright karanthartgallery.com</p>
+                                    <p className="copyright">© 2022 Copyright karanthartgallery.com</p>
                                 </div>
                             </footer>
                         </div>
